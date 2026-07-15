@@ -9,7 +9,7 @@
  or Copyright (c) 2012-2013 Josef Schneider <josef@netpage.dk>
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages. */
@@ -131,7 +131,7 @@ MountOptions defaultMountOptions;
 KeyFile *FirstCmdKeyFile;
 
 HBITMAP hbmLogoBitmapRescaled = NULL;
-wchar_t OrigKeyboardLayout [8+1] = L"00000409";
+wchar_t OrigKeyboardLayout [KL_NAMELENGTH] = L"00000409";
 BOOL bKeyboardLayoutChanged = FALSE;		/* TRUE if the keyboard layout was changed to the standard US keyboard layout (from any other layout). */
 BOOL bKeybLayoutAltKeyWarningShown = FALSE;	/* TRUE if the user has been informed that it is not possible to type characters by pressing keys while the right Alt key is held down. */
 
@@ -310,6 +310,7 @@ void LoadSettings (HWND hwndDlg)
 	bShowDisconnectedNetworkDrives = ConfigReadInt ("ShowDisconnectedNetworkDrives", FALSE);
 	bHideWaitingDialog = ConfigReadInt ("HideWaitingDialog", FALSE);
 	bUseSecureDesktop = ConfigReadInt ("UseSecureDesktop", FALSE);
+	bEnableIMEInSecureDesktop = ConfigReadInt ("EnableIMEInSecureDesktop", FALSE);
 	bUseLegacyMaxPasswordLength = ConfigReadInt ("UseLegacyMaxPasswordLength", FALSE);
 	defaultMountOptions.Removable =	ConfigReadInt ("MountVolumesRemovable", FALSE);
 	defaultMountOptions.ReadOnly =	ConfigReadInt ("MountVolumesReadOnly", FALSE);
@@ -459,7 +460,7 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 
 			for (i = FIRST_PRF_ID; i <= LAST_PRF_ID; i++)
 			{
-				nIndex = (int) SendMessage (hComboBox, CB_ADDSTRING, 0, (LPARAM) get_pkcs5_prf_name(i));
+				nIndex = (int) SendMessage (hComboBox, CB_ADDSTRING, 0, (LPARAM) get_kdf_name(i));
 				SendMessage (hComboBox, CB_SETITEMDATA, (WPARAM) nIndex, (LPARAM) i);
 			}
 
@@ -535,7 +536,7 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			{
 				if (bIsGPT || HashForSystemEncryption(i))
 				{
-					nIndex = (int) SendMessage (hComboBox, CB_ADDSTRING, 0, (LPARAM) get_pkcs5_prf_name(i));
+					nIndex = (int) SendMessage (hComboBox, CB_ADDSTRING, 0, (LPARAM) get_kdf_name(i));
 					SendMessage (hComboBox, CB_SETITEMDATA, (WPARAM) nIndex, (LPARAM) i);
 				}
 			}
@@ -552,9 +553,12 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			SetWindowText (GetDlgItem (hwndDlg, IDC_PASSWORD), tmp);
 			SetWindowText (GetDlgItem (hwndDlg, IDC_PASSWORD), L"");
 
-			StringCbPrintfW (OrigKeyboardLayout, sizeof(OrigKeyboardLayout),L"%08X", (DWORD) GetKeyboardLayout (NULL) & 0xFFFF);
+			if (!GetKeyboardLayoutNameW(OrigKeyboardLayout))
+			{
+				StringCbPrintfW(OrigKeyboardLayout, sizeof(OrigKeyboardLayout), L"%08X", (DWORD) (DWORD_PTR) GetKeyboardLayout(NULL) & 0xFFFF);
+			}
 
-			DWORD keybLayout = (DWORD) LoadKeyboardLayout (L"00000409", KLF_ACTIVATE);
+			DWORD keybLayout = (DWORD) (DWORD_PTR) LoadKeyboardLayout (L"00000409", KLF_ACTIVATE);
 
 			if (keybLayout != 0x00000409 && keybLayout != 0x04090409)
 			{
@@ -594,7 +598,7 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 		case TIMER_ID_KEYB_LAYOUT_GUARD:
 			if (bPrebootPasswordDlgMode)
 			{
-				DWORD keybLayout = (DWORD) GetKeyboardLayout (NULL);
+				DWORD keybLayout = (DWORD) (DWORD_PTR) GetKeyboardLayout (NULL);
 
 				if (keybLayout != 0x00000409 && keybLayout != 0x04090409)
 				{
@@ -607,7 +611,7 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 					SetWindowText (GetDlgItem (hwndDlg, IDC_PASSWORD), tmp);
 					SetWindowText (GetDlgItem (hwndDlg, IDC_PASSWORD), L"");
 
-					keybLayout = (DWORD) LoadKeyboardLayout (L"00000409", KLF_ACTIVATE);
+					keybLayout = (DWORD) (DWORD_PTR) LoadKeyboardLayout (L"00000409", KLF_ACTIVATE);
 
 					if (keybLayout != 0x00000409 && keybLayout != 0x04090409)
 					{
@@ -780,6 +784,10 @@ BOOL CALLBACK ExtcvPasswordDlgProc (HWND hwndDlg, UINT msg, WPARAM wParam, LPARA
 			DragFinish (hdrop);
 		}
 		return 1;
+
+	case WM_DESTROY:
+		DetachProtectionFromCurrentThread();
+		break;
 	}
 
 	return 0;
@@ -878,16 +886,19 @@ void ExtractCommandLine (HWND hwndDlg, wchar_t *lpszCommandLine)
 			enum
 			{
 				OptionEnableMemoryProtection,
+				OptionEnableScreenProtection,
 			};
 
 			argument args[]=
 			{
 				{ OptionEnableMemoryProtection,	L"/protectMemory",	NULL, FALSE },
+				{ OptionEnableScreenProtection,	L"/protectScreen",	NULL, FALSE },
 			};
 
 			argumentspec as;
 
 			int x;
+			wchar_t szTmp[32] = {0};
 
 			if (lpszCommandLineArgs[i] == NULL)
 				continue;
@@ -901,7 +912,33 @@ void ExtractCommandLine (HWND hwndDlg, wchar_t *lpszCommandLine)
 			{
 
 			case OptionEnableMemoryProtection:
-				EnableMemoryProtection = TRUE;
+				if (HAS_ARGUMENT == GetArgumentValue (lpszCommandLineArgs,
+					&i, nNoCommandLineArgs, szTmp, ARRAYSIZE (szTmp)))
+				{
+					if ((!_wcsicmp (szTmp, L"no") || !_wcsicmp (szTmp, L"n")) && IsNonInstallMode())
+						EnableMemoryProtection = FALSE;
+					else if (!_wcsicmp (szTmp, L"yes") || !_wcsicmp (szTmp, L"y"))
+						EnableMemoryProtection = TRUE;
+					else
+						AbortProcess ("COMMAND_LINE_ERROR");
+				}
+				else
+					EnableMemoryProtection = TRUE;
+				break;
+
+			case OptionEnableScreenProtection:
+				if (HAS_ARGUMENT == GetArgumentValue (lpszCommandLineArgs,
+					&i, nNoCommandLineArgs, szTmp, ARRAYSIZE (szTmp)))
+				{
+					if ((!_wcsicmp (szTmp, L"no") || !_wcsicmp (szTmp, L"n")) && IsNonInstallMode())
+						EnableScreenProtection = FALSE;
+					else if (!_wcsicmp (szTmp, L"yes") || !_wcsicmp (szTmp, L"y"))
+						EnableScreenProtection = TRUE;
+					else
+						AbortProcess ("COMMAND_LINE_ERROR");
+				}
+				else
+					EnableScreenProtection = TRUE;
 				break;
 
 			default:
@@ -945,6 +982,7 @@ BOOL CALLBACK MainDialogProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 			bShowDisconnectedNetworkDrives = FALSE;
 			bHideWaitingDialog = FALSE;
 			bUseSecureDesktop = FALSE;
+			bEnableIMEInSecureDesktop = FALSE;
 			bUseLegacyMaxPasswordLength = FALSE;
 
 			VeraCryptExpander::ExtractCommandLine (hwndDlg, (wchar_t *) lParam);
@@ -957,12 +995,6 @@ BOOL CALLBACK MainDialogProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 				// Keyfiles
 				LoadDefaultKeyFilesParam ();
 				RestoreDefaultKeyFilesParam ();
-			}
-
-			if (EnableMemoryProtection)
-			{
-				/* Protect this process memory from being accessed by non-admin users */
-				ActivateMemoryProtection ();
 			}
 
 			InitMainDialog (hwndDlg);
@@ -1038,7 +1070,7 @@ BOOL CALLBACK MainDialogProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		if (lw == IDM_HOMEPAGE )
 		{
 			ArrowWaitCursor ();
-			SafeOpenURL (L"https://www.veracrypt.fr");
+			SafeOpenURL (L"https://veracrypt.jp");
 			Sleep (200);
 			NormalCursor ();
 
@@ -1063,6 +1095,10 @@ BOOL CALLBACK MainDialogProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		VeraCryptExpander::EndMainDlg (hwndDlg);
 		return 1;
 
+	case WM_DESTROY:
+		DetachProtectionFromCurrentThread();
+		break;
+
 	default:
 		;
 	}
@@ -1076,6 +1112,48 @@ BOOL CALLBACK MainDialogProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, wchar_t *lpszCommandLine, int nCmdShow)
 {
 	int status;
+	int argc;
+	LPWSTR *argv = CommandLineToArgvW (GetCommandLineW(), &argc);
+
+	for (int i = 0; argv && i < argc; i++)
+	{
+		if (_wcsicmp (argv[i], L"/protectScreen") == 0)
+		{
+			if ((i < argc - 1) && (_wcsicmp (argv[i + 1], L"no") == 0 || _wcsicmp (argv[i + 1], L"n") == 0))
+			{
+				// Disabling screen protection is only allowed in portable mode
+				if (IsNonInstallMode())
+					EnableScreenProtection = FALSE;
+			}
+			else
+			{
+				EnableScreenProtection = TRUE;
+			}
+		}
+		if (_wcsicmp (argv[i], L"/protectMemory") == 0)
+		{
+			if ((i < argc - 1) && (_wcsicmp (argv[i + 1], L"no") == 0 || _wcsicmp (argv[i + 1], L"n") == 0))
+			{
+				// Disabling memory protection is only allowed in portable mode
+				if (IsNonInstallMode())
+					EnableMemoryProtection = FALSE;
+			}
+			else
+			{
+				EnableMemoryProtection = TRUE;
+			}
+		}
+	}
+
+	LocalFree (argv); // free memory allocated by CommandLineToArgvW
+
+	if (EnableMemoryProtection)
+	{
+		/* Protect this process memory from being accessed by non-admin users */
+		ActivateMemoryProtection ();
+	}
+
+	ScreenCaptureBlocker blocker;
 	atexit (VeraCryptExpander::localcleanup);
 	SetProcessShutdownParameters (0x100, 0);
 
@@ -1090,7 +1168,11 @@ int WINAPI wWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, wchar_t *lpsz
 	/* application title */
 	lpszTitle = L"VeraCrypt Expander";
 
-	DetectX86Features ();
+#ifndef _M_ARM64
+	DetectX86Features();
+#else
+	DetectArmFeatures();
+#endif
 
 	status = DriverAttach ();
 	if (status != 0)

@@ -769,7 +769,7 @@ BenchmarkDialogBase::BenchmarkDialogBase( wxWindow* parent, wxWindowID id, const
 	m_staticText70->Wrap( -1 );
 	fgSizer9->Add( m_staticText70, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
-	wxString BenchmarkChoiceChoices[] = { _("ENCRYPTION_ALGORITHM"), _("PKCS5_PRF"), _("IDT_HASH_ALGO") };
+	wxString BenchmarkChoiceChoices[] = { _("ENCRYPTION_ALGORITHM"), _("KDF"), _("IDT_HASH_ALGO") };
 	int BenchmarkChoiceNChoices = sizeof( BenchmarkChoiceChoices ) / sizeof( wxString );
 	BenchmarkChoice = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, BenchmarkChoiceNChoices, BenchmarkChoiceChoices, 0 );
 	BenchmarkChoice->SetSelection( 0 );
@@ -1821,15 +1821,15 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	wxBoxSizer* bSizer33;
 	bSizer33 = new wxBoxSizer( wxVERTICAL );
 
-	AutoDismountSizer = new wxStaticBoxSizer( new wxStaticBox( SecurityPage, wxID_ANY, _("IDT_AUTO_DISMOUNT") ), wxVERTICAL );
+	AutoDismountSizer = new wxStaticBoxSizer( new wxStaticBox( SecurityPage, wxID_ANY, _("IDT_AUTO_UNMOUNT") ), wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer13;
-	sbSizer13 = new wxStaticBoxSizer( new wxStaticBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("LINUX_DISMOUNT_ALL_WHEN") ), wxVERTICAL );
+	sbSizer13 = new wxStaticBoxSizer( new wxStaticBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("LINUX_UNMOUNT_ALL_WHEN") ), wxVERTICAL );
 
-	DismountOnLogOffCheckBox = new wxCheckBox( sbSizer13->GetStaticBox(), wxID_ANY, _("IDC_PREF_DISMOUNT_LOGOFF"), wxDefaultPosition, wxDefaultSize, 0 );
+	DismountOnLogOffCheckBox = new wxCheckBox( sbSizer13->GetStaticBox(), wxID_ANY, _("IDC_PREF_UNMOUNT_LOGOFF"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer13->Add( DismountOnLogOffCheckBox, 0, wxALL, 5 );
 
-	DismountOnScreenSaverCheckBox = new wxCheckBox( sbSizer13->GetStaticBox(), wxID_ANY, _("IDC_PREF_DISMOUNT_SCREENSAVER"), wxDefaultPosition, wxDefaultSize, 0 );
+	DismountOnScreenSaverCheckBox = new wxCheckBox( sbSizer13->GetStaticBox(), wxID_ANY, _("IDC_PREF_UNMOUNT_SCREENSAVER"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer13->Add( DismountOnScreenSaverCheckBox, 0, wxALL, 5 );
 
 	DismountOnPowerSavingCheckBox = new wxCheckBox( sbSizer13->GetStaticBox(), wxID_ANY, _("LINUX_ENTERING_POVERSAWING"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1841,7 +1841,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	wxBoxSizer* bSizer34;
 	bSizer34 = new wxBoxSizer( wxHORIZONTAL );
 
-	DismountOnInactivityCheckBox = new wxCheckBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("IDC_PREF_DISMOUNT_INACTIVE"), wxDefaultPosition, wxDefaultSize, 0 );
+	DismountOnInactivityCheckBox = new wxCheckBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("IDC_PREF_UNMOUNT_INACTIVE"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer34->Add( DismountOnInactivityCheckBox, 0, wxTOP|wxBOTTOM|wxLEFT|wxALIGN_CENTER_VERTICAL, 5 );
 
 	DismountOnInactivitySpinCtrl = new wxSpinCtrl( AutoDismountSizer->GetStaticBox(), wxID_ANY, wxT("1"), wxDefaultPosition, wxSize( -1,-1 ), wxSP_ARROW_KEYS, 1, 9999, 1 );
@@ -1857,7 +1857,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 
 	AutoDismountSizer->Add( bSizer34, 0, wxEXPAND, 5 );
 
-	ForceAutoDismountCheckBox = new wxCheckBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("IDC_PREF_FORCE_AUTO_DISMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
+	ForceAutoDismountCheckBox = new wxCheckBox( AutoDismountSizer->GetStaticBox(), wxID_ANY, _("IDC_PREF_FORCE_AUTO_UNMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
 	AutoDismountSizer->Add( ForceAutoDismountCheckBox, 0, wxALL, 5 );
 
 
@@ -1877,7 +1877,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	WipeCacheOnCloseCheckBox = new wxCheckBox( sbSizer14->GetStaticBox(), wxID_ANY, _("IDC_PREF_WIPE_CACHE_ON_EXIT"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer14->Add( WipeCacheOnCloseCheckBox, 0, wxALL, 5 );
 
-	WipeCacheOnAutoDismountCheckBox = new wxCheckBox( sbSizer14->GetStaticBox(), wxID_ANY, _("IDC_PREF_WIPE_CACHE_ON_AUTODISMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
+	WipeCacheOnAutoDismountCheckBox = new wxCheckBox( sbSizer14->GetStaticBox(), wxID_ANY, _("IDC_PREF_WIPE_CACHE_ON_AUTOUNMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer14->Add( WipeCacheOnAutoDismountCheckBox, 0, wxALL, 5 );
 
 
@@ -1913,7 +1913,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	wxBoxSizer* bSizer163;
 	bSizer163 = new wxBoxSizer( wxHORIZONTAL );
 
-	Pkcs5PrfStaticText = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("PKCS5_PRF"), wxDefaultPosition, wxDefaultSize, 0 );
+	Pkcs5PrfStaticText = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("KDF"), wxDefaultPosition, wxDefaultSize, 0 );
 	Pkcs5PrfStaticText->Wrap( -1 );
 	bSizer163->Add( Pkcs5PrfStaticText, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
@@ -1983,7 +1983,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	BackgroundTaskMenuOpenItemsEnabledCheckBox = new wxCheckBox( sbSizer26->GetStaticBox(), wxID_ANY, _("TASKICON_PREF_OPEN_VOL"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer26->Add( BackgroundTaskMenuOpenItemsEnabledCheckBox, 0, wxALL, 5 );
 
-	BackgroundTaskMenuDismountItemsEnabledCheckBox = new wxCheckBox( sbSizer26->GetStaticBox(), wxID_ANY, _("TASKICON_PREF_DISMOUNT_VOL"), wxDefaultPosition, wxDefaultSize, 0 );
+	BackgroundTaskMenuDismountItemsEnabledCheckBox = new wxCheckBox( sbSizer26->GetStaticBox(), wxID_ANY, _("TASKICON_PREF_UNMOUNT_VOL"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer26->Add( BackgroundTaskMenuDismountItemsEnabledCheckBox, 0, wxALL, 5 );
 
 
@@ -2026,7 +2026,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	OpenExplorerWindowAfterMountCheckBox = new wxCheckBox( ExplorerSizer->GetStaticBox(), wxID_ANY, _("IDC_PREF_OPEN_EXPLORER"), wxDefaultPosition, wxDefaultSize, 0 );
 	ExplorerSizer->Add( OpenExplorerWindowAfterMountCheckBox, 0, wxALL, 5 );
 
-	CloseExplorerWindowsOnDismountCheckBox = new wxCheckBox( ExplorerSizer->GetStaticBox(), wxID_ANY, _("LINUX_CLOSE_EXPL_ON_DISMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
+	CloseExplorerWindowsOnDismountCheckBox = new wxCheckBox( ExplorerSizer->GetStaticBox(), wxID_ANY, _("LINUX_CLOSE_EXPL_ON_UNMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
 	ExplorerSizer->Add( CloseExplorerWindowsOnDismountCheckBox, 0, wxALL, 5 );
 
 
@@ -2238,7 +2238,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	BeepAfterHotkeyMountDismountCheckBox = new wxCheckBox( sbSizer24->GetStaticBox(), wxID_ANY, _("LINUX_SOUND_NOTIFICATION"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer24->Add( BeepAfterHotkeyMountDismountCheckBox, 0, wxALL, 5 );
 
-	DisplayMessageAfterHotkeyDismountCheckBox = new wxCheckBox( sbSizer24->GetStaticBox(), wxID_ANY, _("LINUX_CONFIRM_AFTER_DISMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
+	DisplayMessageAfterHotkeyDismountCheckBox = new wxCheckBox( sbSizer24->GetStaticBox(), wxID_ANY, _("LINUX_CONFIRM_AFTER_UNMOUNT"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer24->Add( DisplayMessageAfterHotkeyDismountCheckBox, 0, wxALL, 5 );
 
 
@@ -2300,7 +2300,7 @@ PreferencesDialogBase::PreferencesDialogBase( wxWindow* parent, wxWindowID id, c
 	sbSizer49->Add( LanguageListBox, 1, wxEXPAND|wxLEFT|wxRIGHT|wxTOP, 5 );
 
 	SysDefaultLangButton = new wxButton( sbSizer49->GetStaticBox(), wxID_ANY, _("LINUX_SELECT_SYS_DEFAULT_LANG"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer49->Add( SysDefaultLangButton, 0, wxALIGN_BOTTOM|wxALL|wxEXPAND, 5 );
+	sbSizer49->Add( SysDefaultLangButton, 0, wxALL|wxEXPAND, 5 );
 
 
 	bSizer173->Add( sbSizer49, 1, wxALL|wxEXPAND, 5 );
@@ -2694,7 +2694,7 @@ EncryptionOptionsWizardPageBase::EncryptionOptionsWizardPageBase( wxWindow* pare
 	bSizer95->Add( sbSizer29, 1, wxEXPAND|wxALL, 5 );
 
 	wxStaticBoxSizer* sbSizer30;
-	sbSizer30 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("IDT_HASH_ALGO") ), wxHORIZONTAL );
+	sbSizer30 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("KDF") ), wxHORIZONTAL );
 
 	wxArrayString HashChoiceChoices;
 	HashChoice = new wxChoice( sbSizer30->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, HashChoiceChoices, 0 );
@@ -3412,7 +3412,7 @@ VolumePasswordPanelBase::VolumePasswordPanelBase( wxWindow* parent, wxWindowID i
 
 	GridBagSizer->Add( Pkcs5PrfSizer, wxGBPosition( 8, 1 ), wxGBSpan( 1, 1 ), wxEXPAND|wxTOP|wxBOTTOM, 5 );
 
-	Pkcs5PrfStaticText = new wxStaticText( this, wxID_ANY, _("IDT_NEW_PKCS5_PRF"), wxDefaultPosition, wxDefaultSize, 0 );
+	Pkcs5PrfStaticText = new wxStaticText( this, wxID_ANY, _("IDT_NEW_KDF"), wxDefaultPosition, wxDefaultSize, 0 );
 	Pkcs5PrfStaticText->Wrap( -1 );
 	GridBagSizer->Add( Pkcs5PrfStaticText, wxGBPosition( 9, 0 ), wxGBSpan( 1, 1 ), wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 5 );
 

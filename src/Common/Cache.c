@@ -6,7 +6,7 @@
  Encryption for the Masses 2.02a, which is Copyright (c) 1998-2000 Paul Le Roux
  and which is governed by the 'License Agreement for Encryption for the Masses'
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages. */
@@ -24,7 +24,21 @@ int	 CachedPim[CACHE_SIZE];
 int cacheEmpty = 1;
 static int nPasswordIdx = 0;
 
-#ifdef _WIN64
+static BOOL IsUserAbortRequested (long volatile *pUserAbort)
+{
+	return pUserAbort && *pUserAbort;
+}
+
+static BOOL ResetAbortKeyDerivation (long volatile *pAbortKeyDerivation, long volatile *pUserAbort)
+{
+	if (IsUserAbortRequested (pUserAbort))
+		return FALSE;
+
+	if (pAbortKeyDerivation)
+		*pAbortKeyDerivation = 0;
+
+	return TRUE;
+}
 
 uint64 VcGetPasswordEncryptionID (Password* pPassword)
 {
@@ -41,9 +55,7 @@ void VcUnprotectPassword (Password* pPassword, uint64 encID)
 	VcProtectPassword (pPassword, encID);
 }
 
-#endif
-
-int ReadVolumeHeaderWCache (BOOL bBoot, BOOL bCache, BOOL bCachePim, char *header, Password *password, int pkcs5_prf, int pim, PCRYPTO_INFO *retInfo)
+int ReadVolumeHeaderWCacheWithAbort (BOOL bBoot, BOOL bCache, BOOL bCachePim, unsigned char *header, Password *password, int pkcs5_prf, int pim, PCRYPTO_INFO *retInfo, long volatile *pAbortKeyDerivation, long volatile *pUserAbort)
 {
 	int nReturnCode = ERR_PASSWORD_WRONG;
 	int i, effectivePim;
@@ -51,42 +63,37 @@ int ReadVolumeHeaderWCache (BOOL bBoot, BOOL bCache, BOOL bCachePim, char *heade
 	/* Attempt to recognize volume using mount password */
 	if (password->Length > 0)
 	{
-		nReturnCode = ReadVolumeHeader (bBoot, header, password, pkcs5_prf, pim, retInfo, NULL);
+		if (!ResetAbortKeyDerivation (pAbortKeyDerivation, pUserAbort))
+			return ERR_USER_ABORT;
+
+		nReturnCode = ReadVolumeHeaderWithAbort (bBoot, header, password, pkcs5_prf, pim, retInfo, NULL, pAbortKeyDerivation, pUserAbort);
 
 		/* Save mount passwords back into cache if asked to do so */
 		if (bCache && (nReturnCode == 0 || nReturnCode == ERR_CIPHER_INIT_WEAK_KEY))
 		{
-#ifdef _WIN64
 			Password tmpPass;
-#endif
 			for (i = 0; i < CACHE_SIZE; i++)
 			{
 				Password* pCurrentPassword = &CachedPasswords[i];
-#ifdef _WIN64
 				if (IsRamEncryptionEnabled())
 				{
 					memcpy (&tmpPass, pCurrentPassword, sizeof (Password));
 					VcUnprotectPassword (&tmpPass, VcGetPasswordEncryptionID (pCurrentPassword));
 					pCurrentPassword = &tmpPass;
 				}
-#endif
 				if (memcmp (pCurrentPassword, password, sizeof (Password)) == 0)
 					break;
 			}
 
-#ifdef _WIN64
 			if (IsRamEncryptionEnabled())
 				burn (&tmpPass, sizeof (Password));
-#endif
 
 			if (i == CACHE_SIZE)
 			{
 				/* Store the password */
 				CachedPasswords[nPasswordIdx] = *password;
-#ifdef _WIN64
 				if (IsRamEncryptionEnabled ())
 					VcProtectPassword (&CachedPasswords[nPasswordIdx], VcGetPasswordEncryptionID (&CachedPasswords[nPasswordIdx]));
-#endif
 
 				/* Store also PIM if requested, otherwise set to default */
 				if (bCachePim && (pim > 0))
@@ -107,60 +114,66 @@ int ReadVolumeHeaderWCache (BOOL bBoot, BOOL bCache, BOOL bCachePim, char *heade
 	}
 	else if (!cacheEmpty)
 	{
-#ifdef _WIN64
 		Password tmpPass;
-#endif
 		/* Attempt to recognize volume using cached passwords */
 		for (i = 0; i < CACHE_SIZE; i++)
 		{
 			Password* pCurrentPassword = &CachedPasswords[i];
-#ifdef _WIN64
 			if (IsRamEncryptionEnabled())
 			{
 				memcpy (&tmpPass, pCurrentPassword, sizeof (Password));
 				VcUnprotectPassword (&tmpPass, VcGetPasswordEncryptionID (pCurrentPassword));
 				pCurrentPassword = &tmpPass;
 			}
-#endif
+
 			if ((pCurrentPassword->Length > 0) && (pCurrentPassword->Length <= (unsigned int) ((bBoot? MAX_LEGACY_PASSWORD: MAX_PASSWORD))))
 			{
 				if (pim == -1)
 					effectivePim = CachedPim[i];
 				else
 					effectivePim = pim;
-				nReturnCode = ReadVolumeHeader (bBoot, header, pCurrentPassword, pkcs5_prf, effectivePim, retInfo, NULL);
+
+				if (!ResetAbortKeyDerivation (pAbortKeyDerivation, pUserAbort))
+				{
+					nReturnCode = ERR_USER_ABORT;
+					break;
+				}
+
+				nReturnCode = ReadVolumeHeaderWithAbort (bBoot, header, pCurrentPassword, pkcs5_prf, effectivePim, retInfo, NULL, pAbortKeyDerivation, pUserAbort);
 
 				if (nReturnCode != ERR_PASSWORD_WRONG)
 					break;
 			}
 		}
-#ifdef _WIN64
+
 		if (IsRamEncryptionEnabled())
 			burn (&tmpPass, sizeof (Password));
-#endif
+
 	}
 
 	return nReturnCode;
 }
 
+int ReadVolumeHeaderWCache (BOOL bBoot, BOOL bCache, BOOL bCachePim, unsigned char *header, Password *password, int pkcs5_prf, int pim, PCRYPTO_INFO *retInfo)
+{
+	return ReadVolumeHeaderWCacheWithAbort (bBoot, bCache, bCachePim, header, password, pkcs5_prf, pim, retInfo, NULL, NULL);
+}
+
 
 void AddPasswordToCache (Password *password, int pim, BOOL bCachePim)
 {
-#ifdef _WIN64
 	Password tmpPass;
-#endif
 	int i;
 	for (i = 0; i < CACHE_SIZE; i++)
 	{
 		Password* pCurrentPassword = &CachedPasswords[i];
-#ifdef _WIN64
 		if (IsRamEncryptionEnabled())
 		{
 			memcpy (&tmpPass, pCurrentPassword, sizeof (Password));
 			VcUnprotectPassword (&tmpPass, VcGetPasswordEncryptionID (pCurrentPassword));
 			pCurrentPassword = &tmpPass;
 		}
-#endif
+
 		if (memcmp (pCurrentPassword, password, sizeof (Password)) == 0)
 			break;
 	}
@@ -168,10 +181,9 @@ void AddPasswordToCache (Password *password, int pim, BOOL bCachePim)
 	if (i == CACHE_SIZE)
 	{
 		CachedPasswords[nPasswordIdx] = *password;
-#ifdef _WIN64
 		if (IsRamEncryptionEnabled ())
 			VcProtectPassword (&CachedPasswords[nPasswordIdx], VcGetPasswordEncryptionID (&CachedPasswords[nPasswordIdx]));
-#endif
+
 		/* Store also PIM if requested, otherwise set to default */
 		if (bCachePim && (pim > 0))
 			CachedPim[nPasswordIdx] = pim;
@@ -184,13 +196,12 @@ void AddPasswordToCache (Password *password, int pim, BOOL bCachePim)
 	{
 		CachedPim[i] = pim > 0? pim : 0;
 	}
-#ifdef _WIN64
+
 	if (IsRamEncryptionEnabled())
 		burn (&tmpPass, sizeof (Password));
-#endif
 }
 
-void AddLegacyPasswordToCache (PasswordLegacy *password, int pim)
+void AddLegacyPasswordToCache (__unaligned PasswordLegacy *password, int pim)
 {
 	Password inputPass = {0};
 	inputPass.Length = password->Length;

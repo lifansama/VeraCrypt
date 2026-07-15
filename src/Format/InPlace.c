@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -375,7 +375,7 @@ int EncryptPartitionInPlaceBegin (volatile FORMAT_VOL_PARAMETERS *volParams, vol
 	PCRYPTO_INFO cryptoInfo2 = NULL;
 	HANDLE dev = INVALID_HANDLE_VALUE;
 	DWORD dwError;
-	char *header;
+	unsigned char *header;
 	WCHAR dosDev[TC_MAX_PATH] = {0};
 	WCHAR devName[MAX_PATH] = {0};
 	int driveLetter = -1;
@@ -393,7 +393,7 @@ int EncryptPartitionInPlaceBegin (volatile FORMAT_VOL_PARAMETERS *volParams, vol
 		return ERR_DONT_REPORT;
 
 
-	header = (char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
+	header = (unsigned char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
 	if (!header)
 		return ERR_OUTOFMEMORY;
 
@@ -600,7 +600,7 @@ int EncryptPartitionInPlaceBegin (volatile FORMAT_VOL_PARAMETERS *volParams, vol
 		}
 
 		// Write the backup header to the partition
-		if (!WriteEffectiveVolumeHeader (TRUE, dev, (uint8 *) header))
+		if (!WriteEffectiveVolumeHeader (TRUE, dev, header))
 		{
 			nStatus = ERR_OS_ERROR;
 			goto closing_seq;
@@ -753,7 +753,7 @@ int EncryptPartitionInPlaceResume (HANDLE dev,
 {
 	PCRYPTO_INFO masterCryptoInfo = NULL, headerCryptoInfo = NULL, tmpCryptoInfo = NULL;
 	UINT64_STRUCT unitNo;
-	char *buf = NULL, *header = NULL;
+	unsigned char *buf = NULL, *header = NULL;
 	uint8 *wipeBuffer = NULL;
 	uint8 wipeRandChars [TC_WIPE_RAND_CHAR_COUNT];
 	uint8 wipeRandCharsUpdate [TC_WIPE_RAND_CHAR_COUNT];
@@ -776,21 +776,19 @@ int EncryptPartitionInPlaceResume (HANDLE dev,
 	int pim = volParams->pim;
 	DISK_GEOMETRY driveGeometry;
 	HWND hwndDlg = volParams->hwndDlg;
-#ifdef _WIN64
 	BOOL bIsRamEncryptionEnabled = IsRamEncryptionEnabled();
-#endif
 
 
 	bInPlaceEncNonSysResumed = TRUE;
 
-	buf = (char *) TCalloc (TC_MAX_NONSYS_INPLACE_ENC_WORK_CHUNK_SIZE);
+	buf = (unsigned char *) TCalloc (TC_MAX_NONSYS_INPLACE_ENC_WORK_CHUNK_SIZE);
 	if (!buf)
 	{
 		nStatus = ERR_OUTOFMEMORY;
 		goto closing_seq;
 	}
 
-	header = (char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
+	header = (unsigned char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
 	if (!header)
 	{
 		nStatus = ERR_OUTOFMEMORY;
@@ -874,13 +872,11 @@ int EncryptPartitionInPlaceResume (HANDLE dev,
 	if (nStatus != ERR_SUCCESS)
 		goto closing_seq;
 
-#ifdef _WIN64
 	if (bIsRamEncryptionEnabled)
 	{
 		VcProtectKeys (masterCryptoInfo, VcGetEncryptionID (masterCryptoInfo));
 		VcProtectKeys (headerCryptoInfo, VcGetEncryptionID (headerCryptoInfo));
 	}
-#endif
 
 
     remainingBytes = masterCryptoInfo->VolumeSize.Value - masterCryptoInfo->EncryptedAreaLength.Value;
@@ -997,10 +993,10 @@ inplace_enc_read:
 			{
 				if (!WipeBuffer (wipeAlgorithm, wipeRandChars, wipePass, wipeBuffer, workChunkSize))
 				{
-					ULONG i;
-					for (i = 0; i < workChunkSize; ++i)
+					ULONG index;
+					for (index = 0; index < workChunkSize; ++index)
 					{
-						wipeBuffer[i] = buf[i] + wipePass;
+						wipeBuffer[index] = buf[index] + wipePass;
 					}
 
 					EncryptDataUnits (wipeBuffer, &unitNo, workChunkSize / ENCRYPTION_DATA_UNIT_SIZE, masterCryptoInfo);
@@ -1102,7 +1098,6 @@ inplace_enc_read:
 		{
 			PCRYPTO_INFO dummyInfo = NULL;
 
-#ifdef _WIN64
 			CRYPTO_INFO tmpCI;
 			PCRYPTO_INFO cryptoInfoBackup = NULL;
 			if (bIsRamEncryptionEnabled)
@@ -1113,7 +1108,6 @@ inplace_enc_read:
 				cryptoInfoBackup = masterCryptoInfo;
 				masterCryptoInfo = &tmpCI;
 			}
-#endif
 
 			nStatus = CreateVolumeHeaderInMemory (hwndDlg, FALSE,
 				header,
@@ -1133,14 +1127,12 @@ inplace_enc_read:
 				masterCryptoInfo->SectorSize,
 				wipeAlgorithm == TC_WIPE_NONE ? FALSE : (wipePass < PRAND_HEADER_WIPE_PASSES - 1));
 
-#ifdef _WIN64
 			if (bIsRamEncryptionEnabled)
 			{
 				masterCryptoInfo = cryptoInfoBackup;
 				burn (&tmpCI, sizeof (CRYPTO_INFO));
 				VirtualUnlock (&tmpCI, sizeof(tmpCI));
 			}
-#endif
 
 			if (nStatus != ERR_SUCCESS)
 				goto closing_seq;
@@ -1155,7 +1147,6 @@ inplace_enc_read:
 				goto closing_seq;
 			}
 
-#ifdef _WIN64
 			if (bIsRamEncryptionEnabled)
 			{
 				VirtualLock (&tmpCI, sizeof(tmpCI));
@@ -1164,18 +1155,16 @@ inplace_enc_read:
 				cryptoInfoBackup = headerCryptoInfo;
 				headerCryptoInfo = &tmpCI;
 			}
-#endif
+
 			// Fill the reserved sectors of the header area with random data
 			nStatus = WriteRandomDataToReservedHeaderAreas (hwndDlg, dev, headerCryptoInfo, masterCryptoInfo->VolumeSize.Value, TRUE, FALSE);
 
-#ifdef _WIN64
 			if (bIsRamEncryptionEnabled)
 			{
 				headerCryptoInfo = cryptoInfoBackup;
 				burn (&tmpCI, sizeof (CRYPTO_INFO));
 				VirtualUnlock (&tmpCI, sizeof(tmpCI));
 			}
-#endif
 
 			if (nStatus != ERR_SUCCESS)
 				goto closing_seq;
@@ -1336,9 +1325,7 @@ int DecryptPartitionInPlace (volatile FORMAT_VOL_PARAMETERS *volParams, volatile
 	int pkcs5_prf = volParams->pkcs5;
 	int pim = volParams->pim;
 	DISK_GEOMETRY driveGeometry;
-#ifdef _WIN64
 	BOOL bIsRamEncryptionEnabled = IsRamEncryptionEnabled();
-#endif
 
 
 	buf = (char *) TCalloc (TC_MAX_NONSYS_INPLACE_ENC_WORK_CHUNK_SIZE);
@@ -1374,7 +1361,7 @@ int DecryptPartitionInPlace (volatile FORMAT_VOL_PARAMETERS *volParams, volatile
 			|| !UnmountVolume (hwndDlg, driveLetter, TRUE))
 		{
 			handleWin32Error (hwndDlg, SRC_POS);
-			AbortProcess ("CANT_DISMOUNT_VOLUME");
+			AbortProcess ("CANT_UNMOUNT_VOLUME");
 		}
 	}
 
@@ -1445,13 +1432,11 @@ int DecryptPartitionInPlace (volatile FORMAT_VOL_PARAMETERS *volParams, volatile
 	if (nStatus != ERR_SUCCESS)
 		goto closing_seq;
 
-#ifdef _WIN64
 	if (bIsRamEncryptionEnabled)
 	{
 		VcProtectKeys (masterCryptoInfo, VcGetEncryptionID (masterCryptoInfo));
 		VcProtectKeys (headerCryptoInfo, VcGetEncryptionID (headerCryptoInfo));
 	}
-#endif
 
 	if (masterCryptoInfo->LegacyVolume)
 	{
@@ -1848,9 +1833,7 @@ int FastVolumeHeaderUpdate (HANDLE dev, CRYPTO_INFO *headerCryptoInfo, CRYPTO_IN
 	uint32 headerCrc32;
 	uint8 *fieldPos;
 	PCRYPTO_INFO pCryptoInfo = headerCryptoInfo;
-#ifdef _WIN64
 	BOOL bIsRamEncryptionEnabled = IsRamEncryptionEnabled();
-#endif
 
 	header = (uint8 *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
 
@@ -1871,7 +1854,6 @@ int FastVolumeHeaderUpdate (HANDLE dev, CRYPTO_INFO *headerCryptoInfo, CRYPTO_IN
 		goto closing_seq;
 	}
 
-#ifdef _WIN64
 	if (bIsRamEncryptionEnabled)
 	{
 		pCryptoInfo = crypto_open();
@@ -1884,12 +1866,11 @@ int FastVolumeHeaderUpdate (HANDLE dev, CRYPTO_INFO *headerCryptoInfo, CRYPTO_IN
 		memcpy (pCryptoInfo, headerCryptoInfo, sizeof (CRYPTO_INFO));
 		VcUnprotectKeys (pCryptoInfo, VcGetEncryptionID (headerCryptoInfo));
 	}
-#endif
 
 
 	DecryptBuffer (header + HEADER_ENCRYPTED_DATA_OFFSET, HEADER_ENCRYPTED_DATA_SIZE, pCryptoInfo);
 
-	if (GetHeaderField32 (header, TC_HEADER_OFFSET_MAGIC) != 0x56455241)
+	if (GetHeaderField32 (header, TC_HEADER_OFFSET_MAGIC) != TC_HEADER_MAGIC_NUMBER)
 	{
 		nStatus = ERR_PARAMETER_INCORRECT;
 		goto closing_seq;
@@ -1925,12 +1906,10 @@ closing_seq:
 
 	dwError = GetLastError();
 
-#ifdef _WIN64
 	if (bIsRamEncryptionEnabled && pCryptoInfo)
 	{
 		crypto_close(pCryptoInfo);
 	}
-#endif
 
 	burn (header, TC_VOLUME_HEADER_EFFECTIVE_SIZE);
 	VirtualUnlock (header, TC_VOLUME_HEADER_EFFECTIVE_SIZE);
@@ -2042,14 +2021,14 @@ static int DismountFileSystem (HWND hwndDlg, HANDLE dev,
 		if (!bForcedAllowed)
 		{
 			if (!bSilent)
-				ShowInPlaceEncErrMsgWAltSteps (hwndDlg, "INPLACE_ENC_CANT_LOCK_OR_DISMOUNT_FILESYS", TRUE);
+				ShowInPlaceEncErrMsgWAltSteps (hwndDlg, "INPLACE_ENC_CANT_LOCK_OR_UNMOUNT_FILESYS", TRUE);
 
 			return ERR_DONT_REPORT;
 		}
 
 		if (bForcedRequiresConfirmation
 			&& !bSilent
-			&& AskWarnYesNo ("VOL_LOCK_FAILED_OFFER_FORCED_DISMOUNT", hwndDlg) == IDNO)
+			&& AskWarnYesNo ("VOL_LOCK_FAILED_OFFER_FORCED_UNMOUNT", hwndDlg) == IDNO)
 		{
 			return ERR_DONT_REPORT;
 		}
@@ -2069,7 +2048,7 @@ static int DismountFileSystem (HWND hwndDlg, HANDLE dev,
 	if (!bResult)
 	{
 		if (!bSilent)
-			ShowInPlaceEncErrMsgWAltSteps (hwndDlg, "INPLACE_ENC_CANT_LOCK_OR_DISMOUNT_FILESYS", TRUE);
+			ShowInPlaceEncErrMsgWAltSteps (hwndDlg, "INPLACE_ENC_CANT_LOCK_OR_UNMOUNT_FILESYS", TRUE);
 
 		return ERR_DONT_REPORT;
 	}
@@ -2198,39 +2177,6 @@ BOOL SaveNonSysInPlaceEncSettings (int delta, WipeAlgorithmId newWipeAlgorithm, 
 	return SaveBufferToFile (str, GetConfigPath (TC_APPD_FILENAME_NONSYS_INPLACE_ENC), (DWORD) strlen(str), FALSE, FALSE);
 }
 
-// This function moves the file pointer to the given offset. It first retrieves the current
-// file position using SetFilePointerEx() with FILE_CURRENT as the reference point, and then
-// calculates the difference between the current position and the desired position. Subsequently,
-// it moves the file pointer by the difference calculated using SetFilePointerEx() again.
-//
-// This approach of moving the file pointer relatively (instead of absolutely) was implemented 
-// as a workaround to address the performance issues related to in-place encryption. When using
-// SetFilePointerEx() with FILE_BEGIN as the reference point, reaching the end of large drives 
-// during in-place encryption can cause significant slowdowns. By moving the file pointer
-// relatively, these performance issues are mitigated.
-//
-// We fall back to absolute positioning if the relative positioning fails.
-BOOL MoveFilePointer (HANDLE dev, LARGE_INTEGER offset)
-{
-	LARGE_INTEGER currOffset;
-	LARGE_INTEGER diffOffset;
-
-	currOffset.QuadPart = 0;
-	if (SetFilePointerEx (dev, currOffset, &currOffset, FILE_CURRENT))
-	{
-		diffOffset.QuadPart = offset.QuadPart - currOffset.QuadPart;
-		if (diffOffset.QuadPart == 0)
-			return TRUE;
-
-		// Moves the file pointer by the difference between current and desired positions
-		if (SetFilePointerEx (dev, diffOffset, NULL, FILE_CURRENT))
-			return TRUE;
-	}
-
-	// An error occurred, fallback to absolute positioning
-	return SetFilePointerEx (dev, offset, NULL, FILE_BEGIN);
-}
-
 // Repairs damaged sectors (i.e. those with read errors) by zeroing them.
 // Note that this operating fails if there are any write errors.
 int ZeroUnreadableSectors (HANDLE dev, LARGE_INTEGER startOffset, int64 size, int sectorSize, uint64 *zeroedSectorCount)
@@ -2301,10 +2247,10 @@ static int OpenBackupHeader (HANDLE dev, const wchar_t *devicePath, Password *pa
 	LARGE_INTEGER offset;
 	DWORD n;
 	int nStatus = ERR_SUCCESS;
-	char *header;
+	unsigned char *header;
 	DWORD dwError;
 
-	header = (char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
+	header = (unsigned char *) TCalloc (TC_VOLUME_HEADER_EFFECTIVE_SIZE);
 	if (!header)
 		return ERR_OUTOFMEMORY;
 
@@ -2315,7 +2261,7 @@ static int OpenBackupHeader (HANDLE dev, const wchar_t *devicePath, Password *pa
 	offset.QuadPart = deviceSize - TC_VOLUME_HEADER_GROUP_SIZE;
 
 	if (MoveFilePointer (dev, offset) == 0
-		|| !ReadEffectiveVolumeHeader (TRUE, dev, (uint8 *) header, &n) || n < TC_VOLUME_HEADER_EFFECTIVE_SIZE)
+		|| !ReadEffectiveVolumeHeader (TRUE, dev, header, &n) || n < TC_VOLUME_HEADER_EFFECTIVE_SIZE)
 	{
 		nStatus = ERR_OS_ERROR;
 		goto closing_seq;

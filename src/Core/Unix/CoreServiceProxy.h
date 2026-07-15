@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -27,7 +27,17 @@ namespace VeraCrypt
 
 		virtual void CheckFilesystem (shared_ptr <VolumeInfo> mountedVolume, bool repair) const
 		{
+#ifdef TC_MACOSX
+			// On macOS the check runs diskutil against the VeraCrypt virtual device
+			// and shows the result in a Terminal window; neither needs root. Run it
+			// in this (unprivileged) application process directly: once a device-hosted
+			// mount has started the elevated core service, every request is routed to
+			// that root process, which would create the helper script as root and open
+			// a Terminal the GUI-session user cannot read or execute.
+			T::CheckFilesystem (mountedVolume, repair);
+#else
 			CoreService::RequestCheckFilesystem (mountedVolume, repair);
+#endif
 		}
 
 		virtual void DismountFilesystem (const DirectoryPath &mountPoint, bool force) const
@@ -44,6 +54,18 @@ namespace VeraCrypt
 
 			return dismountedVolumeInfo;
 		}
+
+#ifdef TC_LINUX
+		virtual shared_ptr <VolumeInfo> EmergencyDismountVolume (shared_ptr <VolumeInfo> mountedVolume)
+		{
+			shared_ptr <VolumeInfo> dismountedVolumeInfo = CoreService::RequestEmergencyDismountVolume (mountedVolume);
+
+			VolumeEventArgs eventArgs (dismountedVolumeInfo);
+			T::VolumeDismountedEvent.Raise (eventArgs);
+
+			return dismountedVolumeInfo;
+		}
+#endif
 
 		virtual uint32 GetDeviceSectorSize (const DevicePath &devicePath) const
 		{

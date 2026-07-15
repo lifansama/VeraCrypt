@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -55,7 +55,8 @@ namespace VeraCrypt
 				Btrfs,
 				MacOsExt,
 				APFS,
-				UFS
+				UFS,
+				FFS
 			};
 
 			static Enum GetPlatformNative ()
@@ -68,6 +69,8 @@ namespace VeraCrypt
 				return VolumeCreationOptions::FilesystemType::MacOsExt;
 #elif defined (TC_FREEBSD) || defined (TC_SOLARIS)
 				return VolumeCreationOptions::FilesystemType::UFS;
+#elif defined (TC_OPENBSD)
+				return VolumeCreationOptions::FilesystemType::FFS;
 #else
 				return VolumeCreationOptions::FilesystemType::FAT;
 #endif
@@ -90,6 +93,8 @@ namespace VeraCrypt
 				case VolumeCreationOptions::FilesystemType::APFS:		return "newfs_apfs";
 	#elif defined (TC_FREEBSD) || defined (TC_SOLARIS)
 				case VolumeCreationOptions::FilesystemType::UFS:		return "newfs" ;
+	#elif defined (TC_OPENBSD)
+				case VolumeCreationOptions::FilesystemType::FFS:		return "newfs" ;
 	#endif
 				default: return NULL;
 				}
@@ -144,11 +149,26 @@ namespace VeraCrypt
 	{
 	public:
 
+		struct ProgressStage
+		{
+			enum Enum
+			{
+				NotStarted = 0,
+				WritingData,
+				WritingBackupHeader,
+				FlushingData,
+				Finished,
+				Aborted,
+				Error
+			};
+		};
+
 		struct ProgressInfo
 		{
 			bool CreationInProgress;
 			uint64 TotalSize;
 			uint64 SizeDone;
+			ProgressStage::Enum Stage;
 		};
 
 		struct KeyInfo
@@ -180,6 +200,7 @@ namespace VeraCrypt
 		shared_ptr <VolumeLayout> Layout;
 		shared_ptr <File> VolumeFile;
 		SharedVal <uint64> SizeDone;
+		SharedVal <int> Stage;
 		uint64 WriteOffset;
 		ProgressInfo mProgressInfo;
 

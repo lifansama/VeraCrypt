@@ -43,6 +43,7 @@
 #define IDR_LANG_UK                     57
 #define IDR_LANG_UZ                     58
 #define IDR_LANG_ZHTW                   59
+#define IDR_LANG_NB                     60
 #define IDD_INSTALL                     101
 #define IDD_INSTALL_OPTIONS_PAGE_DLG    102
 #define IDD_UNINSTALL                   103
@@ -93,6 +94,7 @@
 #define IDC_DONATE                      1032
 #define IDC_LANGUAGES_LIST              1033
 #define IDC_SELECT_LANGUAGE_LABEL       1034
+#define IDC_DISABLE_SCREEN_PROTECTION   1181
 
 // Next default values for new objects
 // 

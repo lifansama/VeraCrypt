@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -33,7 +33,7 @@ namespace VeraCrypt
 		virtual bool AskYesNo (const wxString &message, bool defaultYes = false, bool warning = false) const = 0;
 		virtual void BackupVolumeHeaders (shared_ptr <VolumePath> volumePath) const = 0;
 		virtual void BeginBusyState () const = 0;
-		virtual void ChangePassword (shared_ptr <VolumePath> volumePath = shared_ptr <VolumePath>(), shared_ptr <VolumePassword> password = shared_ptr <VolumePassword>(), int pim = 0, shared_ptr <Hash> currentHash = shared_ptr <Hash>(), shared_ptr <KeyfileList> keyfiles = shared_ptr <KeyfileList>(), shared_ptr <VolumePassword> newPassword = shared_ptr <VolumePassword>(), int newPim = 0, shared_ptr <KeyfileList> newKeyfiles = shared_ptr <KeyfileList>(), shared_ptr <Hash> newHash = shared_ptr <Hash>()) const = 0;
+		virtual void ChangePassword (shared_ptr <VolumePath> volumePath = shared_ptr <VolumePath>(), shared_ptr <VolumePassword> password = shared_ptr <VolumePassword>(), int pim = 0, shared_ptr <Pkcs5Kdf> currentKdf = shared_ptr <Pkcs5Kdf>(), shared_ptr <KeyfileList> keyfiles = shared_ptr <KeyfileList>(), shared_ptr <VolumePassword> newPassword = shared_ptr <VolumePassword>(), int newPim = 0, shared_ptr <KeyfileList> newKeyfiles = shared_ptr <KeyfileList>(), shared_ptr <Pkcs5Kdf> newKdf = shared_ptr <Pkcs5Kdf>()) const = 0;
 		virtual void CheckRequirementsForMountingVolume () const;
 		virtual void CloseExplorerWindows (shared_ptr <VolumeInfo> mountedVolume) const;
 		virtual void CreateKeyfile (shared_ptr <FilePath> keyfilePath = shared_ptr <FilePath>()) const = 0;
@@ -41,7 +41,7 @@ namespace VeraCrypt
 		virtual void DeleteSecurityTokenKeyfiles () const = 0;
 		virtual void DismountAllVolumes (bool ignoreOpenFiles = false, bool interactive = true) const;
 		virtual void DismountVolume (shared_ptr <VolumeInfo> volume, bool ignoreOpenFiles = false, bool interactive = true) const;
-		virtual void DismountVolumes (VolumeInfoList volumes, bool ignoreOpenFiles = false, bool interactive = true) const;
+		virtual void DismountVolumes (VolumeInfoList volumes, bool ignoreOpenFiles = false, bool interactive = true, bool emergencyCleanup = false) const;
 		virtual void DisplayVolumeProperties (const VolumeInfoList &volumes) const;
 		virtual void DoShowError (const wxString &message) const = 0;
 		virtual void DoShowInfo (const wxString &message) const = 0;
@@ -59,7 +59,7 @@ namespace VeraCrypt
 		virtual void ListTokenKeyfiles () const = 0;
 		virtual void ListSecurityTokenKeyfiles () const = 0;
 		virtual void ListEMVTokenKeyfiles () const = 0;
-		virtual shared_ptr <VolumeInfo> MountVolume (MountOptions &options) const;
+		virtual shared_ptr <VolumeInfo> MountVolume (MountOptions &options, bool tryCachedPasswords = true) const;
 		virtual shared_ptr <VolumeInfo> MountVolumeThread (MountOptions &options) const { return Core->MountVolume (options);}
 		virtual VolumeInfoList MountAllDeviceHostedVolumes (MountOptions &options) const;
 		virtual VolumeInfoList MountAllFavoriteVolumes (MountOptions &options);
@@ -86,7 +86,9 @@ namespace VeraCrypt
 		virtual wxDateTime VolumeTimeToDateTime (VolumeTime volumeTime) const { return wxDateTime ((time_t) (volumeTime / 1000ULL / 1000 / 10 - 134774ULL * 24 * 3600)); }
 		virtual wxString VolumeTimeToString (VolumeTime volumeTime) const;
 		virtual wxString VolumeTypeToString (VolumeType::Enum type, VolumeProtection::Enum protection) const;
-
+#ifdef TC_UNIX
+		virtual bool InsecureMountAllowed () const;
+#endif
 		Event PreferencesUpdatedEvent;
 
 		struct BusyScope

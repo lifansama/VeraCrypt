@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -18,22 +18,48 @@
 #include "CommandLineInterface.h"
 #include "LanguageStrings.h"
 #include "UserInterfaceException.h"
+#include "Volume/Pkcs5Kdf.h"
 
 namespace VeraCrypt
 {
+	static shared_ptr <Pkcs5Kdf> FindKdfAlgorithm (const wxString &name)
+	{
+		foreach (shared_ptr <Pkcs5Kdf> kdf, Pkcs5Kdf::GetAvailableAlgorithms())
+		{
+			wxString kdfName (kdf->GetName());
+			shared_ptr <Hash> hash = kdf->GetHash();
+			wxString hashName (hash->GetName());
+			wxString hashAltName (hash->GetAltName());
+			if (kdfName.IsSameAs (name, false)
+				|| (kdf->IsArgon2() && name.IsSameAs (L"Argon2id", false)))
+				return kdf;
+
+			if (!kdf->IsArgon2()
+				&& (hashName.IsSameAs (name, false) || hashAltName.IsSameAs (name, false)))
+				return kdf;
+		}
+
+		return shared_ptr <Pkcs5Kdf> ();
+	}
+
 	CommandLineInterface::CommandLineInterface (int argc, wchar_t** argv, UserInterfaceType::Enum interfaceType) :
 		ArgCommand (CommandId::None),
+#ifdef TC_LINUX
+		ArgEmergencyUnmount (false),
+#endif
 		ArgFilesystem (VolumeCreationOptions::FilesystemType::Unknown),
 		ArgNewPim (-1),
 		ArgNoHiddenVolumeProtection (false),
 		ArgPim (-1),
 		ArgSize (0),
 		ArgVolumeType (VolumeType::Unknown),
+		ArgAllowScreencapture (false),
 		ArgDisableFileSizeCheck (false),
 		ArgUseLegacyPassword (false),
-#if defined(TC_LINUX ) || defined (TC_FREEBSD)
 		ArgUseDummySudoPassword (false),
-#endif
+#if defined(TC_UNIX)
+		ArgAllowInsecureMount (false),
+ #endif
 		StartBackgroundTask (false)
 	{
 		wxCmdLineParser parser;
@@ -41,6 +67,9 @@ namespace VeraCrypt
 
 		parser.SetSwitchChars (L"-");
 
+#if defined(TC_WINDOWS) || defined(TC_MACOSX)
+		parser.AddSwitch (L"",  L"allow-screencapture",	_("Allow window to be included in screenshots and screen captures (Windows/MacOS)"));
+#endif
 		parser.AddOption (L"",  L"auto-mount",			_("Auto mount device-hosted/favorite volumes"));
 		parser.AddSwitch (L"",  L"backup-headers",		_("Backup volume headers"));
 		parser.AddSwitch (L"",  L"background-task",		_("Start Background Task"));
@@ -51,17 +80,21 @@ namespace VeraCrypt
 		parser.AddSwitch (L"c", L"create",				_("Create new volume"));
 		parser.AddSwitch (L"",	L"create-keyfile",		_("Create new keyfile"));
 		parser.AddSwitch (L"",	L"delete-token-keyfiles", _("Delete security token keyfiles"));
-		parser.AddSwitch (L"d", L"dismount",			_("Dismount volume"));
+		parser.AddSwitch (L"d", L"dismount",			_("Unmount volume (deprecated: use 'unmount')"));
+		parser.AddSwitch (L"u", L"unmount",				_("Unmount volume"));
+#ifdef TC_LINUX
+		parser.AddSwitch (L"",	L"emergency-unmount",	_("Attempt emergency cleanup if normal Linux unmount fails"));
+#endif
 		parser.AddSwitch (L"",	L"display-password",	_("Display password while typing"));
 		parser.AddOption (L"",	L"encryption",			_("Encryption algorithm"));
 		parser.AddSwitch (L"",	L"explore",				_("Open explorer window for mounted volume"));
 		parser.AddSwitch (L"",	L"export-token-keyfile",_("Export keyfile from token"));
 		parser.AddOption (L"",	L"filesystem",			_("Filesystem type"));
-		parser.AddSwitch (L"f", L"force",				_("Force mount/dismount/overwrite"));
+		parser.AddSwitch (L"f", L"force",				_("Force mount/unmount/overwrite"));
 #if !defined(TC_WINDOWS) && !defined(TC_MACOSX)
 		parser.AddOption (L"",	L"fs-options",			_("Filesystem mount options"));
 #endif
-		parser.AddOption (L"",	L"hash",				_("Hash algorithm"));
+		parser.AddOption (L"",	L"hash",				_("Header key derivation algorithm"));
 		parser.AddSwitch (L"h", L"help",				_("Display detailed command line help"), wxCMD_LINE_OPTION_HELP);
 		parser.AddSwitch (L"",	L"import-token-keyfiles", _("Import keyfiles to security token"));
 		parser.AddOption (L"k", L"keyfiles",			_("Keyfiles"));
@@ -72,7 +105,7 @@ namespace VeraCrypt
 		parser.AddSwitch (L"",	L"load-preferences",	_("Load user preferences"));
 		parser.AddSwitch (L"",	L"mount",				_("Mount volume interactively"));
 		parser.AddOption (L"m", L"mount-options",		_("VeraCrypt volume mount options"));
-		parser.AddOption (L"",	L"new-hash",			_("New hash algorithm"));
+		parser.AddOption (L"",	L"new-hash",			_("New header key derivation algorithm"));
 		parser.AddOption (L"",	L"new-keyfiles",		_("New keyfiles"));
 		parser.AddOption (L"",	L"new-password",		_("New password"));
 		parser.AddOption (L"",	L"new-pim",				_("New PIM"));
@@ -81,7 +114,7 @@ namespace VeraCrypt
 		parser.AddOption (L"p", L"password",			_("Password"));
 		parser.AddOption (L"",  L"pim",					_("PIM"));
 		parser.AddOption (L"",	L"protect-hidden",		_("Protect hidden volume"));
-		parser.AddOption (L"",	L"protection-hash",		_("Hash algorithm for protected hidden volume"));
+		parser.AddOption (L"",	L"protection-hash",		_("Header key derivation algorithm for protected hidden volume"));
 		parser.AddOption (L"",	L"protection-keyfiles",	_("Keyfiles for protected hidden volume"));
 		parser.AddOption (L"",	L"protection-password",	_("Password for protected hidden volume"));
 		parser.AddOption (L"",	L"protection-pim",		_("PIM for protected hidden volume"));
@@ -105,6 +138,9 @@ namespace VeraCrypt
 		parser.AddSwitch (L"",	L"legacy-password-maxlength", _("Use legacy maximum password length (64 UTF-8 bytes)"));
 #if defined(TC_LINUX ) || defined (TC_FREEBSD)
 		parser.AddSwitch (L"",	L"use-dummy-sudo-password",	_("Use dummy password in sudo to detect if it is already authenticated"));
+#endif
+#if defined(TC_UNIX)
+		parser.AddSwitch (L"",	L"allow-insecure-mount",	_("Allow mounting volumes on mount points that are in the user's PATH"));
 #endif
 		wxString str;
 		bool param1IsVolume = false;
@@ -142,6 +178,11 @@ namespace VeraCrypt
 			ArgMountOptions = Preferences.DefaultMountOptions;
 		}
 
+#if defined(TC_WINDOWS) || defined(TC_MACOSX)
+		ArgAllowScreencapture = parser.Found (L"allow-screencapture");
+#else
+		ArgAllowScreencapture = true; // Protection against screenshots is supported only on Windows and MacOS
+#endif
 		// Commands
 		if (parser.Found (L"auto-mount", &str))
 		{
@@ -209,7 +250,7 @@ namespace VeraCrypt
 			ArgCommand = CommandId::DeleteSecurityTokenKeyfiles;
 		}
 
-		if (parser.Found (L"dismount"))
+		if (parser.Found (L"unmount") || parser.Found (L"dismount"))
 		{
 			CheckCommandSingle();
 			ArgCommand = CommandId::DismountVolumes;
@@ -326,6 +367,23 @@ namespace VeraCrypt
 					ArgFilesystem = VolumeCreationOptions::FilesystemType::Ext4;
 				else if (str.IsSameAs (L"NTFS", false))
 					ArgFilesystem = VolumeCreationOptions::FilesystemType::NTFS;
+				else if (str.IsSameAs (L"kernel-ntfs", false)
+					|| str.IsSameAs (L"ntfs-kernel", false))
+				{
+					if (ArgCommand == CommandId::CreateVolume)
+						throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
+
+					ArgMountOptions.FilesystemType = L"kernel-ntfs";
+					ArgFilesystem = VolumeCreationOptions::FilesystemType::NTFS;
+				}
+				else if (str.IsSameAs (L"ntfs3", false))
+				{
+					if (ArgCommand == CommandId::CreateVolume)
+						throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
+
+					ArgMountOptions.FilesystemType = L"ntfs3";
+					ArgFilesystem = VolumeCreationOptions::FilesystemType::NTFS;
+				}
 				else if (str.IsSameAs (L"exFAT", false))
 					ArgFilesystem = VolumeCreationOptions::FilesystemType::exFAT;
 				else if (str.IsSameAs (L"Btrfs", false))
@@ -357,6 +415,12 @@ namespace VeraCrypt
 					ArgFilesystem = VolumeCreationOptions::FilesystemType::NTFS;
 				else if (str.IsSameAs (L"exFAT", false))
 					ArgFilesystem = VolumeCreationOptions::FilesystemType::exFAT;
+#elif defined (TC_OPENBSD)
+				else if (str.IsSameAs (L"FFS", false) || str.IsSameAs (L"UFS", false))
+				{
+					ArgMountOptions.FilesystemType = L"ffs";
+					ArgFilesystem = VolumeCreationOptions::FilesystemType::FFS;
+				}
 #endif
 				else
 					throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
@@ -365,10 +429,18 @@ namespace VeraCrypt
 
 		ArgForce = parser.Found (L"force");
 
+#ifdef TC_LINUX
+		ArgEmergencyUnmount = parser.Found (L"emergency-unmount");
+#endif
+
 		ArgDisableFileSizeCheck = parser.Found (L"no-size-check");
-		ArgUseLegacyPassword = parser.Found (L"legacy-password-maxlength");		
+		ArgUseLegacyPassword = parser.Found (L"legacy-password-maxlength");
 #if defined(TC_LINUX ) || defined (TC_FREEBSD)
 		ArgUseDummySudoPassword = parser.Found (L"use-dummy-sudo-password");
+#endif
+
+#if defined(TC_UNIX)
+		ArgAllowInsecureMount = parser.Found (L"allow-insecure-mount");
 #endif
 
 #if !defined(TC_WINDOWS) && !defined(TC_MACOSX)
@@ -378,15 +450,7 @@ namespace VeraCrypt
 
 		if (parser.Found (L"hash", &str))
 		{
-			ArgHash.reset();
-
-			foreach (shared_ptr <Hash> hash, Hash::GetAvailableAlgorithms())
-			{
-				wxString hashName (hash->GetName());
-				wxString hashAltName (hash->GetAltName());
-				if (hashName.IsSameAs (str, false) || hashAltName.IsSameAs (str, false))
-					ArgHash = hash;
-			}
+			ArgHash = FindKdfAlgorithm (str);
 
 			if (!ArgHash)
 				throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
@@ -394,15 +458,7 @@ namespace VeraCrypt
 
 		if (parser.Found (L"new-hash", &str))
 		{
-			ArgNewHash.reset();
-
-			foreach (shared_ptr <Hash> hash, Hash::GetAvailableAlgorithms())
-			{
-				wxString hashName (hash->GetName());
-				wxString hashAltName (hash->GetAltName());
-				if (hashName.IsSameAs (str, false) || hashAltName.IsSameAs (str, false))
-					ArgNewHash = hash;
-			}
+			ArgNewHash = FindKdfAlgorithm (str);
 
 			if (!ArgNewHash)
 				throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
@@ -428,6 +484,10 @@ namespace VeraCrypt
 					ArgMountOptions.PartitionInSystemEncryptionScope = true;
 				else if (token == L"timestamp" || token == L"ts")
 					ArgMountOptions.PreserveTimestamps = false;
+#ifdef TC_LINUX
+				else if (token == L"kernelntfs" || token == L"kernel-ntfs")
+					ArgMountOptions.MountNtfsWithKernelDriver = true;
+#endif
 #ifdef TC_WINDOWS
 				else if (token == L"removable" || token == L"rm")
 					ArgMountOptions.Removable = true;
@@ -540,19 +600,11 @@ namespace VeraCrypt
 
 		if (parser.Found (L"protection-hash", &str))
 		{
-			bool bHashFound = false;
-			foreach (shared_ptr <Hash> hash, Hash::GetAvailableAlgorithms())
-			{
-				wxString hashName (hash->GetName());
-				wxString hashAltName (hash->GetAltName());
-				if (hashName.IsSameAs (str, false) || hashAltName.IsSameAs (str, false))
-				{
-					bHashFound = true;
-					ArgMountOptions.ProtectionKdf = Pkcs5Kdf::GetAlgorithm (*hash);
-				}
-			}
+			shared_ptr <Pkcs5Kdf> kdf = FindKdfAlgorithm (str);
+			if (kdf)
+				ArgMountOptions.ProtectionKdf = kdf;
 
-			if (!bHashFound)
+			if (!kdf)
 				throw_err (LangString["UNKNOWN_OPTION"] + L": " + str);
 		}
 
@@ -709,6 +761,11 @@ namespace VeraCrypt
 
 		if (param1IsMountedVolumeSpec)
 			ArgVolumes = GetMountedVolumes (parser.GetParamCount() > 0 ? parser.GetParam (0) : wxString());
+
+#ifdef TC_LINUX
+		if (ArgEmergencyUnmount && ArgCommand != CommandId::DismountVolumes)
+			throw_err (L"--emergency-unmount is supported only with an unmount command");
+#endif
 
 		if (ArgCommand == CommandId::None && Application::GetUserInterfaceType() == UserInterfaceType::Text)
 			parser.Usage();

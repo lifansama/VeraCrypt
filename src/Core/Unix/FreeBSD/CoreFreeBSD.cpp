@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -46,7 +46,7 @@ namespace VeraCrypt
 		args.push_back ("-f");
 		args.push_back (filePath);
 
-		string dev = StringConverter::Trim (Process::Execute ("mdconfig", args));
+		string dev = StringConverter::Trim (Process::Execute ("/sbin/mdconfig", args));
 
 		if (dev.find ("/") == string::npos)
 			dev = string ("/dev/") + dev;
@@ -65,7 +65,7 @@ namespace VeraCrypt
 		{
 			try
 			{
-				Process::Execute ("mdconfig", args);
+				Process::Execute ("/sbin/mdconfig", args);
 				break;
 			}
 			catch (ExecutedProcessFailed&)
@@ -183,8 +183,10 @@ namespace VeraCrypt
 		return mountedFilesystems;
 	}
 
-	void CoreFreeBSD::MountFilesystem (const DevicePath &devicePath, const DirectoryPath &mountPoint, const string &filesystemType, bool readOnly, const string &systemMountOptions) const
+	void CoreFreeBSD::MountFilesystem (const DevicePath &devicePath, const DirectoryPath &mountPoint, const string &filesystemType, bool readOnly, const string &systemMountOptions, bool internalMountOnly) const
 	{
+		(void) internalMountOnly;
+
 		std::string chosenFilesystem = "msdos";
 		std::string modifiedMountOptions = systemMountOptions;
 

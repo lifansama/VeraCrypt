@@ -6,7 +6,7 @@
  Encryption for the Masses 2.02a, which is Copyright (c) 1998-2000 Paul Le Roux
  and which is governed by the 'License Agreement for Encryption for the Masses'
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages. */
@@ -93,6 +93,15 @@ BOOL bPromptTutorial = FALSE;
 BOOL bUpdateRescueDisk = FALSE;
 BOOL bRepairMode = FALSE;
 BOOL bUserSetLanguage = FALSE;
+
+static BOOL EfiBootLoaderSelectionWasRefused ()
+{
+	DWORD resourceSet = 0;
+	return ReadLocalMachineRegistryDword (
+		(wchar_t *) VC_EFI_BOOT_LOADER_DIAGNOSTICS_REGISTRY_KEY,
+		(wchar_t *) VC_EFI_BOOT_LOADER_RESOURCE_SET_VALUE_NAME,
+		&resourceSet) && resourceSet == 0;
+}
 
 /*
 BOOL bMakePackage = FALSE;
@@ -686,7 +695,7 @@ void Applink_Dll (MSIHANDLE hInstaller, const char *dest)
 	}
 	else if (strcmp(dest, "onlinehelp") == 0)
 	{
-		StringCbCopyW (url, sizeof (url),L"https://www.veracrypt.fr/en/Documentation.html");
+		StringCbCopyW (url, sizeof (url),L"https://veracrypt.jp/en/Documentation.html");
 		buildUrl = FALSE;
 	}
 	else if (strcmp(dest, "keyfiles") == 0)
@@ -800,7 +809,7 @@ void Applink_Dll (MSIHANDLE hInstaller, const char *dest)
 		if (buildUrl && !FileExists (url))
 		{
 			// fallbacl to online resources
-			StringCbPrintfW (url, sizeof (url), L"https://www.veracrypt.fr/en/%s", page);
+			StringCbPrintfW (url, sizeof (url), L"https://veracrypt.jp/en/%s", page);
 			SafeOpenURL (url);
 		}
 		else
@@ -815,7 +824,7 @@ void Applink_Dll (MSIHANDLE hInstaller, const char *dest)
 		if (((r == ERROR_FILE_NOT_FOUND) || (r == ERROR_PATH_NOT_FOUND)) && buildUrl)
 		{
 			// fallbacl to online resources
-			StringCbPrintfW (url, sizeof (url), L"https://www.veracrypt.fr/en/%s", page);
+			StringCbPrintfW (url, sizeof (url), L"https://veracrypt.jp/en/%s", page);
 			ShellExecuteW (NULL, L"open", url, NULL, NULL, SW_SHOWNORMAL);
 		}			
 	}
@@ -1470,7 +1479,7 @@ BOOL DoDriverUnload_Dll (MSIHANDLE hInstaller, HWND hwnd)
 				if (volumesMounted != 0)
 				{
 					bOK = FALSE;
-					MSILogAndShow(hInstaller, MSI_WARNING_LEVEL, GetString ("DISMOUNT_ALL_FIRST"));
+					MSILogAndShow(hInstaller, MSI_WARNING_LEVEL, GetString ("UNMOUNT_ALL_FIRST"));
 				}
 			}
 			else
@@ -1730,6 +1739,9 @@ BOOL DoRegUninstall_Dll (MSIHANDLE hInstaller, BOOL bRemoveDeprecated)
 	RegDeleteKey (HKEY_LOCAL_MACHINE, L"Software\\Classes\\VeraCryptVolume");
 	*/
 
+	DeleteRegistryKey (HKEY_LOCAL_MACHINE, L"Software\\VeraCrypt\\Diagnostics\\EfiBootLoader");
+	RegDeleteKey (HKEY_LOCAL_MACHINE, L"Software\\VeraCrypt\\Diagnostics");
+
 	if (!bRemoveDeprecated)
 	{
 		HKEY hKey;
@@ -1813,6 +1825,36 @@ BOOL UpgradeBootLoader_Dll (MSIHANDLE hInstaller, HWND hwndDlg)
 
 			// this is done by the service now
 			//bootEnc.InstallBootLoader (true);
+
+			// Validate the installed boot files and their known-CA compatibility with the active
+			// Secure Boot db/dbx before the user reboots. In the MSI
+			// upgrade path, the System Favorites service has already attempted the loader refresh.
+			try
+			{
+				if (EfiBootLoaderSelectionWasRefused ())
+				{
+					MSILogAndShow (hInstaller, MSI_WARNING_LEVEL, GetString("SYSENC_EFI_UNSUPPORTED_SECUREBOOT_CA"));
+				}
+				else
+				{
+					EfiBootChainTrustStatus trustStatus;
+					if (bootEnc.GetEfiBootChainTrustStatus (trustStatus))
+					{
+						if (!trustStatus.StatusKnown)
+							MSILogAndShow (hInstaller, MSI_WARNING_LEVEL, GetString("SYSENC_EFI_UNSUPPORTED_SECUREBOOT_CA"));
+						else if (!trustStatus.VeraCryptLoaderFilesValid || !trustStatus.VeraCryptLoaderKnownCaAllowed)
+							MSILogAndShow (hInstaller, MSI_WARNING_LEVEL, GetString("SYSENC_EFI_LOADER_NOT_TRUSTED_BY_SECUREBOOT"));
+						if (trustStatus.StatusKnown && (!trustStatus.WindowsLoaderInspectionSucceeded
+							|| !trustStatus.WindowsLoaderPresent
+							|| !trustStatus.WindowsLoaderSignerKnown
+							|| !trustStatus.WindowsLoaderKnownCaAllowed))
+							MSILogAndShow (hInstaller, MSI_WARNING_LEVEL, GetString("SYSENC_EFI_WINDOWS_LOADER_NOT_TRUSTED_BY_SECUREBOOT"));
+						else if (trustStatus.StatusKnown && trustStatus.WindowsLoaderMigrationRecommended)
+							MSILogAndShow (hInstaller, MSI_WARNING_LEVEL, GetString("SYSENC_EFI_WINDOWS_LOADER_PCA2011_MIGRATION_NEEDED"));
+					}
+				}
+			}
+			catch (...) { }
 
 			if (bootEnc.GetInstalledBootLoaderVersion() <= TC_RESCUE_DISK_UPGRADE_NOTICE_MAX_VERSION)
 			{
@@ -2131,6 +2173,225 @@ void Tokenize(const wchar_t* szInput, std::vector<std::wstring>& szTokens)
     }
 }
 
+static BOOL JoinPath(wchar_t *szPath, size_t cbPath, const wchar_t *szDirectory, const wchar_t *szFileName)
+{
+	if (FAILED(StringCbCopyW(szPath, cbPath, szDirectory)))
+		return FALSE;
+
+	size_t cchPath = wcslen(szPath);
+	if (cchPath > 0 && szPath[cchPath - 1] != L'\\' && szPath[cchPath - 1] != L'/')
+	{
+		if (FAILED(StringCbCatW(szPath, cbPath, L"\\")))
+			return FALSE;
+	}
+
+	return SUCCEEDED(StringCbCatW(szPath, cbPath, szFileName));
+}
+
+static BOOL IsVersionedVeraCryptStartMenuFolderName(const wchar_t *szFolderName)
+{
+	const wchar_t szPrefix[] = L"VeraCrypt ";
+	const wchar_t *szVersion = NULL;
+	BOOL bHasDigit = FALSE;
+	BOOL bHasDot = FALSE;
+	BOOL bPreviousDot = FALSE;
+
+	if (!szFolderName || _wcsnicmp(szFolderName, szPrefix, wcslen(szPrefix)) != 0)
+		return FALSE;
+
+	szVersion = szFolderName + wcslen(szPrefix);
+	if (*szVersion == L'\0')
+		return FALSE;
+
+	while (*szVersion)
+	{
+		if (*szVersion >= L'0' && *szVersion <= L'9')
+		{
+			bHasDigit = TRUE;
+			bPreviousDot = FALSE;
+		}
+		else if (*szVersion == L'.')
+		{
+			if (bPreviousDot)
+				return FALSE;
+
+			bHasDot = TRUE;
+			bPreviousDot = TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+
+		++szVersion;
+	}
+
+	return bHasDigit && bHasDot && !bPreviousDot;
+}
+
+static void DeleteStartMenuShortcutIfExists(MSIHANDLE hInstaller, const wchar_t *szFolderPath, const wchar_t *szShortcutName)
+{
+	wchar_t szShortcutPath[TC_MAX_PATH];
+	DWORD dwAttributes;
+
+	if (!JoinPath(szShortcutPath, sizeof(szShortcutPath), szFolderPath, szShortcutName))
+	{
+		MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not build Start Menu shortcut path for '%s'", szShortcutName);
+		return;
+	}
+
+	dwAttributes = GetFileAttributesW(szShortcutPath);
+	if (dwAttributes == INVALID_FILE_ATTRIBUTES || (dwAttributes & FILE_ATTRIBUTE_DIRECTORY))
+		return;
+
+	MSILog(hInstaller, MSI_INFO_LEVEL, L"Removing obsolete Start Menu shortcut '%s'", szShortcutPath);
+
+	if (dwAttributes & FILE_ATTRIBUTE_READONLY)
+		SetFileAttributesW(szShortcutPath, dwAttributes & ~FILE_ATTRIBUTE_READONLY);
+
+	if (!DeleteFileW(szShortcutPath))
+	{
+		DWORD dwError = GetLastError();
+		if (dwError != ERROR_FILE_NOT_FOUND && dwError != ERROR_PATH_NOT_FOUND)
+		{
+			MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not remove obsolete Start Menu shortcut '%s' (error %lu)", szShortcutPath, dwError);
+		}
+	}
+}
+
+static void CleanupVersionedVeraCryptStartMenuFolder(MSIHANDLE hInstaller, const wchar_t *szFolderPath)
+{
+	/* Delete only known VeraCrypt-created shortcuts; keep folders with any other content. */
+	static const wchar_t *szShortcutNames[] =
+	{
+		L"VeraCrypt.lnk",
+		L"VeraCryptExpander.lnk",
+		L"VeraCrypt Website.url",
+		L"VeraCrypt User's Guide.lnk",
+		L"VeraCrypt User Guide.lnk",
+		L"Uninstall VeraCrypt.lnk"
+	};
+
+	for (size_t i = 0; i < ARRAYSIZE(szShortcutNames); ++i)
+		DeleteStartMenuShortcutIfExists(hInstaller, szFolderPath, szShortcutNames[i]);
+
+	if (RemoveDirectoryW(szFolderPath))
+	{
+		MSILog(hInstaller, MSI_INFO_LEVEL, L"Removed obsolete Start Menu folder '%s'", szFolderPath);
+	}
+	else
+	{
+		DWORD dwError = GetLastError();
+		if (dwError == ERROR_DIR_NOT_EMPTY)
+		{
+			MSILog(hInstaller, MSI_INFO_LEVEL, L"Obsolete Start Menu folder '%s' was left in place because it contains non-VeraCrypt items", szFolderPath);
+		}
+		else if (dwError != ERROR_FILE_NOT_FOUND && dwError != ERROR_PATH_NOT_FOUND)
+		{
+			MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not remove obsolete Start Menu folder '%s' (error %lu)", szFolderPath, dwError);
+		}
+	}
+}
+
+static void CleanupVersionedVeraCryptStartMenuFoldersInRoot(MSIHANDLE hInstaller, const wchar_t *szProgramMenuFolder)
+{
+	wchar_t szSearchPath[TC_MAX_PATH];
+	WIN32_FIND_DATAW findData;
+	HANDLE hFind;
+
+	if (!szProgramMenuFolder || szProgramMenuFolder[0] == L'\0')
+		return;
+
+	if (!JoinPath(szSearchPath, sizeof(szSearchPath), szProgramMenuFolder, L"VeraCrypt *"))
+	{
+		MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not build obsolete Start Menu folder search path for '%s'", szProgramMenuFolder);
+		return;
+	}
+
+	hFind = FindFirstFileW(szSearchPath, &findData);
+	if (hFind == INVALID_HANDLE_VALUE)
+	{
+		DWORD dwError = GetLastError();
+		if (dwError != ERROR_FILE_NOT_FOUND && dwError != ERROR_PATH_NOT_FOUND)
+		{
+			MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not search obsolete Start Menu folders in '%s' (error %lu)", szProgramMenuFolder, dwError);
+		}
+		return;
+	}
+
+	do
+	{
+		if ((findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			&& IsVersionedVeraCryptStartMenuFolderName(findData.cFileName))
+		{
+			wchar_t szFolderPath[TC_MAX_PATH];
+
+			if (JoinPath(szFolderPath, sizeof(szFolderPath), szProgramMenuFolder, findData.cFileName))
+				CleanupVersionedVeraCryptStartMenuFolder(hInstaller, szFolderPath);
+			else
+				MSILog(hInstaller, MSI_WARNING_LEVEL, L"Could not build obsolete Start Menu folder path for '%s'", findData.cFileName);
+		}
+	}
+	while (FindNextFileW(hFind, &findData));
+
+	FindClose(hFind);
+}
+
+static void CleanupVersionedVeraCryptStartMenuFolders(MSIHANDLE hInstaller, const wchar_t *szProgramMenuFolder)
+{
+	wchar_t szCommonPrograms[TC_MAX_PATH];
+
+	CleanupVersionedVeraCryptStartMenuFoldersInRoot(hInstaller, szProgramMenuFolder);
+
+	if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_COMMON_PROGRAMS, NULL, SHGFP_TYPE_CURRENT, szCommonPrograms)))
+		CleanupVersionedVeraCryptStartMenuFoldersInRoot(hInstaller, szCommonPrograms);
+}
+
+EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_CleanupOldStartMenuFolders(MSIHANDLE hInstaller)
+{
+	std::wstring szValueBuf = L"";
+	std::wstring szProgramMenuFolder = L"";
+	DWORD cchValueBuf = 0;
+	UINT uiStat = 0;
+
+	MSILog(hInstaller, MSI_INFO_LEVEL, L"Begin VC_CustomAction_CleanupOldStartMenuFolders");
+
+	uiStat = MsiGetProperty(hInstaller, TEXT("CustomActionData"), (LPWSTR)TEXT(""), &cchValueBuf);
+	if (ERROR_MORE_DATA == uiStat)
+	{
+		++cchValueBuf; // add 1 for null termination
+		szValueBuf.resize(cchValueBuf);
+		uiStat = MsiGetProperty(hInstaller, TEXT("CustomActionData"), &szValueBuf[0], &cchValueBuf);
+		if (ERROR_SUCCESS == uiStat)
+		{
+			MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_CleanupOldStartMenuFolders: CustomActionData = '%s'", szValueBuf.c_str());
+
+			std::vector<std::wstring> szTokens;
+			Tokenize(szValueBuf.c_str(), szTokens);
+
+			for (size_t i = 0; i < szTokens.size(); i++)
+			{
+				std::wstring szToken = szTokens[i];
+
+				if (wcsncmp(szToken.c_str(), L"PROGRAMMENUFOLDER=", wcslen(L"PROGRAMMENUFOLDER=")) == 0)
+				{
+					size_t index0 = szToken.find_first_of(L"=");
+					if (index0 != std::wstring::npos)
+					{
+						szProgramMenuFolder = szToken.substr(index0 + 1);
+						MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_CleanupOldStartMenuFolders: PROGRAMMENUFOLDER = '%s'", szProgramMenuFolder.c_str());
+					}
+				}
+			}
+		}
+	}
+
+	CleanupVersionedVeraCryptStartMenuFolders(hInstaller, szProgramMenuFolder.c_str());
+
+	MSILog(hInstaller, MSI_INFO_LEVEL, L"End VC_CustomAction_CleanupOldStartMenuFolders");
+	return ERROR_SUCCESS;
+}
+
 /* 
  * Same as Setup.c, function DoInstall(), but 
  * without the actual installation, it only prepares the system 
@@ -2336,6 +2597,44 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 	UINT			uiRet           = ERROR_INSTALL_FAILURE;
 	BOOL			bOK				= TRUE;
 	WCHAR			szCurrentDir[MAX_PATH];
+	const wchar_t* 	oldFileNames[] = {
+		L"docs\\html\\en\\AddNewSystemVar.jpg",
+		L"docs\\html\\en\\CertificateCannotBeVerified.jpg",
+		L"docs\\html\\en\\CertVerifyFails.jpg",
+		L"docs\\html\\en\\DistributionPackageDamaged.jpg",
+		L"docs\\html\\en\\DownloadVS2010.jpg",
+		L"docs\\html\\en\\DownloadVS2019.jpg",
+		L"docs\\html\\en\\DownloadVSBuildTools.jpg",
+		L"docs\\html\\en\\gzipCommandLine.jpg",
+		L"docs\\html\\en\\NasmCommandLine.jpg",
+		L"docs\\html\\en\\RegeditPermissions-1.jpg",
+		L"docs\\html\\en\\RegeditPermissions-2.jpg",
+		L"docs\\html\\en\\RegeditPermissions-3.jpg",
+		L"docs\\html\\en\\RegeditPermissions-4.jpg",
+		L"docs\\html\\en\\SelectAdvancedSystemSettings.jpg",
+		L"docs\\html\\en\\SelectEnvironmentVariables.jpg",
+		L"docs\\html\\en\\SelectPathVariable.jpg",
+		L"docs\\html\\en\\SelectThisPC.jpg",
+		L"docs\\html\\en\\upxCommandLine.jpg",
+		L"docs\\html\\en\\VS2010BuildSolution.jpg",
+		L"docs\\html\\en\\VS2010Win32Config.jpg",
+		L"docs\\html\\en\\VS2010X64Config.jpg",
+		L"docs\\html\\en\\VS2019ARM64Config.jpg",
+		L"docs\\html\\en\\VS2019BuildSolution.jpg",
+		L"docs\\html\\en\\YasmCommandLine.jpg",
+		L"docs\\html\\en\\BCH_Logo_48x30.png",
+		L"docs\\html\\en\\Donation_Bank.html",
+		L"docs\\html\\en\\LinuxPrepAndBuild.sh",
+		L"docs\\html\\en\\LinuxPrepAndBuild.zip",
+		L"docs\\html\\en\\RIPEMD-160.html",
+		L"docs\\html\\en\\ru\\BCH_Logo_48x30.png",
+		L"docs\\html\\en\\bank_30x30.png",
+		L"docs\\html\\ru\\Donation_Bank.html",
+		L"docs\\html\\ru\\bank_30x30.png",
+		L"docs\\html\\zh-cn\\Donation_Bank.html",
+		L"docs\\html\\zh-cn\\bank_30x30.png",
+		L"Languages\\Language.ru - Copy.xml",
+	};
 
 	MSILog(hInstaller, MSI_INFO_LEVEL, L"Begin VC_CustomAction_PostInstall");
 
@@ -2349,13 +2648,22 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 		if ((ERROR_SUCCESS == uiStat))
 		{
 			MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_PostInstall: CustomActionData = '%s'", szValueBuf.c_str());
-			if (wcsncmp(szValueBuf.c_str(), L"INSTALLDIR=", wcslen(L"INSTALLDIR=")) == 0)
+
+			std::vector<std::wstring> szTokens;
+			Tokenize(szValueBuf.c_str(), szTokens);
+
+			for (size_t i = 0; i < szTokens.size(); i++)
 			{
-				size_t index0 = szValueBuf.find_first_of(L"=");
-				if (index0 != std::wstring::npos)
+				std::wstring szToken = szTokens[i];
+
+				if (wcsncmp(szToken.c_str(), L"INSTALLDIR=", wcslen(L"INSTALLDIR=")) == 0)
 				{
-					szInstallDir = szValueBuf.substr(index0 + 1);
-					MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_PostInstall: INSTALLDIR = '%s'", szInstallDir.c_str());
+					size_t index0 = szToken.find_first_of(L"=");
+					if (index0 != std::wstring::npos)
+					{
+						szInstallDir = szToken.substr(index0 + 1);
+						MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_PostInstall: INSTALLDIR = '%s'", szInstallDir.c_str());
+					}
 				}
 			}
 		}
@@ -2446,6 +2754,7 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 		WIN32_FIND_DATA f;
 		HANDLE h;
 		wchar_t szTmp[TC_MAX_PATH];
+		size_t i;
 
 		// delete "VeraCrypt Setup.exe" if it exists
 		StringCbPrintfW (szTmp, sizeof(szTmp), L"%s%s", szInstallDir.c_str(), L"VeraCrypt Setup.exe");
@@ -2454,18 +2763,26 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 			ForceDeleteFile(szTmp);
 		}
 
+		// delete files wrongly installed by previous versions in installation folder
+		for (i = 0; i < ARRAYSIZE(oldFileNames); i++)
+		{
+			StringCbPrintfW (szTmp, sizeof(szTmp), L"%s%s", szInstallDir.c_str(), oldFileNames[i]);
+			if (FileExists(szTmp))
+			{
+				ForceDeleteFile(szTmp);
+			}
+		}
+
 		StringCbPrintfW (szTmp, sizeof(szTmp), L"%s%s", szInstallDir.c_str(), L"VeraCrypt.exe");
 
-		if (Is64BitOs ())
-			EnableWow64FsRedirection (FALSE);
+		EnableWow64FsRedirection (FALSE);
 
 		wstring servicePath = GetServiceConfigPath (_T(TC_APP_NAME) L".exe", false);
 		wstring serviceLegacyPath = GetServiceConfigPath (_T(TC_APP_NAME) L".exe", true);
 		wstring favoritesFile = GetServiceConfigPath (TC_APPD_FILENAME_SYSTEM_FAVORITE_VOLUMES, false);
 		wstring favoritesLegacyFile = GetServiceConfigPath (TC_APPD_FILENAME_SYSTEM_FAVORITE_VOLUMES, true);
 
-		if (Is64BitOs ()
-			&& FileExists (favoritesLegacyFile.c_str())
+		if (FileExists (favoritesLegacyFile.c_str())
 			&& !FileExists (favoritesFile.c_str()))
 		{
 			// copy the favorites XML file to the native system directory
@@ -2522,23 +2839,20 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 			catch (...) {}
 		}
 
-		if (Is64BitOs ())
+		// delete files from legacy path
+		if (FileExists (favoritesLegacyFile.c_str()))
 		{
-			// delete files from legacy path
-			if (FileExists (favoritesLegacyFile.c_str()))
-			{
-				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostInstall: REMOVING %s", favoritesLegacyFile.c_str());
-				ForceDeleteFile (favoritesLegacyFile.c_str());
-			}
-
-			if (FileExists (serviceLegacyPath.c_str()))
-			{
-				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostInstall: REMOVING %s", serviceLegacyPath.c_str());
-				ForceDeleteFile (serviceLegacyPath.c_str());
-			}
-
-			EnableWow64FsRedirection (TRUE);
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostInstall: REMOVING %s", favoritesLegacyFile.c_str());
+			ForceDeleteFile (favoritesLegacyFile.c_str());
 		}
+
+		if (FileExists (serviceLegacyPath.c_str()))
+		{
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostInstall: REMOVING %s", serviceLegacyPath.c_str());
+			ForceDeleteFile (serviceLegacyPath.c_str());
+		}
+
+		EnableWow64FsRedirection (TRUE);
 
 		if (bResult == FALSE)
 		{
@@ -2596,6 +2910,14 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 				FindClose (h);
 			}
 
+			// remove legacy folder "docs\en\ru" if present in installation directory
+			{
+				wchar_t folder[TC_MAX_PATH];
+				// since we've done SetCurrentDirectory(szDestDir), a relative path will be resolved correctly
+				StringCbCopyW(folder, sizeof(folder), L"docs\\html\\en\\ru");
+				StatRemoveDirectory(folder);
+			}
+
 			// remove language XML files from previous version if any
 			h = FindFirstFile (L"Language*.xml", &f);
 
@@ -2611,7 +2933,7 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostInstall(MSIHANDLE hInstaller)
 			}
 		
 			// remvove legacy files that are not needed anymore
-			for (int i = 0; i < sizeof (szLegacyFiles) / sizeof (szLegacyFiles[0]); i++)
+			for (i = 0; i < sizeof (szLegacyFiles) / sizeof (szLegacyFiles[0]); i++)
 			{
 				StatDeleteFile (szLegacyFiles [i], TRUE);
 			}
@@ -2977,6 +3299,70 @@ end:
 	return uiRet;
 }
 
+static BOOL DirectoryExists (const wchar_t *dirName)
+{
+	DWORD attrib = GetFileAttributes (dirName);
+	return (attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY));
+}
+
+static BOOL DeleteContentsOnReboot(LPCTSTR pszDir) {
+    TCHAR szPath[MAX_PATH];
+	TCHAR szSubPath[MAX_PATH];
+    WIN32_FIND_DATA FindFileData;
+    HANDLE hFind;
+	BOOL bHasBackslash = FALSE;
+	// check if pszDir ends with a backslash
+	if (pszDir[_tcslen(pszDir) - 1] == '\\')
+	{
+		bHasBackslash = TRUE;
+	}
+
+    // Prepare the path for FindFirstFile
+	if (bHasBackslash)
+		StringCchPrintf(szPath, MAX_PATH, TEXT("%s*"), pszDir);
+	else
+    	StringCchPrintf(szPath, MAX_PATH, TEXT("%s\\*"), pszDir);
+
+    hFind = FindFirstFile(szPath, &FindFileData);
+    if (hFind == INVALID_HANDLE_VALUE) {
+        return FALSE;
+    }
+
+    BOOL result = TRUE;
+
+    do {
+        if (_tcscmp(FindFileData.cFileName, TEXT(".")) != 0 &&
+            _tcscmp(FindFileData.cFileName, TEXT("..")) != 0) {
+
+			if (bHasBackslash)
+				StringCchPrintf(szSubPath, MAX_PATH, TEXT("%s%s"), pszDir, FindFileData.cFileName);
+			else
+            	StringCchPrintf(szSubPath, MAX_PATH, TEXT("%s\\%s"), pszDir, FindFileData.cFileName);
+
+            if (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+                // Recursive call to handle subdirectories
+                if (!DeleteContentsOnReboot(szSubPath)) {
+                    result = FALSE; // Track failures but attempt to continue
+                }
+            } else {
+                // Schedule the file for deletion
+                if (!MoveFileEx(szSubPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT)) {
+                    result = FALSE; // Track failures
+                }
+            }
+        }
+    } while (FindNextFile(hFind, &FindFileData) != 0);
+
+    FindClose(hFind);
+
+    // Schedule the root directory for deletion, only if not done already
+    if (!MoveFileEx(pszDir, NULL, MOVEFILE_DELAY_UNTIL_REBOOT)) {
+        result = FALSE;
+    }
+
+    return result;
+}
+
 /* 
  * Same as Setup.c, function DoUninstall(), but 
  * without the actual installation, it only performs 
@@ -3116,8 +3502,7 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostUninstall(MSIHANDLE hInstaller)
 
 	//	Last part of DoFilesInstall()
 	{
-		if (Is64BitOs ())
-			EnableWow64FsRedirection (FALSE);
+		EnableWow64FsRedirection (FALSE);
 
 		wstring servicePath = GetServiceConfigPath (_T(TC_APP_NAME) L".exe", false);
 		wstring serviceLegacyPath = GetServiceConfigPath (_T(TC_APP_NAME) L".exe", true);
@@ -3137,21 +3522,45 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_PostUninstall(MSIHANDLE hInstaller)
 			ForceDeleteFile (servicePath.c_str());
 		}
 
-		if (Is64BitOs ())
+		if (FileExists (favoritesLegacyFile.c_str()))
 		{
-			if (FileExists (favoritesLegacyFile.c_str()))
-			{
-				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: REMOVING %s", favoritesLegacyFile.c_str());
-				ForceDeleteFile (favoritesLegacyFile.c_str());
-			}
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: REMOVING %s", favoritesLegacyFile.c_str());
+			ForceDeleteFile (favoritesLegacyFile.c_str());
+		}
 
-			if (FileExists (serviceLegacyPath.c_str()))
-			{
-				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: REMOVING %s", serviceLegacyPath.c_str());
-				ForceDeleteFile (serviceLegacyPath.c_str());
-			}
+		if (FileExists (serviceLegacyPath.c_str()))
+		{
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: REMOVING %s", serviceLegacyPath.c_str());
+			ForceDeleteFile (serviceLegacyPath.c_str());
+		}
 
-			EnableWow64FsRedirection (TRUE);
+		EnableWow64FsRedirection (TRUE);
+
+		// remove the installation folder is case it remains after uninstall
+		if (DirectoryExists (szInstallDir.c_str()))
+		{
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: REMOVING %s", szInstallDir.c_str());
+			if(DeleteDirectory (szInstallDir.c_str()))
+			{
+				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: %s removed", szInstallDir.c_str());
+			}
+			else
+			{
+				MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: %s could not be removed. Scheduling removal on reboot", szInstallDir.c_str());
+				if (DeleteContentsOnReboot(szInstallDir.c_str()))
+				{
+					bRestartRequired = TRUE;
+					MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: %s scheduled for removal on reboot", szInstallDir.c_str());
+				}
+				else
+				{
+					MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: %s could not be scheduled for removal on reboot", szInstallDir.c_str());
+				}
+			}
+		}
+		else
+		{
+			MSILog(hInstaller, MSI_ERROR_LEVEL, L"VC_CustomAction_PostUninstall: %s does not exist", szInstallDir.c_str());
 		}
 	}
 
@@ -3356,6 +3765,7 @@ EXTERN_C UINT STDAPICALLTYPE VC_CustomAction_DoChecks(MSIHANDLE hInstaller)
 		if (bDisableReboot)
 		{
 			MSILog(hInstaller, MSI_INFO_LEVEL, L"VC_CustomAction_DoChecks: reboot is required but it is disabled because \"REBOOT\" specifies ReallySuppress");
+			uiRet = ERROR_SUCCESS;
 		}
 		else
 		{

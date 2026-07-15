@@ -1,6 +1,6 @@
-PATH=%PATH%;%WSDK81%\bin\x86;C:\Program Files\7-Zip;C:\Program Files (x86)\7-Zip
-set VC_VERSION=1.26.12
-set VC_VERSION_NBRE=1.26.12
+PATH=%PATH%;%WSDK81%\bin\x86
+set VC_VERSION=1.26.29
+set VC_VERSION_NBRE=1.26.29
 set PFXNAME=TestCertificate\idrix_codeSign.pfx
 set PFXPASSWORD=idrix
 set PFXCA=TestCertificate\idrix_TestRootCA.crt
@@ -17,7 +17,7 @@ cd %SIGNINGPATH%
 
 
 rem sign using SHA-256
-signtool sign /v /a /f %SHA256PFXNAME% /p %SHA256PFXPASSWORD% /ac %SHA256PFXCA% /fd sha256 /tr http://rfc3161timestamp.globalsign.com/advanced /td SHA256 "..\Debug\Setup Files\veracrypt.sys" "..\Debug\Setup Files\veracrypt-x64.sys" "..\Debug\Setup Files\veracrypt-arm64.sys" "..\Debug\Setup Files\VeraCrypt.exe" "..\Debug\Setup Files\VeraCrypt Format.exe" "..\Debug\Setup Files\VeraCryptExpander.exe" "..\Debug\Setup Files\VeraCrypt-x64.exe" "..\Debug\Setup Files\VeraCrypt Format-x64.exe" "..\Debug\Setup Files\VeraCryptExpander-x64.exe" "..\Debug\Setup Files\VeraCrypt-arm64.exe" "..\Debug\Setup Files\VeraCrypt Format-arm64.exe" "..\Debug\Setup Files\VeraCryptExpander-arm64.exe" "..\Debug\Setup Files\VeraCrypt COMReg.exe"
+signtool sign /v /a /f %SHA256PFXNAME% /p %SHA256PFXPASSWORD% /ac %SHA256PFXCA% /fd sha256 /tr http://rfc3161timestamp.globalsign.com/advanced /td SHA256 "..\Debug\Setup Files\veracrypt-x64.sys" "..\Debug\Setup Files\veracrypt-arm64.sys" "..\Debug\Setup Files\VeraCrypt-x64.exe" "..\Debug\Setup Files\VeraCrypt Format-x64.exe" "..\Debug\Setup Files\VeraCryptExpander-x64.exe" "..\Debug\Setup Files\VeraCrypt-arm64.exe" "..\Debug\Setup Files\VeraCrypt Format-arm64.exe" "..\Debug\Setup Files\VeraCryptExpander-arm64.exe" "..\Debug\Setup Files\VeraCrypt COMReg.exe"
 
 rem create setup and MSI
 cd "..\Debug\Setup Files\"
@@ -34,17 +34,17 @@ rmdir /S /Q Languages
 mkdir Languages
 copy /V /Y ..\..\..\Translations\*.xml Languages\.
 del Languages.zip
-7z a -y Languages.zip Languages
+tar -a -cf Languages.zip Languages
 rmdir /S /Q docs
 mkdir docs\html\en
 mkdir docs\EFI-DCS
-copy /V /Y ..\..\..\doc\html\* docs\html\en\.
-copy "..\..\..\doc\chm\VeraCrypt User Guide.chm" docs\.
+xcopy /E /V /Y ..\..\..\doc\html\* docs\html\.
+copy "..\..\..\doc\chm\VeraCrypt User Guide*.chm" docs\.
 copy "..\..\..\doc\EFI-DCS\*.pdf" docs\EFI-DCS\.
 copy "..\..\Release\Setup Files\*.cat" .
 copy "..\..\Release\Setup Files\veracrypt.inf" .
 del docs.zip
-7z a -y docs.zip docs
+tar -a -cf docs.zip docs
 "VeraCrypt Setup.exe" /p
 call build_msi_x64.bat %VC_VERSION_NBRE%
 del LICENSE
@@ -55,7 +55,7 @@ del VeraCrypt.ico
 del VeraCrypt_setup_background.bmp
 del VeraCrypt_setup.bmp
 del Setup.ico
-del "VeraCrypt User Guide.chm"
+del "VeraCrypt User Guide*.chm"
 del Languages.zip
 del docs.zip
 rmdir /S /Q Languages

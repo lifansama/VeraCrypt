@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VeraCrypt>
-  <localization prog-version= "1.26.12">
+  <localization prog-version="1.26.29">
     <language langid="ar" name="العربية" en-name="Arabic" version="0.2.0" translators="Ahmad Gharbeia, Khaled Hosny, Ali Khojah" />
     <font lang="ar" class="normal" size="11" face="default" />
     <font lang="ar" class="bold" size="13" face="Arial" />
@@ -135,8 +135,8 @@
     <entry lang="ar" key="IDC_FAVORITE_REMOVE">قم بإزالة</entry>
     <entry lang="ar" key="IDC_FAVORITE_USE_LABEL_IN_EXPLORER">استخدم الوسم المفضل كوسم لمستكشف الملفات</entry>
     <entry lang="ar" key="IDC_FAV_VOL_OPTIONS_GLOBAL_SETTINGS_BOX">إعدادات عامة</entry>
-    <entry lang="ar" key="IDC_HK_DISMOUNT_BALLOON_TOOLTIP">  عقب التنزيل السريع، أعرض الكتابة في بالون</entry>
-    <entry lang="ar" key="IDC_HK_DISMOUNT_PLAY_SOUND">عقب التنزيل السريع، شغل نغمة تنبيهات النظام</entry>
+    <entry lang="ar" key="IDC_HK_UNMOUNT_BALLOON_TOOLTIP">  عقب التنزيل السريع، أعرض الكتابة في بالون</entry>
+    <entry lang="ar" key="IDC_HK_UNMOUNT_PLAY_SOUND">عقب التنزيل السريع، شغل نغمة تنبيهات النظام</entry>
     <entry lang="ar" key="IDC_HK_MOD_ALT">‮Alt</entry>
     <entry lang="ar" key="IDC_HK_MOD_CTRL">Ctrl</entry>
     <entry lang="ar" key="IDC_HK_MOD_SHIFT">‮Shift</entry>
@@ -156,12 +156,12 @@
     <entry lang="ar" key="IDC_PIM_HELP">(عدد الدورات الافتراضي صفر أو قيمة فارغة)</entry>
     <entry lang="ar" key="IDC_PREF_BKG_TASK_ENABLE">‮مُفعّل</entry>
     <entry lang="ar" key="IDC_PREF_CACHE_PASSWORDS">‮خزّن كلمات السرّ مؤقتا في ذاكرة المُشغِّل</entry>
-    <entry lang="ar" key="IDC_PREF_DISMOUNT_INACTIVE">‮افصل المجلد تلقائيا عندما لا تُكتب/تُقرأ بيانات منه</entry>
-    <entry lang="ar" key="IDC_PREF_DISMOUNT_LOGOFF">‮خروج المستخدم</entry>
-    <entry lang="ar" key="IDC_PREF_DISMOUNT_SESSION_LOCKED">أغلقت الجلسة التشغيلية للمستخدم</entry>
-    <entry lang="ar" key="IDC_PREF_DISMOUNT_POWERSAVING">‮الدخول في طور حِفظ الطاقة</entry>
-    <entry lang="ar" key="IDC_PREF_DISMOUNT_SCREENSAVER">‮اشتغال حافظة الشاشة</entry>
-    <entry lang="ar" key="IDC_PREF_FORCE_AUTO_DISMOUNT">‮أجبر الفصل التلقائي حتى إن وجدت ملفات أو أدلّة مفتوحة في المجلد</entry>
+    <entry lang="ar" key="IDC_PREF_UNMOUNT_INACTIVE">‮افصل المجلد تلقائيا عندما لا تُكتب/تُقرأ بيانات منه</entry>
+    <entry lang="ar" key="IDC_PREF_UNMOUNT_LOGOFF">‮خروج المستخدم</entry>
+    <entry lang="ar" key="IDC_PREF_UNMOUNT_SESSION_LOCKED">أغلقت الجلسة التشغيلية للمستخدم</entry>
+    <entry lang="ar" key="IDC_PREF_UNMOUNT_POWERSAVING">‮الدخول في طور حِفظ الطاقة</entry>
+    <entry lang="ar" key="IDC_PREF_UNMOUNT_SCREENSAVER">‮اشتغال حافظة الشاشة</entry>
+    <entry lang="ar" key="IDC_PREF_FORCE_AUTO_UNMOUNT">‮أجبر الفصل التلقائي حتى إن وجدت ملفات أو أدلّة مفتوحة في المجلد</entry>
     <entry lang="ar" key="IDC_PREF_LOGON_MOUNT_DEVICES">‮أوصل كل مجلدات ڤيراكربت المستضافة في نبائط</entry>
     <entry lang="ar" key="IDC_PREF_LOGON_START">‮شغِّل مهمة ڤيراكربت التي في الخلفية</entry>
     <entry lang="ar" key="IDC_PREF_MOUNT_READONLY">‮أوصل المجلدات للقراءة فقط</entry>
@@ -169,7 +169,7 @@
     <entry lang="ar" key="IDC_PREF_OPEN_EXPLORER">‮افتح نافذة إكسبلورر للمجلدات التي نجح وصلها</entry>
     <entry lang="ar" key="IDC_PREF_TEMP_CACHE_ON_MULTIPLE_MOUNT">كلمة السر المؤقتة للمخبأ خلال عمل "تحميل الأقراص المفضلة"</entry>
     <entry lang="ar" key="IDC_PREF_USE_DIFF_TRAY_ICON_IF_VOL_MOUNTED">قم باستخدام أيقونة مختلفة في شريط الأوامر عند وجود أقراص محملة</entry>
-    <entry lang="ar" key="IDC_PREF_WIPE_CACHE_ON_AUTODISMOUNT">‮امحُ كلمات السر المخزّنة مؤقتا عند الفصل التلقائي</entry>
+    <entry lang="ar" key="IDC_PREF_WIPE_CACHE_ON_AUTOUNMOUNT">‮امحُ كلمات السر المخزّنة مؤقتا عند الفصل التلقائي</entry>
     <entry lang="ar" key="IDC_PREF_WIPE_CACHE_ON_EXIT">‮امحُ كلمات السر المخزّنة مؤقتا عند الخروج</entry>
     <entry lang="ar" key="IDC_PRESERVE_TIMESTAMPS">قم بحفظ ختم الوقت عند تعديل ملفات الحاويات</entry>
     <entry lang="ar" key="IDC_RESET_HOTKEYS">‮صفّر</entry>
@@ -181,7 +181,7 @@
     <entry lang="ar" key="IDC_TRAVEL_OPEN_EXPLORER">‮افتح &amp;نافذة إكسبلورر للمجلدات الموصولة</entry>
     <entry lang="ar" key="IDC_TRAV_CACHE_PASSWORDS">‮خزّن كلمات السرّ &amp;مؤقتا في ذاكرة المُشغِّل</entry>
     <entry lang="ar" key="IDC_TRUECRYPT_MODE">TrueCrypt نمط</entry>
-    <entry lang="ar" key="IDC_UNMOUNTALL">‮ا&amp;فصل الكل</entry>
+    <entry lang="ar" key="IDC_UNMOUNTALL">‮افصل ال&amp;كل</entry>
     <entry lang="ar" key="IDC_VOLUME_PROPERTIES">‮خ&amp;صائص المجلد…</entry>
     <entry lang="ar" key="IDC_VOLUME_TOOLS">‮أ&amp;دوات المجلد…</entry>
     <entry lang="ar" key="IDC_WIPE_CACHE">‮ا&amp;مح المخبئية</entry>
@@ -269,14 +269,14 @@
     <entry lang="ar" key="IDT_ACCELERATION_OPTIONS">تسريع العتاد</entry>
     <entry lang="ar" key="IDT_ASSIGN_HOTKEY">‮اختصار</entry>
     <entry lang="ar" key="IDT_AUTORUN">‮تضبيطات التشغيل التلقائي (autorun.inf)</entry>
-    <entry lang="ar" key="IDT_AUTO_DISMOUNT">‮افصل تلقائيًا</entry>
-    <entry lang="ar" key="IDT_AUTO_DISMOUNT_ON">‮افصل الكل عندما:</entry>
+    <entry lang="ar" key="IDT_AUTO_UNMOUNT">‮افصل تلقائيًا</entry>
+    <entry lang="ar" key="IDT_AUTO_UNMOUNT_ON">‮افصل الكل عندما:</entry>
     <entry lang="ar" key="IDT_BOOT_LOADER_SCREEN_OPTIONS">‮خيارات شاشة مُحمِّل الإقلاع</entry>
     <entry lang="ar" key="IDT_CONFIRM_PASSWORD">‮أكّد كلمة السرّ:</entry>
     <entry lang="ar" key="IDT_CURRENT">‮الحالي</entry>
     <entry lang="ar" key="IDT_CUSTOM_BOOT_LOADER_MESSAGE">‮اعرض هذه الرسالة في شاشة استيثاق ما قبل الإقلاع (بحد أقصى 24 حرفا):</entry>
     <entry lang="ar" key="IDT_DEFAULT_MOUNT_OPTIONS">‮خيارات الوصل المبدئية</entry>
-    <entry lang="ar" key="IDT_DISMOUNT_ACTION">‮خيارات أزرار الاختصار</entry>
+    <entry lang="ar" key="IDT_UNMOUNT_ACTION">‮خيارات أزرار الاختصار</entry>
     <entry lang="ar" key="IDT_DRIVER_OPTIONS">تهيئة المحرك</entry>
     <entry lang="ar" key="IDC_ENABLE_EXTENDED_IOCTL_SUPPORT">فعل دعم أكواد تحكم الأقراص</entry>
     <entry lang="ar" key="IDT_FAVORITE_LABEL">وسم القرص المعين</entry>
@@ -291,11 +291,11 @@
     <entry lang="ar" key="IDT_NEW_PASSWORD">‮كلمة السر:</entry>
     <entry lang="ar" key="IDT_PARALLELIZATION_OPTIONS">الأوامر البرمجية المصغرة بالتوازي</entry>
     <entry lang="ar" key="IDT_PKCS11_LIB_PATH">‮مسار مكتبة ‪PKCS #11‬</entry>
-    <entry lang="ar" key="IDT_PKCS5_PRF">PKCS-5 PRF:</entry>
-    <entry lang="ar" key="IDT_NEW_PKCS5_PRF">PKCS-5 PRF:</entry>
+    <entry lang="ar" key="IDT_KDF">KDF:</entry>
+    <entry lang="ar" key="IDT_NEW_KDF">KDF:</entry>
     <entry lang="ar" key="IDT_PW_CACHE_OPTIONS">‮ذاكرة كلمات السّر</entry>
     <entry lang="ar" key="IDT_SECURITY_OPTIONS">‮خيارات الأمان</entry>
-    <entry lang="en" key="IDT_EMV_OPTIONS">EMV Options</entry>
+    <entry lang="ar" key="IDT_EMV_OPTIONS">خيارات EMV</entry>
     <entry lang="ar" key="IDT_TASKBAR_ICON">‮مهمّة الخلفية لڤيراكربت</entry>
     <entry lang="ar" key="IDT_TRAVELER_MOUNT">‮مجلد ڤيراكربت لوصله (نسبة إلى جذر قرص الجوّال):</entry>
     <entry lang="ar" key="IDT_TRAVEL_INSERTION">‮عند إدخال قرص الجوال: </entry>
@@ -390,7 +390,7 @@
     <entry lang="ar" key="ADMINISTRATOR">المستخدم المدير</entry>
     <entry lang="ar" key="ADMIN_PRIVILEGES_DRIVER">‮لتُحمّل مشغّل ڤيراكربت تحتاج للولوج إلى حساب له صلاحيات المدير.</entry>
     <entry lang="ar" key="ADMIN_PRIVILEGES_WARN_DEVICES">‮لاحظ أنه لكي تعمي/تُهيئ قسما/نبيطة فإنه يتوجب عليك الولوج إلى حساب له صلاحيات المدير. ‮ ‮ هذا لا ينطبق على المجلدات المستضافة في ملفات.</entry>
-    <entry lang="en" key="ADMIN_PRIVILEGES_WARN_MANAGE_VOLUME">Unable to activate fast file creation: Administrator privileges required.\nPlease relaunch the program as an Administrator to enable this feature.\n\nWould you like to proceed without fast file creation?</entry>
+    <entry lang="ar" key="ADMIN_PRIVILEGES_WARN_MANAGE_VOLUME">تعذر تفعيل إنشاء الملفات السريعة: يلزم وجود امتيازات المسؤول.\nيرجى إعادة تشغيل البرنامج كمسؤول لتمكين هذه الميزة.\n\nهل ترغب في المتابعة دون إنشاء الملفات السريعة؟</entry>
     <entry lang="ar" key="ADMIN_PRIVILEGES_WARN_HIDVOL">‮لإنشاء مجلد مخفي يجب الولوج إلى حساب له صلاحيات المدير. ‮ ‮أأتابع؟</entry>
     <entry lang="ar" key="ADMIN_PRIVILEGES_WARN_NTFS">‮رجاءً لاحظ أنه يجب عليك الولوج إلى حساب له صلاحيات المدير لتتمكّن من تهيئة المجلد بنظام‍ ‪NTFS‬. ‮ ‮ يمكنك أن تُهيء المجلد بنظام ‪FAT‬ دون صلاحيات المدير.</entry>
     <entry lang="ar" key="AES_HELP">‮شفرة مقبولة لدى ‪FIPS‬ (‪Rijndael‬ المنشورة في ‪1998‬) يمكن لوكالات و إدارات حكومة الولايات المتحدة الأمريكية استخدامها لحماية المعلومات المصنفة حتى مستوى 'سري للغاية'. ‮مفتاح بطول ‪256‬ بتة؛ كتلة ‪128‬ بتة؛ ‪14‬ دورة (‪AES‬ ‪256‬)؛ تعمل في طور ‪XTS‬.</entry>
@@ -423,8 +423,8 @@
     <entry lang="ar" key="DEVICE_FREE_PB">‮حجم ‪%s‬ هو ‪%.2f‬ ب.بايت</entry>
     <entry lang="ar" key="DEVICE_IN_USE_FORMAT">‮تحذير: النبيطة\\القسم قيد الاستخدام بواسطة نظام التشغيل أو تطبيق ما. قد تسبب تهيئة النبيطة\\القسم فساد البيانات وعدم استقرار النظام. ‮ ‮أأواصل؟</entry>
     <entry lang="ar" key="DEVICE_IN_USE_INPLACE_ENC">‮تحذير: هذا القسم قيد الاستخدام بواسطة نظام التشغيل أو تطبيق ما. ينبغي أن تغلق كل التطبيقات التي يمكن أن تكون مستخدمة القسم (بما في ذلك مضادات الفيروسات). ‮ ‮أأواصل؟</entry>
-    <entry lang="ar" key="FORMAT_CANT_DISMOUNT_FILESYS">‮عُطل: تحتوي النبيطة\\القسم على نظام ملفات تعذَّر فصله. ربما يستخدم نظامُ التشغيل نظامَ الملفات. ستسبب تهيئة النبيطة\\القسم تلف البيانات وعدم استقرار النظام. ‮ ‮ لحل هذه المشكلة ننصحك بأن تحذف القسم أولًا ثم تعيد إنشاءه دون تهيئة. لفعل هذا اتبع	الخطوات التالية: 1) انقر باليمين أيقونة 'الحاسوب' (أو 'حاسوبي') في 'قائمة ابدأ' واختر 'أدر'. ستظهر نافذة 'إدارة الحاسوب'. 2) من نافذة 'إدارة الحاسوب' اختر 'تخزين' &gt; 'إدارة القرص'. 3) انقر باليمين على القسم الذي تريد تعميته واختر إمَّا 'احذف القسم' أو 'احذف المجلد'، أو'احذف المجلد المنطقي'. 4) انقر 'نعم'. إذا سألك ويندوز إعادة تشغيل الحاسوب فافعل ذلك. ثم أعد الخطوتين 1 و 2 وواصل من الخطوة 5. 5) انقر باليمين على المساحة غير المخصصة\\الشاغرة ثم اختر إما 'قسم جديد'، أو 'مجلد جديد بسيط' أو 'مجلد منطقي جديد'. 6) ستظهر الآن نافذة 'مرشد القسم الجديد' أو 'مرشد المجلد البسيط الجديد'، اتبع التعليمات. في صفحة المعالج المعنونة 'هيّء القسم'، اختر إما 'لا تهيء هذا القسم' أو 'لا تهيء هذا المجلد'. في المرشد ذاته انقر 'اللاحق' ثم 'أنه'. 7) لاحظ أن مسار النبيطة التي كنت قد اخترتها في المرشد ربما أضحى غير صحيح الآن. لذا اخرج من مرشد إنشاء مجلد ڤيراكربت (إذا كان لا يزال يعمل) ثم ابدأه مجددا. 8) جرب تعمية النبيطة\\القسم مجددا. ‮ ‮ إذا تكرر فشل ڤيراكربت في تعمية المجلد فقد ترى إنشاء ملفٍ حاوٍ بدلا من هذا.</entry>
-    <entry lang="ar" key="INPLACE_ENC_CANT_LOCK_OR_DISMOUNT_FILESYS">‮عطل: تعذّر قفل نظام الملفات و\\أو فصله. قد يكون قيد الاستخدام بواسطة نظام التشغيل أو تطبيق ما (كمضاد فيروسات مثلا). مواصلة تعمية القسم قد تسبب تلف البيانات و عدم استقرار النظام. ‮ ‮أغلق كل التطبيقات التي يمكن أن تكون مستخدمة نظام الملفات (بما في ذلك مضادات الفيروسات) و حاول مجددا.. إن لم تنحل المشكلة فاتّبع الخطوات التالية.</entry>
+    <entry lang="ar" key="FORMAT_CANT_UNMOUNT_FILESYS">‮عُطل: تحتوي النبيطة\\القسم على نظام ملفات تعذَّر فصله. ربما يستخدم نظامُ التشغيل نظامَ الملفات. ستسبب تهيئة النبيطة\\القسم تلف البيانات وعدم استقرار النظام. ‮ ‮ لحل هذه المشكلة ننصحك بأن تحذف القسم أولًا ثم تعيد إنشاءه دون تهيئة. لفعل هذا اتبع	الخطوات التالية: 1) انقر باليمين أيقونة 'الحاسوب' (أو 'حاسوبي') في 'قائمة ابدأ' واختر 'أدر'. ستظهر نافذة 'إدارة الحاسوب'. 2) من نافذة 'إدارة الحاسوب' اختر 'تخزين' &gt; 'إدارة القرص'. 3) انقر باليمين على القسم الذي تريد تعميته واختر إمَّا 'احذف القسم' أو 'احذف المجلد'، أو'احذف المجلد المنطقي'. 4) انقر 'نعم'. إذا سألك ويندوز إعادة تشغيل الحاسوب فافعل ذلك. ثم أعد الخطوتين 1 و 2 وواصل من الخطوة 5. 5) انقر باليمين على المساحة غير المخصصة\\الشاغرة ثم اختر إما 'قسم جديد'، أو 'مجلد جديد بسيط' أو 'مجلد منطقي جديد'. 6) ستظهر الآن نافذة 'مرشد القسم الجديد' أو 'مرشد المجلد البسيط الجديد'، اتبع التعليمات. في صفحة المعالج المعنونة 'هيّء القسم'، اختر إما 'لا تهيء هذا القسم' أو 'لا تهيء هذا المجلد'. في المرشد ذاته انقر 'اللاحق' ثم 'أنه'. 7) لاحظ أن مسار النبيطة التي كنت قد اخترتها في المرشد ربما أضحى غير صحيح الآن. لذا اخرج من مرشد إنشاء مجلد ڤيراكربت (إذا كان لا يزال يعمل) ثم ابدأه مجددا. 8) جرب تعمية النبيطة\\القسم مجددا. ‮ ‮ إذا تكرر فشل ڤيراكربت في تعمية المجلد فقد ترى إنشاء ملفٍ حاوٍ بدلا من هذا.</entry>
+    <entry lang="ar" key="INPLACE_ENC_CANT_LOCK_OR_UNMOUNT_FILESYS">‮عطل: تعذّر قفل نظام الملفات و\\أو فصله. قد يكون قيد الاستخدام بواسطة نظام التشغيل أو تطبيق ما (كمضاد فيروسات مثلا). مواصلة تعمية القسم قد تسبب تلف البيانات و عدم استقرار النظام. ‮ ‮أغلق كل التطبيقات التي يمكن أن تكون مستخدمة نظام الملفات (بما في ذلك مضادات الفيروسات) و حاول مجددا.. إن لم تنحل المشكلة فاتّبع الخطوات التالية.</entry>
     <entry lang="ar" key="DEVICE_IN_USE_INFO">‮تحذير: بعض النبائط\\الأقسام الموصولة قيد الاستخدام! ‮ ‮ سيسبب تجاهل هذا نتائج غير مرغوبة تشمل عدم استقرار النظام. ‮ ‮ ننصح بشدة بغلق أي تطبيق يستخدم النبائط\\الأقسام.</entry>
     <entry lang="ar" key="DEVICE_PARTITIONS_ERR">‮النبيطة المختارة تحوي أقساما. ‮ ‮ ربما تسبب تهيئة تلك النبيطة عدم استقرار النظام و/أو تلف البيانات. عليك إمَّا أن تختار قسما على النبيطة، أو أن تحذف كل الأقسام لتمكن ڤيراكربت من تهيئتها بأمان.</entry>
     <entry lang="ar" key="DEVICE_PARTITIONS_ERR_W_INPLACE_ENC_NOTE">‮النبيطة المختارة لا تحوي نظام تشغيل و تحوي أقساما. ‮ ‮مجلدات ڤيراكربت المعماة المستضافة في نبائط يمكن إنشاؤها حصرا في نبائط لا تحوي أية أقسام مسبقا (بما في ذلك الاقراص الصلبة و شرائح الذاكرة). لا يمكن تعمية نبيطة تحوي أقساما في موضعها (باستخدام مفتاح واحد رئيسي) إلا إن كانت السواقة المنصب فيها ويندوز و منها يقلع. ‮ ‮إن أردت تعمية النبيطة المختارة باستخدام مفتاح واحد رئيسي فتنبغي إزالة كل الأقسام من النبيطة أولا لتمكين ڤيراكربت من تهيئتها بأمان (تهيئة نبيطة تحوي أقساما قد تؤدي إلى عدم استقرار النظام و\\أو تلف البيانات). عوضا عن هذا يمكنك تعمية كل قسم على النبيطة على حدى (و سيكون لكل منها مفتاح). ‮ ‮ملاحظة:إن أردت إزالة كل الأقسام من قرص ‪GPT‬ فقد تضطر إلى تحويله إلى قرص ‪MBR‬ (مثلا باستخدام أداة إدارة الوسائط) لكي تتمكن من إزالة الأقسام المخفية منه.</entry>
@@ -590,7 +590,7 @@
     <entry lang="ar" key="HIDDEN_VOLUME_TOO_SMALL_FOR_OS_CLONE">‮عطل: الملفات التي نسختها إلى المجلد الخارجي تشغل حيزا أكبر من اللازم، لذا لا توجد مساحة شاغرة كافية فيه للمجلد المخفي. ‮ ‮لاحظ أن المجلد المخفي ينبغي أن يكون بحجم قسم النظام (القسم المنصب فيه نظام التشغيل العامل حاليا). السبب هو أن نظام التشغيل المخفي سينشأ بنسخ محتوى قسم النظام إلى المجلد المخفي. ‮ ‮لا يمكن مواصلة صيرورة إنشاء نظام التشغيل المخفي.</entry>
     <entry lang="ar" key="OPENFILES_DRIVER">‮لا يستطيع المشغل فصل المجلد. يحتمل أن تكون بعض الملفات الموجودة على المجلد لا تزال مفتوحة.</entry>
     <entry lang="ar" key="OPENFILES_LOCK">‮تعذَّر قفل المجلد. ما زالت بعض الملفات على المجلد مفتوحة. لذا لا يمكن فصله.</entry>
-    <entry lang="ar" key="VOL_LOCK_FAILED_OFFER_FORCED_DISMOUNT">‮تعذَّر على ڤيراكربت قفل المجلد لأنه قيد الاستخدام بواسطة النظام أو تطبيقات (ربما توجد ملفات مفتوحة على المجلد). ‮ ‮أتريد إجبار فصل المجلد؟</entry>
+    <entry lang="ar" key="VOL_LOCK_FAILED_OFFER_FORCED_UNMOUNT">‮تعذَّر على ڤيراكربت قفل المجلد لأنه قيد الاستخدام بواسطة النظام أو تطبيقات (ربما توجد ملفات مفتوحة على المجلد). ‮ ‮أتريد إجبار فصل المجلد؟</entry>
     <entry lang="ar" key="OPEN_VOL_TITLE">‮اختر مجلد ڤيراكربت</entry>
     <entry lang="ar" key="OPEN_TITLE">‮عيِّن المسار و اسم الملف</entry>
     <entry lang="ar" key="SELECT_PKCS11_MODULE">‮اختر مكتبة ‪PKCS #11‬</entry>
@@ -610,7 +610,6 @@
     <entry lang="ar" key="IDD_PCDM_ADD_REMOVE_VOL_KEYFILES">‮أضف/احذف الملفات المفاتيح من/إلى المجلد</entry>
     <entry lang="ar" key="IDD_PCDM_REMOVE_ALL_KEYFILES_FROM_VOL">‮احذف كل الملفات المفاتيح من المجلد</entry>
     <entry lang="ar" key="PASSWORD_CHANGED">كلمة السر, PIM  and/or ملف/ملفات المفاتيح تم تغييرها بنجاح.\n\nمهم: الرجاء التأكد من قراءة هذا القسم 'Changing Passwords and Keyfiles' في فصل 'Security Requirements and Precautions' في دليل المستخدم لفيراكربت.</entry>
-    <entry lang="ar" key="FAVORITE_PIM_CHANGED">هذا القرص تم تسجيله في مفضلات النظام وهويته تغيرت.\nهل ترغب أن يقوم فيراكربت بتحديث تهيئة مفضلات النظام تلقائيا (يتطلب صلاحيات مدير نظام)?\n\nالرجاء إذا تمت الإجابة بلا, أنه يتحتم عليك تحديث مفضلات النظام يدويا.</entry>
     <entry lang="ar" key="SYS_PASSWORD_CHANGED_ASK_RESCUE_DISK">‮هام: إذا لم تدمر قرص إنقاذ ڤيراكربت فإنه يمكن تظهير قسم\\نبيطة النظام باستخدام كلمة السر العتيقة (بإقلاع قرص إنقاذ ڤيراكربت و إدخال كلمة السر العتيقة). لذا ينبغي إنشاء قرص إنقاذ ڤيراكربت حديث ثم إتلاف العتيق. ‮ ‮أتريد إنشاء قرص ڤيراكربت حديث؟</entry>
     <entry lang="ar" key="SYS_HKD_ALGO_CHANGED_ASK_RESCUE_DISK">‮لاحظ أن قرص ڤيراكربت لازال يستخدم الخوارزمية السابقة. إن كنت تعد الخوارزمية السابقة غير آمنة فينبغي لك أن تنشئ قرص إنقاذ ڤيراكربت جديد ثم تدمر العتيق. ‮ ‮أتريد إنشاء قرص إنقاذ ڤيراكربت جديد؟</entry>
     <entry lang="ar" key="KEYFILES_NOTE"> لاحظ أن فيراكربت لا يقوم بتغيير محتوى ملف المفتاح. يمكنك اختيار أكثر من ملف مفتاح (التريتب غير مؤثر). إذا أضفت مجلدا, كل الملفات غير المخفية سيتم اعتبارها ملفات مفاتيح. اضغط 'Add Token Files' لاختيار ملفات مفاتيح مخزنة على كرت ذكي أو توكن آمن (أو قم باستيرادهما).</entry>
@@ -650,7 +649,7 @@
     <entry lang="ar" key="PIM_SMALL_WARNING">قمت باختيار قيمة متدنية ل (PIM) وهي أدنى من القيمة الافتراضية له في فيراكربت. يرجى ملاحظة أنه إن لم تكن كلمة السر قوية فهذا يعني أمان أقل.\n\nهل تؤكد أنك تستخدم كلمة سر قوية?</entry>
     <entry lang="ar" key="PIM_SYSENC_TOO_BIG">أكبر قيمة ل (PIM) لتشفير النظام هي 65535.</entry>
     <entry lang="ar" key="PIM_TITLE">قيمة PIM للقرص</entry>
-    <entry lang="ar" key="HIDDEN_FILES_PRESENT_IN_KEYFILE_PATH">\n\nتحذير: وجدت ملفات مخفية في مسار ملف المفتاح. تلك الملفات المخفية لا تصلح كملف مفتاح. إذا كنت تريد استخدامهم كملف مفتاح, يرجى إزالة خاصية الإخفاء عنها (لضغط بالزر الأيمن عليها, اختر خصائص, أزل العلامة من أمام خاصية الإخفاء ثم اضغط زر نعم). ملاحظة: المفات المخفية تظهر إذا كانت خاصية الإخفاء بالكمبيوتر غير مفعلة (الكمبيوتر > ترتيب > 'خيارات المجلدات والبحث' > مشاهدة).</entry>
+    <entry lang="ar" key="HIDDEN_FILES_PRESENT_IN_KEYFILE_PATH">\n\nتحذير: وجدت ملفات مخفية في مسار ملف المفتاح. تلك الملفات المخفية لا تصلح كملف مفتاح. إذا كنت تريد استخدامهم كملف مفتاح, يرجى إزالة خاصية الإخفاء عنها (لضغط بالزر الأيمن عليها, اختر خصائص, أزل العلامة من أمام خاصية الإخفاء ثم اضغط زر نعم). ملاحظة: المفات المخفية تظهر إذا كانت خاصية الإخفاء بالكمبيوتر غير مفعلة (الكمبيوتر &gt; ترتيب &gt; 'خيارات المجلدات والبحث' &gt; مشاهدة).</entry>
     <entry lang="ar" key="HIDDEN_VOL_PROT_PASSWORD_US_KEYB_LAYOUT">إذا كنت ترغب في حماية ملف مخفي, فيرجى استخدام لوحة مفاتيح قياسية انجليزية للولايات المتحدة عند إدخال كلمة السر. هذا مطلوب لعملية الإقلاع  (قبل إقلاع ويندوز) والتي لا يتاح حينها لوحة مفاتيح غيرها.</entry>
     <entry lang="ar" key="FOUND_NO_PARTITION_W_DEFERRED_INPLACE_ENC">‮لم يجد ڤيراكربت أي مجلدات لغير النظام و قد قوطعت تعميتها و أمكن تظهير ترويستها باستخدام كلمة السر و\\أو الملفات المفاتح المعطاة. ‮ ‮تحقق من أن كلمة السر و\\أو ملفات المفاتيح صحيحة و أن القسم\\المجلد ليس قيد الاستخدام من قبل النظام أو تطبيقات (بما في ذلك مضادات الفيروسات).</entry>
     <entry lang="ar" key="SELECTED_PARTITION_ALREADY_INPLACE_ENC">الجزء أو القرص المختار مشفر من قبل.\n = 0x%.8X إشارات الترويسة</entry>
@@ -729,7 +728,7 @@
     <entry lang="ar" key="DLL_FILES">‮وحدات المكتبات</entry>
     <entry lang="ar" key="FORMAT_NTFS_STOP">‮تعذَّر إتمام تهيئة ‪NTFS‬.</entry>
     <entry lang="ar" key="CANT_MOUNT_VOLUME">‮تعذَّر وصل المجلد.</entry>
-    <entry lang="ar" key="CANT_DISMOUNT_VOLUME">‮تعذَّر فصل المجلد.</entry>
+    <entry lang="ar" key="CANT_UNMOUNT_VOLUME">‮تعذَّر فصل المجلد.</entry>
     <entry lang="ar" key="FORMAT_NTFS_FAILED">‮فشل ويندوز في تهيئة المجلد بنظام ‪NTFS‬. ‮ ‮اختر نظام ملفات مختلف (إن أمكن) وحاول مجددا. أو يمكنك ترك المجلد دون تهيئة (اختر نوع نظام الملفات 'لا شيء') واخرج من هذا المرشد ثم أوصل المجلد واستخدم أداة النظام أو أداة أخرى لتهيئة المجلد الموصول (سيبقى المجلد معمّى).</entry>
     <entry lang="ar" key="FORMAT_NTFS_FAILED_ASK_FAT">‮فشل ويندوز في تهيئة المجلد في هيئة ‪NTFS‬. ‮ ‮أتريد تهيئة المجلد على هيئة ‪FAT‬ بدلا من هذا؟</entry>
     <entry lang="ar" key="DEFAULT">‮المبدئيّ</entry>
@@ -771,7 +770,7 @@
     <entry lang="ar" key="INPLACE_ENC_GENERIC_ERR_ALT_STEPS">‮منع عطلٌ تروركبت من تعمية القسم. حاول إصلاح الأعطال المقررة مسبقا ثم حاول مجدا. إن تكررت المشكلة يفيد اتِّباع الخطوات التالية.</entry>
     <entry lang="ar" key="INPLACE_ENC_GENERIC_ERR_RESUME">‮منع عطلُ ڤيراكربت من معاودة صيرورة تعمية القسم. ‮ ‮حاول إصلاح المشكلات المقررة مسبقا ثم حاول مجددا معاودة الصيرورة. لاحظ أن المجلد لا يمكن وصله حتى تمام تعميته.</entry>
     <entry lang="ar" key="INPLACE_DEC_GENERIC_ERR">خطأ تسبب في عدم تمكن فيراكربت من فك تشفير القرص. يرجى إصلاح أي خلل سابق ثم معاودة المحاولة إذا أمكن.</entry>
-    <entry lang="ar" key="CANT_DISMOUNT_OUTER_VOL">‮عُطل: تعذَّر فصل المجلد الخارجي! ‮ ‮لا يمكن فصل المجلد إذا حوى ملفات أو أدلة يستخدمها تطبيق أو النظام. ‮ ‮أغلق كل البرمجيات التي قد تكون مستخدمة ملفات أو أدلة على المجلد ثم انقر 'حاول مجددا'.</entry>
+    <entry lang="ar" key="CANT_UNMOUNT_OUTER_VOL">‮عُطل: تعذَّر فصل المجلد الخارجي! ‮ ‮لا يمكن فصل المجلد إذا حوى ملفات أو أدلة يستخدمها تطبيق أو النظام. ‮ ‮أغلق كل البرمجيات التي قد تكون مستخدمة ملفات أو أدلة على المجلد ثم انقر 'حاول مجددا'.</entry>
     <entry lang="ar" key="CANT_GET_OUTER_VOL_INFO">‮عطل: تعذّر جلب معلومات عن المجلد الخارجي! لا تمكن مواصلة إنشاء المجلد.</entry>
     <entry lang="ar" key="CANT_ACCESS_OUTER_VOL">‮عُطل: تعذَّر النفاذ للمجلد الخارجي! لا يمكن متابعة إنشاء المجلد.</entry>
     <entry lang="ar" key="CANT_MOUNT_OUTER_VOL">‮عُطل: تعذَّر وصل المجلد الخارجي! لا يمكن متابعة إنشاء المجلد.</entry>
@@ -813,7 +812,7 @@
     <entry lang="ar" key="SECONDARY_KEY_SIZE_LRW">‮ضبط حجم المفتاح (طور ‪LRW‬)</entry>
     <entry lang="ar" key="BITS">‮بتات</entry>
     <entry lang="ar" key="BLOCK_SIZE">‮حجم الكتلة</entry>
-    <entry lang="ar" key="PKCS5_PRF">‮PKCS-5 PRF</entry>
+    <entry lang="ar" key="KDF">‮KDF</entry>
     <entry lang="ar" key="PKCS5_ITERATIONS">‮عدد دورات ‪PKCS-5‬</entry>
     <entry lang="ar" key="VOLUME_CREATE_DATE">‮أُنشئ المجلد</entry>
     <entry lang="ar" key="VOLUME_HEADER_DATE">‮آخر تعديل للترويسة</entry>
@@ -855,7 +854,7 @@
     <entry lang="ar" key="TC_INSTALLER_IS_RUNNING">‮أداة تنصيب ڤيراكربت عاملة حاليا في هذا النظام و تجري أو تهيئ تنصيبا أو تحديثا. قبل المواصلة انتظر حتى تتم عملها أو أغلقها. إن تعذّر إغلاقها فأعد تشغيل النظام.</entry>
     <entry lang="ar" key="INSTALL_FAILED">‮فشل التنصيب.</entry>
     <entry lang="ar" key="UNINSTALL_FAILED">‮فشلت الإزالة.</entry>
-    <entry lang="ar" key="DIST_PACKAGE_CORRUPTED">‮حزمة التوزيع هذه معطوبة. حاول تنزيلها مجددا (يستحسن من موقع ڤيراكربت الرسمي في ‪https://www.veracrypt.fr‬).</entry>
+    <entry lang="ar" key="DIST_PACKAGE_CORRUPTED">‮حزمة التوزيع هذه معطوبة. حاول تنزيلها مجددا (يستحسن من موقع ڤيراكربت الرسمي في ‪https://veracrypt.jp‬).</entry>
     <entry lang="ar" key="CANNOT_WRITE_FILE_X">‮تعذّرت كتابة الملف ‪%s‬</entry>
     <entry lang="ar" key="EXTRACTING_VERB">‮يجري الاستحراج</entry>
     <entry lang="ar" key="CANNOT_READ_FROM_PACKAGE">‮تعذّرت قراءة البيانات من الحزمة.</entry>
@@ -865,7 +864,7 @@
     <entry lang="ar" key="INSTALL_OK">‮ثُبِّت ڤيراكربت بنجاح.</entry>
     <entry lang="ar" key="SETUP_UPDATE_OK">‮تم بنجاح تحديث ڤيراكربت.</entry>
     <entry lang="ar" key="UPGRADE_OK_REBOOT_REQUIRED">تمت ترقية فيراكربت بنجاح. لكن, قبل البدء في استخدامه, لابد من إعادة تشغيل نظام التشغيل.\n\nهل ترغب في إعادة التشغيل الآن?</entry>
-    <entry lang="ar" key="SYS_ENC_UPGRADE_FAILED">فشلت ترقية فيراكربت!\n\nمهم: قبل إطفاء الجهاز أو إعادة التشغيل, ننصح باستخدام نقطة استرجاع ويندوز (قائمة البدء في وندوز > كل البرامج > ملحقات > أدوات النظام > استرجاع النظام) لاسترجاع النظام لنقطة 'تثبيت فيراكربت'. إذا لم تكن نقطة استرجاع النظام موجودة, يمكن إعادة تثبيت فيراكربت أو إصدار أحدث منه قبل إطفاء الجهاز أو إعادة التشغيل.</entry>
+    <entry lang="ar" key="SYS_ENC_UPGRADE_FAILED">فشلت ترقية فيراكربت!\n\nمهم: قبل إطفاء الجهاز أو إعادة التشغيل, ننصح باستخدام نقطة استرجاع ويندوز (قائمة البدء في وندوز &gt; كل البرامج &gt; ملحقات &gt; أدوات النظام &gt; استرجاع النظام) لاسترجاع النظام لنقطة 'تثبيت فيراكربت'. إذا لم تكن نقطة استرجاع النظام موجودة, يمكن إعادة تثبيت فيراكربت أو إصدار أحدث منه قبل إطفاء الجهاز أو إعادة التشغيل.</entry>
     <entry lang="ar" key="UNINSTALL_OK">‮أُزيل ڤيراكربت بنجاح. ‮ ‮انقر 'انهِ' لتحذف مُنصِّب ڤيراكربت و الدليل ‪%s‬. لاحظ أن الدليل لن يُحذف إذا كان يحوي أية ملفات لم يثَبِّتها مُنصِّب ڤيراكربت أو لم يُنشئها ڤيراكربت.</entry>
     <entry lang="ar" key="REMOVING_REG">‮تجري إزالة مدخلات تسجيل ڤيراكربت</entry>
     <entry lang="ar" key="ADDING_REG">‮تجري إضافة مدخلة تسجيل</entry>
@@ -882,7 +881,7 @@
     <entry lang="ar" key="INSTALL_COMPLETED">‮تم التنصيب.</entry>
     <entry lang="ar" key="CANT_CREATE_FOLDER">‮تعذَّر إنشاء الدليل '‪%s‬'</entry>
     <entry lang="ar" key="CLOSE_TC_FIRST">‮تعذَّر إفراغ مُشغِّل ڤيراكربت. ‮ ‮أغلق كل نوافذ ڤيراكربت المفتوحة أولا. إذا لم ينجح هذا أعد تشغيل ويندوز و حاول مجددا.</entry>
-    <entry lang="ar" key="DISMOUNT_ALL_FIRST">‮يجب أن تُفصل كل مجلدات ڤيراكربت قبل تنصيب ‌أو إزالة ڤيراكربت.</entry>
+    <entry lang="ar" key="UNMOUNT_ALL_FIRST">‮يجب أن تُفصل كل مجلدات ڤيراكربت قبل تنصيب ‌أو إزالة ڤيراكربت.</entry>
     <entry lang="ar" key="UNINSTALL_OLD_VERSION_FIRST">نسخة منتهية الصلاحية من فيراكربت مثبتة حاليا على هذا النظام. لابد من إزالة هذه النسخة قبل أن تتمكن من تثبيت النسخة الجديدة من فيراكربت.\n\nفور إقفالك لهذه الرسالة, سوف يبدأ برنامج إزالة التثبيت في العمل. لاحظ أنه لن يتم فك تشفير أي قرص أثناء عملية الإزالة. بعد عملية الإزالة للنسخة القديمة من فيراكربت, قم بتثبيت النسخة الجديدة من فيراكر.</entry>
     <entry lang="ar" key="REG_INSTALL_FAILED">‮فشل تنصيب مدخلات التسجيل</entry>
     <entry lang="ar" key="DRIVER_INSTALL_FAILED">‮فشل تنصيب مشغل النبيطة. أعد تشغيل ويندوز ثم حاول تنصيب ڤيراكربت مجددًا.</entry>
@@ -903,7 +902,7 @@
     <entry lang="ar" key="MINUTES">‮دقائق</entry>
     <entry lang="ar" key="SECONDS">‮ث</entry>
     <entry lang="ar" key="OPEN">‮افتح</entry>
-    <entry lang="ar" key="DISMOUNT">‮افصل</entry>
+    <entry lang="ar" key="UNMOUNT">‮افصل</entry>
     <entry lang="ar" key="SHOW_TC">‮أظهر ڤيراكربت</entry>
     <entry lang="ar" key="HIDE_TC">‮اخفِ ڤيراكربت</entry>
     <entry lang="ar" key="TOTAL_DATA_READ">‮البيانات التي قُرأت منذ الوصل</entry>
@@ -923,10 +922,10 @@
     <entry lang="ar" key="PROGRESS_STATUS_FINISHED">‮تمّ</entry>
     <entry lang="ar" key="PROGRESS_STATUS_ERROR">‮عُطل</entry>
     <entry lang="ar" key="FAVORITE_DISCONNECTED_DEV">تم فصل الجهاز</entry>
-    <entry lang="ar" key="SYS_FAVORITE_VOLUMES_SAVED">تم حفظ اقراص النظام المفضلة.\n\nلتفعيل تحميل الأقراص المفضلة, فضلا اختر 'إعدادات' > 'أقراص النظام المفضلة' > 'حمل أقراص النظام المفضلة عند بدء ويندوز'.</entry>
+    <entry lang="ar" key="SYS_FAVORITE_VOLUMES_SAVED">تم حفظ اقراص النظام المفضلة.\n\nلتفعيل تحميل الأقراص المفضلة, فضلا اختر 'إعدادات' &gt; 'أقراص النظام المفضلة' &gt; 'حمل أقراص النظام المفضلة عند بدء ويندوز'.</entry>
     <entry lang="ar" key="FAVORITE_ADD_DRIVE_DEV_WARNING"> القرص الذي تريد إضافته للمفضلات ليس جزءا ولا قرصا نظاميا  . لذلك, فيراكربت لن يتمكن من تحميل هذا القرص المفضل لو تغير رقمه بالنظام .</entry>
     <entry lang="ar" key="FAVORITE_ADD_PARTITION_TYPE_WARNING"> القرص الذي تحاول تفضيله عبارة عن جزء لم يتعرف عليه ويندوز.\n\nفيراكربت لن يتمكن من تحميله لو تغير رقمه بالنظام. لذلك قم بتغيير نوعه إلى نوع يعرفه ويندوز (استخدم أمر SETID من أداة 'diskpart' في ويندوز). ثم قم بتفضيله بعد ذلك.</entry>
-    <entry lang="ar" key="FAVORITE_ARRIVAL_MOUNT_BACKGROUND_TASK_ERR">أوامر التنفيذ في الخلفية معطلة في فيراكربت أو مهيأة للتعطيل إذا لم يكن هناك أقراص محملة (أو غيراكربت مشغل بالنمط المتنقل). وهذا يتسبب في عدم التمكن من التحميل التلقائي للمفضلات حينما يتم توصيل الجهاز الذي يحوي تلك المفضلات.\n\nملاحظة: لتفعيل تنفيذ الأوامر في الخلفية في فيراكربت, اختر الإعدادات > التفضيلات ثم قم باختيار خيار تنفيذ أوامر فيراكربت في الخلفية .</entry>
+    <entry lang="ar" key="FAVORITE_ARRIVAL_MOUNT_BACKGROUND_TASK_ERR">أوامر التنفيذ في الخلفية معطلة في فيراكربت أو مهيأة للتعطيل إذا لم يكن هناك أقراص محملة (أو غيراكربت مشغل بالنمط المتنقل). وهذا يتسبب في عدم التمكن من التحميل التلقائي للمفضلات حينما يتم توصيل الجهاز الذي يحوي تلك المفضلات.\n\nملاحظة: لتفعيل تنفيذ الأوامر في الخلفية في فيراكربت, اختر الإعدادات &gt; التفضيلات ثم قم باختيار خيار تنفيذ أوامر فيراكربت في الخلفية .</entry>
     <entry lang="ar" key="FAVORITE_ARRIVAL_MOUNT_NETWORK_PATH_ERR">حاوية مخزنة في نظام بعيد عبر الشبكة لا يمكن تحميله تلقائيا عند توصيل الجهاز الذي يحويه.</entry>
     <entry lang="ar" key="FAVORITE_ARRIVAL_MOUNT_DEVICE_PATH_ERR">الجهاز المدرج أدناه ليس جزءا ولا قرصا ديناميكيا. لذلك, القرص المستضاف على الجهاز لا يمكن تحميله تلقائيا عندما يتم توصيل الجهاز الذي يحويه.</entry>
     <entry lang="ar" key="FAVORITE_ARRIVAL_MOUNT_PARTITION_TYPE_ERR">الرجاء تغيير نوع الجزء المبين أدناه إلى نوع يتعرف عليه ويندوز(استخدم أمر SETID من أداة 'diskpart' في ويندوز). ثم احذف الجزء من المفضلات وقم بإعادتها ثانية. هذا سيسمح للقرص أن يحمل تلقائيا عن توصيل الجهاز الذي يحويه.</entry>
@@ -967,7 +966,7 @@
     <entry lang="ar" key="RESCUE_DISK_NON_WIZARD_CHECK_PASSED">‮تم بنجاح التحقق من سلامة قرص إنقاذ ڤيراكربت.</entry>
     <entry lang="ar" key="RESCUE_DISK_NON_WIZARD_CHECK_FAILED">‮تعذّر توكيد أن قرص إنقاذ ڤيراكربت قد تم تسجيله كما ينبغي. ‮ ‮إن كنت أتممت التسجيل على هذا القرص فأخرجه من السواقة ثم أعد إدخاله و اختبره مجددا. إن لم تنحل المشكلة فجرب برمجية تسجيل أقراص أخرى أو/و قرصا آخر. ‮ ‮إن كنت تحاول فحص قرص إنقاذ ڤيراكربت أُنشئ لأجل مفتاح رئيسي آخر أو بكلمة سر أو بذرة مختلفة، إلخ، فاعلم أن هذا القرص سيفشل دوما في هذا الفحص. لتنشئ قرص إنقاذ جديد متوافق مع إعداداتك الحالية اختر 'نظام' &gt; 'أنشئ قرص إنقاذ'.</entry>
     <entry lang="ar" key="RESCUE_DISK_ISO_IMAGE_CHECK_PASSED">تم التحقق من قرص الإسعاف لفيراكربت بنجاح.</entry>
-    <entry lang="ar" key="RESCUE_DISK_ISO_IMAGE_CHECK_FAILED">فشلت عملية التحقق لقرص الإسعاف لفيراكربت.\n\nإذا حاولت التحقق لقرص إسعاف تم تجهيزه برقم مفتاح مختلف, كلمة سر, القيمة العشوائية المضافة لكلمة السر, الخ., فإن التحقق من هذا القرص سبفشل دائما. لعمل قرص إسعاف متوافق تماما مع التهيئة الحالية, اختر 'النظام' > 'إنشاء قرص إسعاف'.</entry>
+    <entry lang="ar" key="RESCUE_DISK_ISO_IMAGE_CHECK_FAILED">فشلت عملية التحقق لقرص الإسعاف لفيراكربت.\n\nإذا حاولت التحقق لقرص إسعاف تم تجهيزه برقم مفتاح مختلف, كلمة سر, القيمة العشوائية المضافة لكلمة السر, الخ., فإن التحقق من هذا القرص سبفشل دائما. لعمل قرص إسعاف متوافق تماما مع التهيئة الحالية, اختر 'النظام' &gt; 'إنشاء قرص إسعاف'.</entry>
     <entry lang="ar" key="ERROR_CREATING_RESCUE_DISK">‮عطل إثناء إنشاء قرص إنقاذ ڤيراكربت.</entry>
     <entry lang="ar" key="CANNOT_CREATE_RESCUE_DISK_ON_HIDDEN_OS">‮لا يمكن إنشاء قرص إنقاذ ڤيراكربت في نظام تشغيل مخفي عامل. ‮ ‮لإنشاء قرص إنقاذ ڤيراكربت أقلع نظام التشغيل التمويهي ثم اختر 'نظام' &gt; 'أنشئ قرص إنقاذ'.</entry>
     <entry lang="ar" key="RESCUE_DISK_CHECK_FAILED">لا يمكن التحقق من أنه تم حرق قرص الإسعاف بنجاح.\n\nإذا قمت بحرق قرص الإسعاف, يرجى إخراجه ثم إدخاله مرة أخرى; ثم اضغط التالي للمحاولة مرة أخرى. إذا لم ينجح هذا, حاول استخدام وسيط آخر %s.\n\nإذا لم تقم بحرق قرص الإسعاف بعد, يرجى القيام بذلك, ثم الضغط على التالي.\n\nإذا قمت بالتحقق من قرص إسعاف فيراكربت قبل تشغيلك هذا الخيار, يرجى ملاحظة أنه لن يمكنك استخدام هذا القرص الآن, لأنه تم تجهيزه برقم مفتاح مختلف. تحتاج حرق قرص إسعاف جديد.</entry>
@@ -975,7 +974,7 @@
     <entry lang="ar" key="SYSTEM_FAVORITES_DLG_TITLE">فيراكربت - أقراص النظام المفضلة</entry>
     <entry lang="ar" key="SYS_FAVORITES_HELP_LINK">ما هي أقراص النظام المفضلة?</entry>
     <entry lang="ar" key="SYS_FAVORITES_REQUIRE_PBA">قرص النظام لا يبدو أنه مشفر.\n\nأقراص النظام المفضلة يمكن استخدامها فقط بكلمة سر قبل الإقلاع . لذلك, لتفعيل استخدام أقراص النظام المفضلة, تحتاج إلى تشفير قرص النظام أو جزء النظام أولا.</entry>
-    <entry lang="ar" key="DISMOUNT_FIRST">‮افصل المجلد قبل الاستمرار.</entry>
+    <entry lang="ar" key="UNMOUNT_FIRST">‮افصل المجلد قبل الاستمرار.</entry>
     <entry lang="ar" key="CANNOT_SET_TIMER">‮عطل: تعذّر شبط المؤقِّت.</entry>
     <entry lang="ar" key="IDPM_CHECK_FILESYS">‮افحص نظام الملفات</entry>
     <entry lang="ar" key="IDPM_REPAIR_FILESYS">‮أصلح نظام الملفات</entry>
@@ -1009,11 +1008,11 @@
     <entry lang="ar" key="NO_SYSENC_PARTITION_SELECTED">‮لم يُختر أي قسم. ‮ ‮انقر 'اختر نبيطة' لتختار قسما مفصولا يتطلب عادة استيثاق ما قبل الإقلاع (مثل قسمٍ على سواقة النظام المعمّاة لنظام تشغيل آخر غير عامل أو قسم النظام لنظام تشغيل آخر). ‮ ‮ملاحظة: القسم المختار سيوصل كمجلد ڤيراكربت عادي دون استيثاق ما قبل الإقلاع. هذا مفيد للنسخ الاحتياطي أو لعمليات الإصلاح.</entry>
     <entry lang="ar" key="CONFIRM_SAVE_DEFAULT_KEYFILES">‮تنبيه: إن كانت ملفات مفاتيح مبدئية قد ضُبطت و فُعلِّت فإن المجلدات التي لا تستخدم تلك الملفات المفاتيح لن يمكن وصلها. لذا فبعد أن تفعِّل الملفات المفاتيح المبدئية خذ في الاعتبار أن تزيل تأشير 'استخدم الملفات المفاتيح' (أسفل حقل إدخال كلمة السر) كلما عزمت وصل مثل تلك المجلدات. ‮ ‮ أمتأكد أنك تريد حفظ الملفات المفاتيح\\المسارات المختارة كمبدئية؟</entry>
     <entry lang="ar" key="HK_AUTOMOUNT_DEVICES">‮أوصل النبائط تلقائيا</entry>
-    <entry lang="ar" key="HK_DISMOUNT_ALL">‮افصل الكل</entry>
+    <entry lang="ar" key="HK_UNMOUNT_ALL">‮افصل الكل</entry>
     <entry lang="ar" key="HK_WIPE_CACHE">‮امحُ الذّاكرة المخبئية</entry>
-    <entry lang="ar" key="HK_DISMOUNT_ALL_AND_WIPE">تنزيل الجميع  &amp;  تدمير الكاش</entry>
-    <entry lang="ar" key="HK_FORCE_DISMOUNT_ALL_AND_WIPE">‮أجبر فصل الكل و امحُ الذّاكرة المخبئية</entry>
-    <entry lang="ar" key="HK_FORCE_DISMOUNT_ALL_AND_WIPE_AND_EXIT">‮أجبر فصل الكل و امحُ الذّاكرة المخبئية و اخرج</entry>
+    <entry lang="ar" key="HK_UNMOUNT_ALL_AND_WIPE">تنزيل الجميع  &amp;  تدمير الكاش</entry>
+    <entry lang="ar" key="HK_FORCE_UNMOUNT_ALL_AND_WIPE">‮أجبر فصل الكل و امحُ الذّاكرة المخبئية</entry>
+    <entry lang="ar" key="HK_FORCE_UNMOUNT_ALL_AND_WIPE_AND_EXIT">‮أجبر فصل الكل و امحُ الذّاكرة المخبئية و اخرج</entry>
     <entry lang="ar" key="HK_MOUNT_FAVORITE_VOLUMES">‮أوصل المجلدات المفضّلة</entry>
     <entry lang="ar" key="HK_SHOW_HIDE_MAIN_WINDOW">‮أظهر/اخف نافذة ڤيراكربت الرئيسية</entry>
     <entry lang="ar" key="PRESS_A_KEY_TO_ASSIGN">‮(انقر هنا و اضغط زرا)</entry>
@@ -1025,14 +1024,14 @@
     <entry lang="ar" key="PAGING_FILE_CREATION_PREVENTED">تم منع ملفات الترحيل.\n\nالرجاء ملاحظة أنه, طبقا لإشكالات في ويندوز, لا يمكن تعيين ملفات الترحيل على قرص فيراكربت غير نظامي (بما في ذلك الأقراص المفضلة). فيراكربت يدعم ملفات الترحيل على أقراص/أجزاء نظامية فقط.</entry>
     <entry lang="ar" key="SYS_ENC_HIBERNATION_PREVENTED">‮منع عُطلٌ أو عدمُ توافقية ڤيراكربت من تعمية ملف السبات، لذا فقد عُطل السبات. ‮ ‮ملاحظة: عندما يسبت حاسوب (أو يدخل طور توفير الطاقة) فإن محتويات ذاكرة النظام تحفظ في ملف تخزين للسبات يوجد على سواقة النظام. لا يمكن لتروكربيت أن يحول دون حفظ مفاتيح التعمية و محتويات الملفات الحساسة المفتوحة في الذاكرة إلى ملف السبات غير معماة.</entry>
     <entry lang="ar" key="HIDDEN_OS_HIBERNATION_PREVENTED">تم منع الإسبات.\n\nفيراكربت لايدعم الإسبات في نظام تشغيل مخفي يستخدم جزءا خاصا للإقلاع. لاحظ أن جزء الإقلاع مشترك بين النظام المزيف والمخفي. لذلك, من أجل منع تسرب البيانات عند الإفاقة من الإسبات, فإن فيراكربت يمنع الإسبات ويمنع النظام المخفي من الكتابة على جزء الإقلاع المشترك.</entry>
-    <entry lang="ar" key="VOLUME_MOUNTED_AS_DRIVE_LETTER_X_DISMOUNTED">قرص فيراكربت الذي تم تحميله ك %c: تم تنزيله.</entry>
-    <entry lang="ar" key="MOUNTED_VOLUMES_DISMOUNTED">تم تنزيل قرص فيراكربت.</entry>
-    <entry lang="ar" key="VOLUMES_DISMOUNTED_CACHE_WIPED">تم تنزيل قرص فيراكربت وتدمير الكاش.</entry>
-    <entry lang="ar" key="SUCCESSFULLY_DISMOUNTED">تنزيل بنجاح</entry>
+    <entry lang="ar" key="VOLUME_MOUNTED_AS_DRIVE_LETTER_X_UNMOUNTED">قرص فيراكربت الذي تم تحميله ك %c: تم تنزيله.</entry>
+    <entry lang="ar" key="MOUNTED_VOLUMES_UNMOUNTED">تم تنزيل قرص فيراكربت.</entry>
+    <entry lang="ar" key="VOLUMES_UNMOUNTED_CACHE_WIPED">تم تنزيل قرص فيراكربت وتدمير الكاش.</entry>
+    <entry lang="ar" key="SUCCESSFULLY_UNMOUNTED">تنزيل بنجاح</entry>
     <entry lang="ar" key="CONFIRM_BACKGROUND_TASK_DISABLED">تحذير: إذا كانت عمليات فيراكربت الخلفية معطلة, الوظائف التالية ستتعطل:\n\n1) المفاتيح الساخنة\n2) التنزيل التلقائي (مثال, عند الخروج, إخراج الجهاز غير المتعمد, نفاذ التوقيت, etc.)\n3) التحميل التلقائي للمفضلات\n4) التنبيهات (مثال, عند منع العطب للأقراص المخفية)\n5) أيقونة الشريط السفلي\n\nملاحظة: بإمكانك تعطيل العمليات الخلفية لفيراكربت في أي وقت وذلك بالضغط بالزر الأيمن على شريط فيراكربت ثم اختيار الخروج .\n\nهل أنت متأكد من رغبتك في تعطيل مهام فيراكربت الخلفية نهائيا?</entry>
-    <entry lang="ar" key="CONFIRM_NO_FORCED_AUTODISMOUNT">‮تحذير: إذا عُطِّل هذا الخيار فلن يمكن تلقائيا فصل المجلدات التي تحوي ملفات\\أدلة مفتوحة. ‮ ‮أمتأكد أنك تريد تعطيل هذا الخيار؟</entry>
-    <entry lang="ar" key="WARN_PREF_AUTO_DISMOUNT">‮تنبيه: المجلدات التي تحوي ملفات\\أدلة مفتوحة لن تُفصل تلقائيا. ‮ ‮للحول دون هذا فعّل الخيار التالي في نافذة الحوار هذه: 'أجبر الفصل التلقائي حتى إذا حوى المجلد ملفات أو أدلة مفتوحة'</entry>
-    <entry lang="ar" key="WARN_PREF_AUTO_DISMOUNT_ON_POWER">تحذير: عندما تكون بطارية المحمول منخفضة الشحن,  يقوم ويندوز بإخطار التطبيقات قيد التشغيل بذلك برسالة مناسبة. لذلك, يمكن أن يخفق فيراكربت في تعطيل تحميل الأقراص المحملة.</entry>
+    <entry lang="ar" key="CONFIRM_NO_FORCED_AUTOUNMOUNT">‮تحذير: إذا عُطِّل هذا الخيار فلن يمكن تلقائيا فصل المجلدات التي تحوي ملفات\\أدلة مفتوحة. ‮ ‮أمتأكد أنك تريد تعطيل هذا الخيار؟</entry>
+    <entry lang="ar" key="WARN_PREF_AUTO_UNMOUNT">‮تنبيه: المجلدات التي تحوي ملفات\\أدلة مفتوحة لن تُفصل تلقائيا. ‮ ‮للحول دون هذا فعّل الخيار التالي في نافذة الحوار هذه: 'أجبر الفصل التلقائي حتى إذا حوى المجلد ملفات أو أدلة مفتوحة'</entry>
+    <entry lang="ar" key="WARN_PREF_AUTO_UNMOUNT_ON_POWER">تحذير: عندما تكون بطارية المحمول منخفضة الشحن,  يقوم ويندوز بإخطار التطبيقات قيد التشغيل بذلك برسالة مناسبة. لذلك, يمكن أن يخفق فيراكربت في تعطيل تحميل الأقراص المحملة.</entry>
     <entry lang="ar" key="NONSYS_INPLACE_ENC_RESUME_PROMPT">‮كنت قد جدولت صيرورة تعمية قسم\\مجلد، و لم تتم تلك الصيرورة. ‮ ‮أتريد معاودة الصيرورة الآن؟</entry>
     <entry lang="ar" key="SYSTEM_ENCRYPTION_RESUME_PROMPT">‮كنت قد جدولت صيرورة تعمية أو تظهير قسم\\سواقة النظام، إلا أن هذه الصيرورة لم تتم بعد. ‮ ‮أتريد معاودة الصيرورة الآن؟</entry>
     <entry lang="ar" key="ASK_NONSYS_INPLACE_ENC_NOTIFICATION_REMOVAL"> هل ترغب أن يتم إخطارك عما إذا كنت تريد استكمال العملية المجدولة لتشفير/فك تشفير جزء أو قرص غير نظامي?</entry>
@@ -1063,7 +1062,7 @@
     <entry lang="ar" key="SYS_AUTOMOUNT_DISABLED">‮نظامك ليس مضبوطا ليوصِّل المجلدات الجديدة تلقائيا. قد يتعذَّر وصل مجلدات ڤيراكربت المستضافة في نبائط. يمكن تفعيل الوصل الآلي بتنفيذ الأمر التالي ثم إعادة تشغيل النظام. ‮ ‮‪mountvol.exe /E‬</entry>
     <entry lang="ar" key="SYS_ASSIGN_DRIVE_LETTER">‮خصِّص حرفا للقسم\\النبيطة قبل المواصلة ('لوحة التحكم' &gt; 'النظام و الإدارة' &gt; 'أدوات الإدارة' - 'أنشئ و هيء أقسام القرص الصلب'). ‮ ‮لاحظ أن هذا من متطلبات النظام.</entry>
     <entry lang="ar" key="MOUNT_TC_VOLUME">‮أوصل مجلد ڤيراكربت</entry>
-    <entry lang="ar" key="DISMOUNT_ALL_TC_VOLUMES">‮افصل كل مجلدات ڤيراكربت</entry>
+    <entry lang="ar" key="UNMOUNT_ALL_TC_VOLUMES">‮افصل كل مجلدات ڤيراكربت</entry>
     <entry lang="ar" key="UAC_INIT_ERROR">‮فشل ڤيراكربت في الحصول على صلاحيات الإدارة.</entry>
     <entry lang="ar" key="ERR_ACCESS_DENIED">‮منع النظامُ النفاذ. ‮ ‮السبب المحتمل: يتطلب النظام أن تكون لديك صلاحية القراءة\\الكتابة (أو صلاحية الإدارة) لأدلة و ملفات و نبائط معينة ليُسمح لك بقراءة و كتابة بيانات إليها/منها. عادة ما يُسمح للمستخدم دون صلاحيات الإدارة أن يُنشئ و يقرأ و يعدل الملفات في دليل الوثائق الخاص به.</entry>
     <entry lang="ar" key="SECTOR_SIZE_UNSUPPORTED">خطأ: القرص يستخدم حجم مسار غير مدعوم.\n\nإنه لا يمكن إنشاء جزء/قرص  حجم مساره أكبر 4096من  بايت. لكن, لاحظ أن بإمكانك إنشاء ملف حاوية على ذلك القرص.</entry>
@@ -1098,7 +1097,7 @@
     <entry lang="ar" key="DECOY_OS_REINSTALL_WARNING">تحذير: أثناء عملية إنشاء نظام التشغيل المخفي, سيطلب منك تثبيت نظام تشغيل كامل (من أجل إنشاء نظام مزيف بأمان).\n\nملاحظة: سيتم نسخ نظام التشغيل الحالي وجيمع محتوى جزء التشغيل إلى الجزء المخفي (من أجل إنشاء النظام الخفي).\n\n\nهل أنت متأكد من أنه باستطاعتك تثبيت ويندوز من قرص وسيط (أو استخدام جزء يخدم هذا الغرض)?</entry>
     <entry lang="ar" key="DECOY_OS_REQUIREMENTS">لأسباب أمنية, إذا احتاج نظام التشغيل الحالي إلى تنشيط, فلابد من فعل ذلك قبل المضي قدما. لاحظ أن نظام التشغيل الحالي سيتم نسخه للقسم المخفي (فإذا لم يكن هذا النظام منشطا, فإن النظام المخفي سيكون مثله كذلك). ولمزيد من المعلومات, إقرأ الفصل الخاص "المتطلبات والمحاذير الأمنية الخاصة بالأقسام المخفية" في دليل المستخدم.\n\nمهم: قبل المضي قدما, تأكد ن قراءة القسم "المتطلبات والتحذيرات الأمنية الخاصة بالأقسام المخفية" في دليل المستخدم.\n\n\nهل النظام الحالي يتوافق مع تلك المتطلبات?</entry>
     <entry lang="ar" key="CONFIRM_HIDDEN_OS_EXTRA_BOOT_PARTITION">النظام يستخدم قسما إضافيا. فيراكربت لا يدعم الإسبات لنظام تشغيل يستخدم قسما خاصا للإقلاع (النظام المزيف يمكن أن يسبت من دون مشكلة).\n\nالرجاء ملاحظة أن قسم الإقلاع سيكون مشتركا بين النظام المزيف والمخفي. لذلك,ومن أجل منع تسرب البيانات أثناء الإسبات , فيراكربت يمنع النظام المخفي من الكتابة على القسم المشترك ويمنعه كذلك من الاسبات.\n\n\nهل تريد الاستمرار? إذا اخترت 'لا', فسوف تظهر تعليمات كيفية إزالة جزء الإقلاع الإضافي.</entry>
-    <entry lang="ar" key="EXTRA_BOOT_PARTITION_REMOVAL_INSTRUCTIONS">\nقسم الإقلاع الإضافي يمكن إزالته قبل تثبيت ويندوز. للقيام بذلك, اتبع الخطوات التالية:\n\n1) أقلع من قرص وسيط لويندوز.\n\n2) في الشاشة الخاصة بتثبيت ويندوز, اضغط 'ثبت الآن' > 'معدل (متقدم)'.\n\n3) اضغط 'خيارات القرص'.\n\n4) اختر جزء النظام الأساس واختر مسح بالضغط على 'مسح' ثم 'نعم'.\n\n5) اختر'محجوز للنظام' الجزء, واضغط 'قم بالتمديد', ثم زد المساحة كي يتم تثبيت نظام التشغيل.\n\n6) اضغط 'طبق' ثم 'نعم'.\n\n7) ثبت ويندوز في الجزء 'محجوز للنظام'.\n\n\nولو سأل مخترق لماذا قمت بحذف الجزء الإضافي الخاص بالإقلاع, بإمكانك الإجابة بأنك لا تريد تسريب بياناتك عبر الجزء الخاص بالإقلاع غير المشفر.\n\nملاحظة: يمكن طباعة هذا القسم بالضغط على 'طباعة' بالأسفل. إذا احتفظت بنسخة أو قمت بطباعتها (ننصح بشدة, إلا إذا كانت طابعتك تخزن نسخة مما تطبع على القرص الداخلي الخاص بها), فإنه يجب التخلص من أي نسخة احتفظت بها (وإلا, فإذا تم العثور على تلك النسخة, فإن ذلك سيدل على أن هناك نظاما مخفيا على هذا الجهاز).</entry>
+    <entry lang="ar" key="EXTRA_BOOT_PARTITION_REMOVAL_INSTRUCTIONS">\nقسم الإقلاع الإضافي يمكن إزالته قبل تثبيت ويندوز. للقيام بذلك, اتبع الخطوات التالية:\n\n1) أقلع من قرص وسيط لويندوز.\n\n2) في الشاشة الخاصة بتثبيت ويندوز, اضغط 'ثبت الآن' &gt; 'معدل (متقدم)'.\n\n3) اضغط 'خيارات القرص'.\n\n4) اختر جزء النظام الأساس واختر مسح بالضغط على 'مسح' ثم 'نعم'.\n\n5) اختر'محجوز للنظام' الجزء, واضغط 'قم بالتمديد', ثم زد المساحة كي يتم تثبيت نظام التشغيل.\n\n6) اضغط 'طبق' ثم 'نعم'.\n\n7) ثبت ويندوز في الجزء 'محجوز للنظام'.\n\n\nولو سأل مخترق لماذا قمت بحذف الجزء الإضافي الخاص بالإقلاع, بإمكانك الإجابة بأنك لا تريد تسريب بياناتك عبر الجزء الخاص بالإقلاع غير المشفر.\n\nملاحظة: يمكن طباعة هذا القسم بالضغط على 'طباعة' بالأسفل. إذا احتفظت بنسخة أو قمت بطباعتها (ننصح بشدة, إلا إذا كانت طابعتك تخزن نسخة مما تطبع على القرص الداخلي الخاص بها), فإنه يجب التخلص من أي نسخة احتفظت بها (وإلا, فإذا تم العثور على تلك النسخة, فإن ذلك سيدل على أن هناك نظاما مخفيا على هذا الجهاز).</entry>
     <entry lang="ar" key="GAP_BETWEEN_SYS_AND_HIDDEN_OS_PARTITION">‮تحذير: توجد مساحة غير مخصصة بين قسم النظام و القسم الذي يليه. بعد إنشاء نظام التشغيل المخفي ينبغي ألا تنشئ أية أقسام جديدة في هذه المساحة غير المخصصة و إلا فلن يمكن إقلاع نظام التشغيل (حتى تحذف تلك الأقسام المنشأة حديثا).</entry>
     <entry lang="ar" key="ALGO_NOT_SUPPORTED_FOR_SYS_ENCRYPTION">‮هذه الخوارزمية ليست مدعومة حاليا لتعمية النظام.</entry>
     <entry lang="ar" key="ALGO_NOT_SUPPORTED_FOR_TRUECRYPT_MODE">هذه الخوارزمية ليست مدعومة لنمط تروكربت.</entry>
@@ -1165,7 +1164,7 @@
     <entry lang="ar" key="SYSENC_DRIVE_ANALYSIS_TITLE">‮يجري تحسس القطاعات المخفية</entry>
     <entry lang="ar" key="SYSENC_DRIVE_ANALYSIS_INFO">‮انتظر حتى يتحسس ڤيراكربت وجود قطاعات مخفية في آخر سواقة النظام. لاحظ أن هذا قد يستغرق وقتا طويلا ليتم. ‮ ‮ملاحظة:في بعض الحالات النادرة و في بعض الحواسيب قد يصبح النظام غير مستجيب أثناء صيرورة التحسس. إن حدث هذا فأعد تشغيل الحاسوب و شغِّل ڤيراكربت و أعد الخطوات السابقة مع تجاوز هذه الخطوة. لاحظ أن هذا لا تسببه علة في ڤيراكربت.</entry>
     <entry lang="ar" key="SYS_ENCRYPTION_SPAN_TITLE">‮المنطقة التي ستُعمَّى</entry>
-    <entry lang="ar" key="SYS_ENCRYPTION_SPAN_WHOLE_SYS_DRIVE_HELP">اختر هذا الخيار إذا كنت تريد تشفير كامل القرص ال>ي يعمل منه ويندوز. كل القرص, بما في ذلك كل الأجزاء, سوف يتم تشفيره عدا المسار الأول حيث برنامج الإقلاع. أي شخص يريد الدخول على النظام بالقرص, أو الملفات المخزنة به, سوف يطلب منه إدخال كلمة السر كل مرة. ه>اا لخيار لا يمكن استخدامه لتشفير قرص ثانوي إذا لم يكن ويندوز مثبتا به أو يقلع منه.</entry>
+    <entry lang="ar" key="SYS_ENCRYPTION_SPAN_WHOLE_SYS_DRIVE_HELP">اختر هذا الخيار إذا كنت تريد تشفير كامل القرص ال&gt;ي يعمل منه ويندوز. كل القرص, بما في ذلك كل الأجزاء, سوف يتم تشفيره عدا المسار الأول حيث برنامج الإقلاع. أي شخص يريد الدخول على النظام بالقرص, أو الملفات المخزنة به, سوف يطلب منه إدخال كلمة السر كل مرة. ه&gt;اا لخيار لا يمكن استخدامه لتشفير قرص ثانوي إذا لم يكن ويندوز مثبتا به أو يقلع منه.</entry>
     <entry lang="ar" key="COLLECTING_RANDOM_DATA_TITLE">‮يجري جمع العشوائية</entry>
     <entry lang="ar" key="KEYS_GEN_TITLE">‮تم توليد المفاتيح</entry>
     <entry lang="ar" key="CD_BURNER_NOT_PRESENT">اكتشف فيراكربت عدم وجود برنامج حرق الأقراص المدمجة. يحتاج فيراكربت برنامجا لحرق الأقراص المدمجة يستخدم لحرق صورة من قرص إسعاف فيراكربت يحوي مفتاح فيراكربت, برنامج إقلاع فيراكربت, برنامج إقلاع النظام الأصل, الخ.\n\nننصح بشدة إنشاء قرص إسعاف فيراكربت.</entry>
@@ -1201,12 +1200,12 @@
     <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_1">\nإذا أمكن, يرجى طباعة هذا النص (اضغط 'طباعة' بالأسفل).\n\n\nمتى وكيف تستخدم قرص الإنقاذ من فيراكربت (بعد التشفير)\n-----------------------------------------------------------------------------------\n\n</entry>
     <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_2">I. كيفية الإقلاع من قرص الإنقاذ من فيراكربت\n\nللإقلاع من قرص الإنقاذ من فيراكربت, أدخل القرص المدمج الخاص به في السواقة. إذا لم تظهر شاشة الإقلاع لفيراكربت (أو لم تظهر قائمة 'خيارات الإصلاح'  'في معايير لوحة المفاتيح' في الشاشة), فيمكن أن تكون إعدادت البيوس مهيأة لبدء الإقلاع من القرص الصلب قبل القرص المدمج. في تلك الحالة, أعد التشغيل, اضغط. اضغط F2 أو زر المسح (فور ظهور شاشة البيوس), ثم انتظر حتى تبدأ شاشة إعدادات البيوس في الظهور. إذا لم تظهر شاشة الإعدادات, أعد التشغيل ثم كرر الضغط على زر المسح أو زر F2. عندما تظهر شاشة الإعدادات, قم بتهيئة البيوس لتتم عملية الإقلاع من القرص المدمج أولا (لمزيد من المعلومات حول هذا قم بمراجعة دليل الشركة المصنعة للبيوس أو لوحة الكمبيوتر الأم). قم بإعادة التشغيل بعد ذلك. ستظهر شاشة الإنقاذ من فيراكربت الآن. ملاحظة: في شاشة إنقاذ فيراكربت, يمكنك اختيار 'خيارات الإصلاح' بالضغط على زر F8 على لوحةالمفاتيح.\n\n\n</entry>
     <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_3">II. متى وكيف تستخدم قرص الإنقاذ من فيراكربت (بعد التشفير)\n\n</entry>
-    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_4">1) إذا لم تظهر شاشة إقلاع فيراكربت (أو أن ويندوز لم يقلع), فإن برنامج إقلاع فيراكربت معطوب. برنامج إقلاع فيراكربت يتيح لك الدخول على النظام بعد تشفيره (لكن, لاحظ أنه عليك إدخال كلمة السر الصحيحة). على قرص الإنقاذ, اختر 'خيارات الإصلاخ' > 'استعادة برنامج الإقلاع'. بعدها اضغط 'Y' للتأكيد, أخرج قرص الإقاذ من السواقة ثم أعد التشغيل.\n\n</entry>
-    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_5">2) إذا قمت بإدخال كلمة السر وكرر عليك فيراكربت بأنها غير صحيحة, فإن المفتاح الرئيس معطوب أو بينات أخرى معطوبة. قرص الإنقاذ يتيح لك إصلاح ذلك (لكن, لاحظ أنه عليك إدخال كلمة السر الصحيحة). على شاشة قرص الإنقاذ, اختر 'خيارات الإصلاح' > 'استعادة بيانات المفتاح'. بعهدها قم بإدخال كلمة السر, اضغط 'Y' للتأكيد, أخرج قرص الإنقاذ من السواقة, ثم أعد تشغيل الكمبيوتر.\n\n</entry>
+    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_4">1) إذا لم تظهر شاشة إقلاع فيراكربت (أو أن ويندوز لم يقلع), فإن برنامج إقلاع فيراكربت معطوب. برنامج إقلاع فيراكربت يتيح لك الدخول على النظام بعد تشفيره (لكن, لاحظ أنه عليك إدخال كلمة السر الصحيحة). على قرص الإنقاذ, اختر 'خيارات الإصلاخ' &gt; 'استعادة برنامج الإقلاع'. بعدها اضغط 'Y' للتأكيد, أخرج قرص الإقاذ من السواقة ثم أعد التشغيل.\n\n</entry>
+    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_5">2) إذا قمت بإدخال كلمة السر وكرر عليك فيراكربت بأنها غير صحيحة, فإن المفتاح الرئيس معطوب أو بينات أخرى معطوبة. قرص الإنقاذ يتيح لك إصلاح ذلك (لكن, لاحظ أنه عليك إدخال كلمة السر الصحيحة). على شاشة قرص الإنقاذ, اختر 'خيارات الإصلاح' &gt; 'استعادة بيانات المفتاح'. بعهدها قم بإدخال كلمة السر, اضغط 'Y' للتأكيد, أخرج قرص الإنقاذ من السواقة, ثم أعد تشغيل الكمبيوتر.\n\n</entry>
     <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_6">3)  إذا كان برنامج لإقلاع فيراكربت معطوبا, يمكنك تفادي استخدامه بواسطة الإقلاع واستخدام قرص الإنقاذ.  أدخل قرص الإنقاذ ثم قم بإدخال كلمة السر في شاشة الإنقاذ.\n\n</entry>
-    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_7">4) إذا عطبت ويندوز ولم تقلع, قرص الإنقاذ من ويندوز يتيح لك فك تشفير قسم النظام/قرص النظام بشكل دائم. في شاشة قرص الإنقاذ, اختر 'خيارات الإصلاح' > 'فك تشفير قسم/قرص النظام بشكل دائم'. أدخل كلمة السر الصحيحة وانتظر فك التشفير حتى ينتهي. ثم على سبيل المثال أقلع من قرص ويندوز المدمج ثم اختر تثبيت.\n\n</entry>
-    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_8">ملاحظة: كحل بديل, إذا عطبت ويندوز (ولم يمكن أن تقلع) وتحتاج لإصلاحها (أو الدخول على بيانات بداخلها), يمكنك تفادي فك تشفير قسم/قرص النظام: إذا كان أكثر من نظام تشغيل مثبتا على جهازك, أقلع من أحدها بحيث لا تحتاج إلى كلمة سر قبل الإقلاع. إذا لم يكم هناك أمثر من نظام تشغيل على جهازك, يمكن الإقلاع بواسطة WinBE أو BartBE أو إخراج قرص الكمبيوتر وتوصيله كقرص ثانوي بجهاز آخر والإقلاع من نظام تشغيله . بعد اٌلاع من نظام تشغيل الكمبيوتر الآخر, شغل فيراكربت, اختر 'اختر قرصا', اختر قسم النظام المعطوب, اضغط 'نعم', اختر 'نظام' > 'حمل من دون كلمة السر الخاصة بالإقلاع', أدخل كلمة السر الخاصة بالإقلاع ثم اضغط  'نعم'. سيتم تحميل القرص كقرص فيراكربت عادي (كالمعتاد البيانات سوف يتم تشفيرها/فك تشفيرها على الفور في الذاكرة).\n\n\n</entry>
-    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_9">Note that even if you lose your VeraCrypt Rescue Disk and an attacker finds it, he or she will NOT be able to decrypt the system partition or drive without the correct password.</entry>
+    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_7">4) إذا عطبت ويندوز ولم تقلع, قرص الإنقاذ من ويندوز يتيح لك فك تشفير قسم النظام/قرص النظام بشكل دائم. في شاشة قرص الإنقاذ, اختر 'خيارات الإصلاح' &gt; 'فك تشفير قسم/قرص النظام بشكل دائم'. أدخل كلمة السر الصحيحة وانتظر فك التشفير حتى ينتهي. ثم على سبيل المثال أقلع من قرص ويندوز المدمج ثم اختر تثبيت.\n\n</entry>
+    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_8">ملاحظة: كحل بديل, إذا عطبت ويندوز (ولم يمكن أن تقلع) وتحتاج لإصلاحها (أو الدخول على بيانات بداخلها), يمكنك تفادي فك تشفير قسم/قرص النظام: إذا كان أكثر من نظام تشغيل مثبتا على جهازك, أقلع من أحدها بحيث لا تحتاج إلى كلمة سر قبل الإقلاع. إذا لم يكم هناك أمثر من نظام تشغيل على جهازك, يمكن الإقلاع بواسطة WinBE أو BartBE أو إخراج قرص الكمبيوتر وتوصيله كقرص ثانوي بجهاز آخر والإقلاع من نظام تشغيله . بعد اٌلاع من نظام تشغيل الكمبيوتر الآخر, شغل فيراكربت, اختر 'اختر قرصا', اختر قسم النظام المعطوب, اضغط 'نعم', اختر 'نظام' &gt; 'حمل من دون كلمة السر الخاصة بالإقلاع', أدخل كلمة السر الخاصة بالإقلاع ثم اضغط  'نعم'. سيتم تحميل القرص كقرص فيراكربت عادي (كالمعتاد البيانات سوف يتم تشفيرها/فك تشفيرها على الفور في الذاكرة).\n\n\n</entry>
+    <entry lang="ar" key="RESCUE_DISK_HELP_PORTION_9">‮لاحظ أنه حتى إذا فقدت قرص إنقاذ ڤيراكربت وعثر عليه مهاجم، فلن يتمكن من فك تشفير قسم النظام أو السواقة من دون كلمة السر الصحيحة.</entry>
     <entry lang="ar" key="DECOY_OS_INSTRUCTIONS_PORTION_1">\n\nمهم -- الرجاء طباعة النص التالي (اضغط 'طباعة' بالأسفل).\n\n\nملاحظة: هذا النص سوف يظهر في كل مرة تقلع من النظام المخفي حتى تقلع من النظام المزيف.\n\n\n</entry>
     <entry lang="ar" key="DECOY_OS_INSTRUCTIONS_PORTION_2">كيف تنشئ النظام المزيف بشكل آمن وسليم\n----------------------------------------------------------------------------\n\nللحصول على الإنكار المنطقي, تحتاج لإنشاء نظام مزيف. لعمل ذلك, اتبع الخطوات التالية:\n\n</entry>
     <entry lang="ar" key="DECOY_OS_INSTRUCTIONS_PORTION_3">1) لأسباب أمنية, أطفئ الجهاز وأبقع مطفأ لبرهة من الزمن (كلما طالت المدة, فهو أفضل). هذا مطلوب لتنظيف الذاكرة, والتي تحوي معلومات حساسة. ثم شغل الجهاز ولكن لا تقلع النظام المخفي.\n\n</entry>
@@ -1229,7 +1228,7 @@
     <entry lang="ar" key="HIDDEN_OS_CREATION_PREINFO_HELP">‮في الخطوات التالية سينشئ ڤيراكربت نظام التشغيل المخفي بنسخ محتوى قسم النظام إلى المجلد المخفي (البيانات المنسوخة ستُعمى لحظيا بمفتاح تعمية يختلف عن الذي سيستخدم لنظام التشغيل التمويهي). ‮ ‮لاحظ أن هذه الصيرورة ستجري في بيئة ما قبل الإقلاع (قبل أن يشتغل ويندوز) و أنها قد تستغرق وقتا طويلا حتى تتم؛ بضع ساعات أو حتى أياما (حسب حجم قسم النظام و قوة الحاسوب). ‮ ‮سيكون بوسعك مقاطعة الصيرورة و إطفاء الحاسوب ثم بدء نظام التشغيل و معاودة الصيرورة لاحقا. إلا أنك إذا ما قاطعت صيرورة نسخ نظام التشغيل فإنها ستبدأ من البداية عند معاودتها (لأن محتويات قسم النظام ينبغي ألا تتغير أثناء النسخ).</entry>
     <entry lang="ar" key="CONFIRM_CANCEL_HIDDEN_OS_CREATION">‮أتريد إلغاء صيرورة إنشاء نظام التسغيل المخفي كلية؟ ‮ ‮ملاحظة: لن يمكنك معاودة الصيرورة إن ألغيتها الآن.</entry>
     <entry lang="ar" key="CONFIRM_CANCEL_SYS_ENC_PRETEST">‮أتريد إلغاء الاختبار المبدئي لتعمية النظام؟</entry>
-    <entry lang="ar" key="BOOT_PRETEST_FAILED_RETRY">فشل الاختبار المبدئي لتشفير فيراكربت. هل تريد إعادة المحاولة?\n\nإذا اخترت 'لا', سيتم إزالة برنامج الإقلاع من فيراكربت.\n\nملاحظة:\n\n- إذا لم يطلب برنامج إقلاع فيراكربت كلمة سر قبل ويندوز, فهذا يعني أن نظام التشغيل ليس مثبتا على نفس القسم الذي يقلع منه. وهذا ليس مدعوما.\n\n- إذا استخدمت خوارزمية تشفير غير AES وفشل عملية الإقلاع (مع إدخالك لكلمة السر), فيمكن أن يكون المحرك به خلل في التصميم. اختر 'لا', وحاول تشفير قسم/قرص النظام مرة أخرى, AES واستخدم خزارزمية تشفير (التي لها أقل المتطلبات بالنسبة للذاكرة).\n\n- للمزيد عن الأسباب والحلول, راجع: https://www.veracrypt.fr/en/Troubleshooting.html</entry>
+    <entry lang="ar" key="BOOT_PRETEST_FAILED_RETRY">فشل الاختبار المبدئي لتشفير فيراكربت. هل تريد إعادة المحاولة?\n\nإذا اخترت 'لا', سيتم إزالة برنامج الإقلاع من فيراكربت.\n\nملاحظة:\n\n- إذا لم يطلب برنامج إقلاع فيراكربت كلمة سر قبل ويندوز, فهذا يعني أن نظام التشغيل ليس مثبتا على نفس القسم الذي يقلع منه. وهذا ليس مدعوما.\n\n- إذا استخدمت خوارزمية تشفير غير AES وفشل عملية الإقلاع (مع إدخالك لكلمة السر), فيمكن أن يكون المحرك به خلل في التصميم. اختر 'لا', وحاول تشفير قسم/قرص النظام مرة أخرى, AES واستخدم خزارزمية تشفير (التي لها أقل المتطلبات بالنسبة للذاكرة).\n\n- للمزيد عن الأسباب والحلول, راجع: https://veracrypt.jp/en/Troubleshooting.html</entry>
     <entry lang="ar" key="SYS_DRIVE_NOT_ENCRYPTED">‮لا يبدو أن قسم\\سواقة النظام مُعمّاة (لا جزئيا و لا بالكامل).</entry>
     <entry lang="ar" key="SETUP_FAILED_BOOT_DRIVE_ENCRYPTED">‮قسم\\سواقة النظام مُعمّاة (جزئيا أو بالكامل). ‮ ‮ظهِّر قسم\\سواقة النظام كُليّا قبل المواصلة. لفعل هذا اختر 'نظام' &gt; 'ظهِّر نهائيا قسم\\سواقة النظام' من قائمة نافذة ڤيراكربت الرئيسية.</entry>
     <entry lang="ar" key="SETUP_FAILED_BOOT_DRIVE_ENCRYPTED_DOWNGRADE">حينما يتم تشفير قسم/قرص النظام (كليا أو جزئيا), لا يمكنك تخفيض فيراكربت (لكن يمكنك الترقية أو تثبيت نفس الإصدار).</entry>
@@ -1252,7 +1251,7 @@
     <entry lang="ar" key="NOTE_CASCADE_FOR_SYS_ENCRYPTION">‮إن واجهتك أي من المشكلات سابقة الذكر فظهِّر قسم\\سواقة النظام (إن كانت معمّاة) و حاول تعميتها مجددا باستخدام خوارزمية تعمية غير متوالية (مثل ‪AES‬).</entry>
     <entry lang="ar" key="UPDATE_TC_IN_DECOY_OS_FIRST">تحذير: لأسباب السلامة والأمن, ينبغي تحديث فيراكربت في نظام التشغيل المزيف قبل تحديثه في النظام المخفي.\n\nلعمل ذلك, أقلع النظام المزيف وشغل برنامج تثبيت فيراكربت. ثم أقلع النظام المخفي وشغل برنامج تثبيت فيراكربت.\n\nملاحظة: النظامان المزيف والمخفي يتشاركان في قسم الإقلاع. إذا قمت بتحديث النظام المخفي فقط (وليس المزيف أيضا), سيحوي النظام المزيف إصدار فيراكربت مختلفا ومحركا مختلفا عن الذي في برنامج الإقلاع. مثل هذا الاختلاف قد يشير إلى وجود نظام مخفي.\n\n\nهل ترغب في الاستمرار?</entry>
     <entry lang="ar" key="UPDATE_TC_IN_HIDDEN_OS_TOO">‮رقم إصدارة مُحمِل إقلاع ڤيراكربت الذي أقلع نظام التشغيل هذا يختلف عن رقم إصدارة مُشغِّل ڤيراكربت (و تطبيقات ڤيراكربت) المثبتة في هذا النظام. ‮ ‮ينبغي أن تشغل مُنَصِّب ڤيراكربت (الذي يتطابق رقم إصدارته مع رقم إصدارة مُحمِل إقلاع ڤيراكربت) و ذلك لتحديث ڤيراكربت في هذا النظام.</entry>
-    <entry lang="ar" key="BOOT_LOADER_VERSION_DIFFERENT_FROM_DRIVER_VERSION">إصدارة فيراكربت في الإقلاع مختلفة عن محرك فيراكربت المستخدم في إقلاع نظام التشغيل هذا(وأيضا مختلف عن إصدارة التطبيق نفسه) المثبتة على هذا النظام. لاحظ أن الإصدارات القديمة تحوي مشكلات تم حلها في الإصدارات الأحدث.\n\nإذا لم تقلع من قرص إنقاذ فيراكربت, عليك إعادة تثبيت فيراكربت أو ترقيته لآخر نسخة مستقرة (سوف يتم تحديث برنامج إقلاع فيراكربت أيضا).\n\nإذا أقلعت من قرص إنقاذ فيراكربت, يجب تحديثه ('النظام' > 'أنشئ قرص إنقاذ').</entry>
+    <entry lang="ar" key="BOOT_LOADER_VERSION_DIFFERENT_FROM_DRIVER_VERSION">إصدارة فيراكربت في الإقلاع مختلفة عن محرك فيراكربت المستخدم في إقلاع نظام التشغيل هذا(وأيضا مختلف عن إصدارة التطبيق نفسه) المثبتة على هذا النظام. لاحظ أن الإصدارات القديمة تحوي مشكلات تم حلها في الإصدارات الأحدث.\n\nإذا لم تقلع من قرص إنقاذ فيراكربت, عليك إعادة تثبيت فيراكربت أو ترقيته لآخر نسخة مستقرة (سوف يتم تحديث برنامج إقلاع فيراكربت أيضا).\n\nإذا أقلعت من قرص إنقاذ فيراكربت, يجب تحديثه ('النظام' &gt; 'أنشئ قرص إنقاذ').</entry>
     <entry lang="ar" key="BOOT_LOADER_UPGRADE_OK">‮تمت ترقية مُحمِّل إقلاع ڤيراكربت. ‮ ‮من المحبذ بشدة أن تنشئ قرص إنقاذ ڤيراكربت جديد (ليحوي الإصدارة الجديدة من مُحمِّل إقلاع ڤيراكربت) باختيار 'نظام' &gt; 'أنشئ قرص إنقاذ' بعد أن تعيد تشغيل الحاسوب.</entry>
     <entry lang="ar" key="BOOT_LOADER_UPGRADE_OK_HIDDEN_OS">‮مُحمِل إقلاع ڤيراكربت تمت ترقيته. ‮ ‮من المحبذ بشدة أن تُقلع نظام التشغيل التمويهي و أن تنشئ قرص إنقاذ ڤيراكربت حديث (و هو الذي سيحوي الإصدارة الجديدة من مُحمِّل إقلاع ڤيراكربت) باختيار 'نظام' &gt; 'أنشئ قرص إنقاذ'.</entry>
     <entry lang="ar" key="BOOT_LOADER_UPGRADE_FAILED">‮فشلت ترقية مُحمِّل إقلاع ڤيراكربت.</entry>
@@ -1277,7 +1276,7 @@
     <entry lang="ar" key="INVALID_TOKEN_KEYFILE_PATH">‮مسار ملف مفتاح أمارة الأمان غير صحيح.</entry>
     <entry lang="ar" key="SECURITY_TOKEN_ERROR">‮عطل متعلق بأمارة الأمان</entry>
     <entry lang="ar" key="CKR_PIN_INCORRECT">‮كلمة سر أمارة الأمان غير صحيحة.</entry>
-    <entry lang="ar" key="CKR_DEVICE_MEMORY">أمارة الأمان لا تملك مساحة كافية على الذاكرة/القرص لإتمام العملية المطلوبة.\n\nإذا كنت تسوتورد ملف مفتاح, عليك باستخدام ملف أصغر أو توليده عن طريق فيراكربت (اختر 'أدوات' > 'مولد ملف المفتاح').</entry>
+    <entry lang="ar" key="CKR_DEVICE_MEMORY">أمارة الأمان لا تملك مساحة كافية على الذاكرة/القرص لإتمام العملية المطلوبة.\n\nإذا كنت تسوتورد ملف مفتاح, عليك باستخدام ملف أصغر أو توليده عن طريق فيراكربت (اختر 'أدوات' &gt; 'مولد ملف المفتاح').</entry>
     <entry lang="ar" key="ALL_TOKEN_SESSIONS_CLOSED">‮كل جلسات أمارات الأمان المفتوحة تم إنهاؤها.</entry>
     <entry lang="ar" key="SELECT_TOKEN_KEYFILES">‮اختر ملفات مفاتيح أمارات الأمان</entry>
     <entry lang="ar" key="TOKEN_SLOT_ID">‮فتحة</entry>
@@ -1297,17 +1296,17 @@
     <entry lang="ar" key="MOUNTED_VOLUME_DIRTY">‮تحذير: نظام الملفات في المجلد الموصول باسم '‪%s‬' لم يفصل كما ينبغي المرة السابقة و قد يحوي أعطالا. استخدام نظام ملفات معطوب قد يؤدي إلى ضياع البيانات أو تلفها. ‮ ‮ملاحظة: قبل أن تطفئ أو تفصل عن الحاسوب نبيطة (مثل شريحة ذاكرة USB أو سواقة أقراص خارجية) تحوي مجلد ڤيراكربت تأكد من أن تفصل المجلد أولا في ڤيراكربت. ‮ ‮ ‮أتريد أن يحاول ويندوز تحسس و إصلاح الأعطال (إن وجدت) في نظام الملفات هذا؟</entry>
     <entry lang="ar" key="SYS_FAVORITE_VOLUME_DIRTY">تحذير: واحد أو أكثر من أقراص النظام المفضلة لم يتم تنزيلها بشكل سليم ولذلك يمكن أن تحوي أخطاء نظامية. يرجى مراجعة سجل أحداث النظام لمعرفة التفاصيل.\n\nإن استخدام نظام ملفات معطوب يؤدي لفقدان البيانات أو عطبها. عليك بفحص القرص أو الأقراص ذات العلاقة لكشف الأخطاء (اضغط بالزر الأيمن على كل قرص على حدة 'أصلح نظام الملفات').</entry>
     <entry lang="ar" key="FILESYS_REPAIR_CONFIRM_BACKUP">تحذير: إصلاح عطب نظام المفات عن طريق أداة مايكروسوفت 'chkdsk' يمكن أن تسبب في عطب في قسم النظام. لذلك, بنصح بنسخ محتوى قرص فيراكربت إلى, قسم فيراكربت سليم آخر.\n\nهل تريد إصلاح نظام الملفات الآن?</entry>
-    <entry lang="ar" key="MOUNTED_CONTAINER_FORCED_READ_ONLY">القرص '%s' تم تحميله للقراءة فقط لأنه لم يسمح له بإذن الكتابة.\n\nيرجى التأكد من أن أذونات الأمان للقرص تسمح لك بالكتابة (اختر ملف الحاية واضغط بالزر الأيمن واختر خصائص > الأمان).\n\nلاحظ أن, طبقا لمشكلة في ويندوز, يمكن مشاهدة هذا التحذير حتى بعد تهيئة الخصائص. وهذا ليس بسبب مشكلة في فيراكربت. كحل مناسب يمكن نقل ملف الحاوية لمجلد, مثلا,  'الوثائق'.\n\nإذا تنوي الإبقاء على إذن للقراءة فقط, فعل خاصية للقراءة فقط للحاوية (بالزر الأيمن اختر خصائص > للقراءة فقط), وهذا سيلغي ذلك التحذير.</entry>
+    <entry lang="ar" key="MOUNTED_CONTAINER_FORCED_READ_ONLY">القرص '%s' تم تحميله للقراءة فقط لأنه لم يسمح له بإذن الكتابة.\n\nيرجى التأكد من أن أذونات الأمان للقرص تسمح لك بالكتابة (اختر ملف الحاية واضغط بالزر الأيمن واختر خصائص &gt; الأمان).\n\nلاحظ أن, طبقا لمشكلة في ويندوز, يمكن مشاهدة هذا التحذير حتى بعد تهيئة الخصائص. وهذا ليس بسبب مشكلة في فيراكربت. كحل مناسب يمكن نقل ملف الحاوية لمجلد, مثلا,  'الوثائق'.\n\nإذا تنوي الإبقاء على إذن للقراءة فقط, فعل خاصية للقراءة فقط للحاوية (بالزر الأيمن اختر خصائص &gt; للقراءة فقط), وهذا سيلغي ذلك التحذير.</entry>
     <entry lang="ar" key="MOUNTED_DEVICE_FORCED_READ_ONLY">‮المجلد '‪%s‬' وُصل للقراءة فقط لأن النفاذ بالكتابة قد مُنع. ‮ ‮تحقق من أنه ما من برمجيات أخرى (مثل مضاد الفيروسات) تنفذ إلى القسم\\النبيطة المستضاف فيها المجلد.</entry>
     <entry lang="ar" key="MOUNTED_DEVICE_FORCED_READ_ONLY_WRITE_PROTECTION">القرص '%s' تم تحميله للقراءة فقط لأن نظام التشغيل أشعر بأن الجهاز المستضيف محمي ضد الكتابة.\n\nيرجى ملاحظة أن بعض شرائح التحكم لبعض وسائط التخزين تعطي رسائل خاطة بأن الجهاز محمي وضد الكتابة. هذه المشكلة ليست بسبب فيراكربت. يمكن حل هذه المشكلة بتحديث محرك الجهاز أو إزالة محرك الجهاز إن كان من طرف ثالث (غير مايكروسوفت).</entry>
     <entry lang="ar" key="LIMIT_ENC_THREAD_POOL_NOTE">لاحظ أن تقنية فرط البرمجيات الصغيرة. حينما تكون مفعلة, الرقم المختار بالأعلى يبين عدد الأنوية أو المعالجات.</entry>
     <entry lang="ar" key="NUMBER_OF_THREADS">%d مجموعة برمجيات صغيرة</entry>
-    <entry lang="ar" key="DISABLED_HW_AES_AFFECTS_PERFORMANCE">لاحظ أن العتاد الذي يسرع تشفير AES معطل, والذي سؤثر على عملية مؤشر المقارنة (الأداء الأسوأ).\n\nلتفعيل تسريع العتاد, اختر 'إعدادات ' > 'الأداء' ثم فعل الخيار المطلوب.</entry>
-    <entry lang="ar" key="LIMITED_THREAD_COUNT_AFFECTS_PERFORMANCE">لاحظ أن عدد البرمجيات الصغيرة محدود, والذي سيؤثر على مؤشرات المقارنة (الأداء الأسوأ).\n\nلاستغلال كامل إمكانات المعالج/المعالجات, اختر 'إعدادات' > 'الأداء' ثم عطل الخيار المطلوب.</entry>
+    <entry lang="ar" key="DISABLED_HW_AES_AFFECTS_PERFORMANCE">لاحظ أن العتاد الذي يسرع تشفير AES معطل, والذي سؤثر على عملية مؤشر المقارنة (الأداء الأسوأ).\n\nلتفعيل تسريع العتاد, اختر 'إعدادات ' &gt; 'الأداء' ثم فعل الخيار المطلوب.</entry>
+    <entry lang="ar" key="LIMITED_THREAD_COUNT_AFFECTS_PERFORMANCE">لاحظ أن عدد البرمجيات الصغيرة محدود, والذي سيؤثر على مؤشرات المقارنة (الأداء الأسوأ).\n\nلاستغلال كامل إمكانات المعالج/المعالجات, اختر 'إعدادات' &gt; 'الأداء' ثم عطل الخيار المطلوب.</entry>
     <entry lang="ar" key="ASK_REMOVE_DEVICE_WRITE_PROTECTION">هل ترغب أن يحاول فيراكربت في تعطيل حماية الكتابة للقرص/القسم?</entry>
     <entry lang="ar" key="CONFIRM_SETTING_DEGRADES_PERFORMANCE">تحذير: هذا الخيار يمكن يؤثر سلبا على الأداء.\n\nهل ترغب فعلا في استخدام هذا الخيار?</entry>
-    <entry lang="ar" key="HOST_DEVICE_REMOVAL_DISMOUNT_WARN_TITLE">تحذير: قرص فيراكربت تم تنزيله</entry>
-    <entry lang="ar" key="HOST_DEVICE_REMOVAL_DISMOUNT_WARN">قبل فصل جهاز موصول ويحوي قرص فيراكربت, لابد دوما من تنزيل ملف الحاوية أولا.\n\nفصل الحاوية المفاجئ سببه إنقطاع التوصيل المتكرر لسلك الجهاز, المحرك (الغطاء), ...الخ.</entry>
+    <entry lang="ar" key="HOST_DEVICE_REMOVAL_UNMOUNT_WARN_TITLE">تحذير: قرص فيراكربت تم تنزيله</entry>
+    <entry lang="ar" key="HOST_DEVICE_REMOVAL_UNMOUNT_WARN">قبل فصل جهاز موصول ويحوي قرص فيراكربت, لابد دوما من تنزيل ملف الحاوية أولا.\n\nفصل الحاوية المفاجئ سببه إنقطاع التوصيل المتكرر لسلك الجهاز, المحرك (الغطاء), ...الخ.</entry>
     <entry lang="ar" key="UNSUPPORTED_TRUECRYPT_FORMAT">هذا القرص تم إنشاؤه بالإصدار  %x.%x لكن فيراكربت يدعم فقط أقراص تروكربت من إصدار 6.x/7.x series</entry>
     <entry lang="ar" key="TEST">‮اختبر</entry>
     <entry lang="ar" key="KEYFILE">‮ملف مفتاح</entry>
@@ -1332,7 +1331,7 @@
     <entry lang="ar" key="VKEY_2C">Print Screen</entry>
     <entry lang="ar" key="VKEY_2D">Insert</entry>
     <entry lang="ar" key="VKEY_2E">Delete</entry>
-    <entry lang="ar" key="VKEY_5D">Applications Key</entry>
+    <entry lang="ar" key="VKEY_5D">‮مفتاح التطبيقات</entry>
     <entry lang="ar" key="VKEY_5F">Sleep</entry>
     <entry lang="ar" key="VKEY_90">Num Lock</entry>
     <entry lang="ar" key="VKEY_91">Scroll Lock</entry>
@@ -1407,8 +1406,8 @@
     <entry lang="ar" key="RESCUE_DISK_EFI_EXTRACT_INFO_NO_CHECK">تم إنشاء قرص الصورة بصيغة ZIP للإنقاذ من فيراكربت في الملف:\n%s\n\nالآن تحتاج تصديره إلى وسيط ملحق مهيأ بصيغة FAT/FAT32 أو تخزينه في مكان آمن لاستخدامه عند الحاجة فيما بعد\n\n%lsاضغط زر التالي للاستمرار</entry>
     <entry lang="ar" key="RESCUE_DISK_EFI_EXTRACT_INFO_NOTE">مهم: لاحظ أنه لابد من فك ضغط ملف ZIP على القرص الملحق في الجذر. على سبيل المثال: إذا كان القرص الملحق تم تعيينه على أنه E:  فإن فك الملف المضغوط ينبغي أن يكون على المجلد E:\\EFI على القرص الملحق\n\n</entry>
     <entry lang="ar" key="RESCUE_DISK_EFI_CHECK_FAILED">لم يمكن التأكد من صحة تصدير ملف الإنقاذ\n\nإذا صدرت ملف الإنقاذ فيرجى نزع القرص الملحق ثم إدخاله مرة أخرى ثم اضغط زر التالي. إذا لم تنجح العملية فيمكن استخدام قرص ملق آخر أو تطبيق آخر لفك ضغط الملفات المضغفطة\n\nإذا لم تقم بتصدير ملف الإنقاذ بعد فيرجى عمل ذلك ثم الضغط على زر التالي\n\nإذا حاولت التأكد من صحة إنشاء ملف الإنقاذ قبل التسلسل التوضيحي للعملية فيرجى ملاحظة أنه لن يمكنك استخدام قرص الإنقاذ ذاك لأنه أنشء بمفتاح رئيسي آخر. تحتاج تصدير تصدير صورة مضغوطة جديدة</entry>
-    <entry lang="ar" key="RESCUE_DISK_EFI_NON_WIZARD_CHECK_FAILED">لم يمكن التأكد من نجاح عملية تصدير قرص الإنقاذ\n\nإذا قمت بتصدير قرص الإنقاذ على وسيط ملحق فيرجى نزعه ثم إدخاله مرة أخرى. إذا لم يجد ذلك فعليك باستخدام وسيط ملحق آخر أو تطبيق آخر لضغط الملفات\n\nإذا حاولت التحقق من إنشاء قرص الإنقاذ لمفتاح رئيسي آخر أو كلمة سر أخرى, فيرجى ملاحظ أن عملية التحقق ستفشل دائما. لإنشاء قرص إنقاذ جديد فينبغي تهيئته على البيئة الحالية, اختر 'النظام' > 'إنشاء قرص الإنقاذ'.</entry>
-    <entry lang="ar" key="RESCUE_DISK_EFI_NON_WIZARD_CREATION">صورة قرص الإنقاذ تم إنشاؤها وحفظها على الملف:\n%s\n\nالآن تحتاج تصديره على وسيط ملحق مهيأ بصيغة FAT/FAT32.\n\nمهم: لاحظ أن تطبيق فك الضغط يجب أن يفك الملف على جذر الوسيط الملحق. على سبيل المثال، لو كان الوسيط الملحق هو E: فإنه يلزم فك الضغط على المجلد E:\\EFI.\n\nبعد إنشاء قرص الإنقاذ، اختر 'النظام' > 'التحقق من قرص الإنقاذ' للتحقق من إنشائه بنجاح</entry>
+    <entry lang="ar" key="RESCUE_DISK_EFI_NON_WIZARD_CHECK_FAILED">لم يمكن التأكد من نجاح عملية تصدير قرص الإنقاذ\n\nإذا قمت بتصدير قرص الإنقاذ على وسيط ملحق فيرجى نزعه ثم إدخاله مرة أخرى. إذا لم يجد ذلك فعليك باستخدام وسيط ملحق آخر أو تطبيق آخر لضغط الملفات\n\nإذا حاولت التحقق من إنشاء قرص الإنقاذ لمفتاح رئيسي آخر أو كلمة سر أخرى, فيرجى ملاحظ أن عملية التحقق ستفشل دائما. لإنشاء قرص إنقاذ جديد فينبغي تهيئته على البيئة الحالية, اختر 'النظام' &gt; 'إنشاء قرص الإنقاذ'.</entry>
+    <entry lang="ar" key="RESCUE_DISK_EFI_NON_WIZARD_CREATION">صورة قرص الإنقاذ تم إنشاؤها وحفظها على الملف:\n%s\n\nالآن تحتاج تصديره على وسيط ملحق مهيأ بصيغة FAT/FAT32.\n\nمهم: لاحظ أن تطبيق فك الضغط يجب أن يفك الملف على جذر الوسيط الملحق. على سبيل المثال، لو كان الوسيط الملحق هو E: فإنه يلزم فك الضغط على المجلد E:\\EFI.\n\nبعد إنشاء قرص الإنقاذ، اختر 'النظام' &gt; 'التحقق من قرص الإنقاذ' للتحقق من إنشائه بنجاح</entry>
     <entry lang="ar" key="IDC_SECURE_DESKTOP_PASSWORD_ENTRY">استخدم سطح مكتب مؤمن لإدخال كلمة السر</entry>
     <entry lang="ar" key="ERR_REFS_INVALID_VOLUME_SIZE">حجم الملف المحدد في سطر الأوامر غير متوافق مع نظام الملفات  ReFS</entry>
     <entry lang="ar" key="IDC_EDIT_DCSPROP">تحرير تهيئة تحميل الاقلاع</entry>
@@ -1429,215 +1428,269 @@
     <entry lang="ar" key="VOLUME_TOO_LARGE_FOR_HOST">خطأ: حجم ملف الحاوية أكبر من حجم المساحة المتاحة على القرص.</entry>
     <entry lang="ar" key="IDC_ALLOW_WINDOWS_DEFRAG">اسمح لملغي تجزئة القرص من ويندوز أن يقوم بإلغاء تجزئة القرص أو القسم غي النظامي.</entry>
     <entry lang="ar" key="CONFIRM_ALLOW_WINDOWS_DEFRAG">تحذير: إلغاء تجزئة قسم أو قرص غير نظامي يمكن أن يؤدي لتسريب بيانات وصفية عن الجزء أو القسم، أو يتسبب في مشكلات للقسم المخفي الموجود بهما.\n\nهل ترغب بالاستمرار؟</entry>
-    <entry lang="en" key="VIRTUAL_DEVICE">Virtual Device</entry>
-    <entry lang="en" key="MOUNTED_VOLUME_NOT_ASSOCIATED">The selected mounted volume is not associated with its drive letter in Windows and so it can not be opened in Windows Explorer.</entry>
-    <entry lang="en" key="IDC_CLEAR_KEYS_ON_NEW_DEVICE_INSERTION">Clear encryption keys from memory if a new device is inserted</entry>
-    <entry lang="en" key="CLEAR_KEYS_ON_DEVICE_INSERTION_WARNING">IMPORTANT NOTES:\n - Please keep in mind that this option will not persist after a shutdown/reboot so you will need to select it again next time the machine is started.\n\n - With this option enabled and after a new device is connected, the machine will freeze and it will eventually crash with a BSOD since Windows can not access the encrypted disk after its keys are cleared from memory.\n</entry>
+    <entry lang="ar" key="VIRTUAL_DEVICE">جهاز افتراضي</entry>
+    <entry lang="ar" key="MOUNTED_VOLUME_NOT_ASSOCIATED">الحجم المركب المحدد غير مرتبط بحرف محرك الأقراص في نظام التشغيل Windows لذلك لا يمكن فتحه في مستكشف Windows.</entry>
+    <entry lang="ar" key="IDC_CLEAR_KEYS_ON_NEW_DEVICE_INSERTION">مسح مفاتيح التشفير من الذاكرة عند إدراج جهاز جديد</entry>
+    <entry lang="ar" key="CLEAR_KEYS_ON_DEVICE_INSERTION_WARNING">ملاحظات هامة:\n - يرجى ملاحظة أن هذا الخيار لن يستمر بعد إيقاف التشغيل / إعادة التشغيل لذلك ستحتاج إلى تحديده مرة أخرى في المرة القادمة التي يتم فيها تشغيل الجهاز.\n\n - عند تمكين هذا الخيار وبعد توصيل جهاز جديد، سيتجمد الجهاز وفي النهاية سيتعطل بوجود شاشة زرقاء لأن نظام Windows لا يمكنه الوصول إلى القرص المشفر بعد مسح مفاتيحه من الذاكرة.\n</entry>
     <entry lang="ar" key="STARTING">جاري البدأ</entry>
-    <entry lang="en" key="IDC_ENABLE_CPU_RNG">Use CPU hardware random generator as an additional source of entropy</entry>
-    <entry lang="en" key="IDC_USE_LEGACY_MAX_PASSWORD_LENGTH">Use legacy maximum password length (64 characters)</entry>
-    <entry lang="en" key="IDC_ENABLE_RAM_ENCRYPTION">Activate encryption of keys and passwords stored in RAM</entry>
+    <entry lang="ar" key="IDC_ENABLE_CPU_RNG">استخدام مولد عشوائي للأجهزة في وحدة المعالجة المركزية كمصدر إضافي للطاقة</entry>
+    <entry lang="ar" key="IDC_USE_LEGACY_MAX_PASSWORD_LENGTH">استخدام طول كلمة المرور الأقصى التقليدي (64 حرفًا)</entry>
+    <entry lang="ar" key="IDC_ENABLE_RAM_ENCRYPTION">تفعيل تشفير المفاتيح وكلمات المرور المخزنة في الذاكرة العشوائية (RAM)</entry>
     <entry lang="ar" key="IDT_BENCHMARK">مقايسة الأداء:</entry>
-    <entry lang="en" key="IDC_DISABLE_MOUNT_MANAGER">Only create virtual device without mounting on selected drive letter</entry>
+    <entry lang="ar" key="IDC_DISABLE_MOUNT_MANAGER">إنشاء جهاز افتراضي فقط دون التثبيت على حرف محرك الأقراص المحدد</entry>
     <entry lang="ar" key="LEGACY_PASSWORD_UTF8_TOO_LONG">كلمة السر المدخلة طويلة: تمثيلها بصيغة UTF-8 يزيد عن 128 بايت.</entry>
-    <entry lang="en" key="HIDDEN_CREDS_SAME_AS_OUTER">The Hidden volume can't have the same password, PIM and keyfiles as the Outer volume</entry>
-    <entry lang="en" key="SYSENC_BITLOCKER_CONFLICT">VeraCrypt does not support encrypting a system drive that is already encrypted by BitLocker.</entry>
-    <entry lang="en" key="IDC_UPDATE_BOOTLOADER_ON_SHUTDOWN">Automatically fix boot configuration issues that may prevent Windows from starting</entry>
-    <entry lang="en" key="IDC_FORCE_NEXT_BOOT_VERACRYPT">Force machine to boot on VeraCrypt in the next startup</entry>
-    <entry lang="en" key="IDC_FORCE_VERACRYPT_BOOT_ENTRY">Force the presence of VeraCrypt entry in the EFI firmware boot menu</entry>
-    <entry lang="en" key="IDC_FORCE_VERACRYPT_FIRST_BOOT_ENTRY">Force VeraCrypt entry to be the first in the EFI firmware boot menu</entry>
-    <entry lang="en" key="RAM_ENCRYPTION_DISABLE_HIBERNATE">WARNING: RAM encryption is not compatible with Windows Hibernate and Windows Fast Startup features. VeraCrypt needs to disable them before activating RAM encryption.\n\nContinue?</entry>
-    <entry lang="en" key="CONFIRM_DISABLE_FAST_STARTUP">WARNING: Windows Fast Startup is enabled and it is known to cause issues when working with VeraCrypt volumes. It is advised to disable it for better security and usability.\n\nDo you want to disable Windows Fast Startup?</entry>
-    <entry lang="en" key="QUICK_FORMAT_HELP">In order to enable your operating system to mount your new volume, it has to be formatted with a filesystem. Please select a filesystem type.\n\nIf your volume is going to be hosted on a device or partition, you can use 'Quick format' to skip encryption of free space of the volume.</entry>
-    <entry lang="en" key="IDC_ENABLE_HARDWARE_ENCRYPTION_NEG">Do not accelerate AES encryption/decryption by using the AES instructions of the processor</entry>
-    <entry lang="en" key="IDM_ADD_ALL_VOLUME_TO_FAVORITES">Add All Mounted Volumes to Favorites...</entry>
-    <entry lang="en" key="TASKICON_PREF_MENU_ITEMS">Task Icon Menu Items</entry>
-    <entry lang="en" key="TASKICON_PREF_OPEN_VOL">Open Mounted Volumes</entry>
-    <entry lang="en" key="TASKICON_PREF_DISMOUNT_VOL">Dismount Mounted Volumes</entry>
-    <entry lang="en" key="DISK_FREE">Free space available: {0}</entry>
-    <entry lang="en" key="VOLUME_SIZE_HELP">Please specify the size of the container to create. Note that the minimum possible size of a volume is 292 KiB.</entry>
-    <entry lang="en" key="LINUX_CONFIRM_INNER_VOLUME_CALC">WARNING: You have selected a filesystem other than FAT for the outer volume.\nPlease Note that in this case VeraCrypt can't calculate the exact maximum allowed size for the hidden volume and it will use only an estimation that can be wrong.\nThus, it is your responsibility to use an adequate value for the size of the hidden volume so that it does not overlap the outer volume.\n\nDo you want to continue using the selected filesystem for the outer volume?</entry>
+    <entry lang="ar" key="HIDDEN_CREDS_SAME_AS_OUTER">لا يمكن أن يكون للحجم المخفي نفس كلمة المرور، و PIM والملفات المفتاحية للحجم الخارجي</entry>
+    <entry lang="ar" key="SYSENC_BITLOCKER_CONFLICT">VeraCrypt لا يدعم تشفير محرك النظام المشفر بالفعل بواسطة BitLocker.</entry>
+    <entry lang="ar" key="IDC_UPDATE_BOOTLOADER_ON_SHUTDOWN">إصلاح تلقائي لمشكلات تكوين الإقلاع التي قد تمنع Windows من بدء التشغيل</entry>
+    <entry lang="ar" key="IDC_FORCE_NEXT_BOOT_VERACRYPT">إجبار الجهاز على الإقلاع على VeraCrypt في بدء التشغيل التالي</entry>
+    <entry lang="ar" key="IDC_FORCE_VERACRYPT_BOOT_ENTRY">فرض وجود إدخال VeraCrypt في قائمة إقلاع برنامج EFI الثابت</entry>
+    <entry lang="ar" key="IDC_FORCE_VERACRYPT_FIRST_BOOT_ENTRY">فرض إدخال VeraCrypt ليكون الأول في قائمة إقلاع برنامج EFI الثابت</entry>
+    <entry lang="ar" key="RAM_ENCRYPTION_DISABLE_HIBERNATE">تحذير: تشفير الذاكرة العشوائية (RAM) غير متوافق مع ميزات السبات الفوري (Hibernate) والتشغيل السريع في Windows. يحتاج VeraCrypt إلى تعطيلها قبل تفعيل تشفير الذاكرة العشوائية.\n\nهل تريد المتابعة؟</entry>
+    <entry lang="ar" key="CONFIRM_DISABLE_FAST_STARTUP">تحذير: التشغيل السريع في Windows مفعل، ومن المعروف أنه يسبب مشاكل عند التعامل مع أحجام VeraCrypt. يوصى بتعطيله لأمان وسهولة أفضل.\n\nهل تريد تعطيل التشغيل السريع في Windows؟</entry>
+    <entry lang="ar" key="QUICK_FORMAT_HELP">لتمكين نظام التشغيل الخاص بك من استيعاب الحجم الجديد الخاص بك، يجب تنسيقه بنظام ملفات. يرجى اختيار نوع نظام الملفات.\n\nإذا كان الحجم الخاص بك سيتم استضافته على جهاز أو قسم، يمكنك استخدام "التنسيق السريع" لتخطي تشفير المساحة الفارغة من الحجم.</entry>
+    <entry lang="ar" key="IDC_ENABLE_HARDWARE_ENCRYPTION_NEG">عدم تسريع تشفير/فك تشفير AES باستخدام تعليمات AES الخاصة بالمعالج</entry>
+    <entry lang="ar" key="IDM_ADD_ALL_VOLUME_TO_FAVORITES">إضافة جميع الأحجام المركبة إلى المفضلة...</entry>
+    <entry lang="ar" key="TASKICON_PREF_MENU_ITEMS">عناصر قائمة رمز المهام</entry>
+    <entry lang="ar" key="TASKICON_PREF_OPEN_VOL">فتح الأحجام المركبة</entry>
+    <entry lang="ar" key="TASKICON_PREF_UNMOUNT_VOL">إلغاء تركيب الأحجام المركبة</entry>
+    <entry lang="ar" key="DISK_FREE">المساحة الحرة المتوفرة :{0}</entry>
+    <entry lang="ar" key="VOLUME_SIZE_HELP">يرجى تحديد حجم الحاوية التي تريد إنشاءها. لاحظ أن الحد الأدنى لحجم الحجم الممكن هو 292 KiB.</entry>
+    <entry lang="ar" key="LINUX_CONFIRM_INNER_VOLUME_CALC">تحذير: لقد حددت نظام ملفات غير FAT للحجم الخارجي.\nيرجى ملاحظة أنه في هذه الحالة، لا يمكن لـ VeraCrypt حساب الحد الأقصى المسموح به لحجم الحجم المخفي بدقة وسيستخدم فقط تقديرًا قد يكون خاطئًا.\nلذلك، تقع على عاتقك المسؤولية استخدام قيمة مناسبة لحجم الحجم المخفي حتى لا يتداخل مع الحجم الخارجي.\n\nهل ترغب في المتابعة باستخدام نظام الملفات المحدد للحجم الخارجي؟</entry>
     <entry lang="ar" key="LINUX_PREF_TAB_SECURITY">الأمان</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_MOUNT_OPTIONS">Mount Options</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_BACKGROUND_TASK">Background Task</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_SYSTEM_INTEGRATION">System Integration</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_SYSTEM_INTEGRATION_EXPLORER">Filesystem Explorer</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_MOUNT_OPTIONS">خيارات التركيب</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_BACKGROUND_TASK">المهام الخلفية</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_SYSTEM_INTEGRATION">تكامل النظام</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_SYSTEM_INTEGRATION_EXPLORER">مستكشف نظام الملفات</entry>
     <entry lang="ar" key="LINUX_PREF_TAB_PERFORMANCE">الأداء</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_KEYFILES">Keyfiles</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_TOKENS">Security Tokens</entry>
-    <entry lang="en" key="LINUX_PREF_KERNEL_SERVICES">Kernel Services</entry>
-    <entry lang="en" key="LINUX_PREF_KERNEL_CRYPT">Do not use kernel cryptographic services</entry>
-    <entry lang="en" key="LINUX_PREF_TAB_MOUNT_OPTIONS_FS">Filesystem</entry>
-    <entry lang="en" key="IDT_LINUX_PREF_TAB_MOUNT_OPTIONS">Mount options:</entry>
-    <entry lang="en" key="LINUX_CROSS_SUPPORT">Cross-Platform Support</entry>
-    <entry lang="en" key="LINUX_CROSS_SUPPORT_OTHER">I will mount the volume on other platforms</entry>
-    <entry lang="en" key="LINUX_CROSS_SUPPORT_OTHER_HELP">Choose this option if you need to use the volume on other platforms.</entry>
-    <entry lang="en" key="LINUX_CROSS_SUPPORT_ONLY">I will mount the volume only on {0}</entry>
-    <entry lang="en" key="LINUX_CROSS_SUPPORT_ONLY_HELP">Choose this option if you do not need to use the volume on other platforms.</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_KEYFILES">الملفات المفتاحية</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_TOKENS">الرموز الأمنية</entry>
+    <entry lang="ar" key="LINUX_PREF_KERNEL_SERVICES">خدمات النواة</entry>
+    <entry lang="ar" key="LINUX_PREF_KERNEL_CRYPT">لا تستخدم خدمات التشفير في النواة</entry>
+    <entry lang="ar" key="LINUX_PREF_TAB_MOUNT_OPTIONS_FS">نظام الملفات</entry>
+    <entry lang="ar" key="IDT_LINUX_PREF_TAB_MOUNT_OPTIONS">خيارات التركيب:</entry>
+    <entry lang="ar" key="LINUX_CROSS_SUPPORT">الدعم عبر المنصات</entry>
+    <entry lang="ar" key="LINUX_CROSS_SUPPORT_OTHER">سأقوم بتركيب الحجم على منصات أخرى</entry>
+    <entry lang="ar" key="LINUX_CROSS_SUPPORT_OTHER_HELP">اختر هذا الخيار إذا كنت بحاجة إلى استخدام الحجم على منصات أخرى.</entry>
+    <entry lang="ar" key="LINUX_CROSS_SUPPORT_ONLY">سأقوم بتركيب الحجم فقط على {0}</entry>
+    <entry lang="ar" key="LINUX_CROSS_SUPPORT_ONLY_HELP">اختر هذا الخيار إذا كنت لا تحتاج إلى استخدام الحجم على منصات أخرى.</entry>
     <entry lang="ar" key="LINUX_DESELECT">الغاء الاختيار</entry>
-    <entry lang="en" key="LINUX_ADMIN_PW_QUERY">Enter your user password or administrator password:</entry>
-    <entry lang="en" key="LINUX_ADMIN_PW_QUERY_TITLE">Administrator privileges required</entry>
-    <entry lang="en" key="LINUX_VC_RUNNING_ALREADY">VeraCrypt is already running.</entry>
-    <entry lang="en" key="LINUX_SYSTEM_ENC_PW_LENGTH_NOTE">System Encryption password is longer than {0} characters.</entry>
-    <entry lang="en" key="LINUX_MOUNT_SYSTEM_ENC_PREBOOT">Mount partition &amp;using system encryption (preboot authentication)</entry>
-    <entry lang="en" key="LINUX_DO_NOT_MOUNT">Do &amp;not mount</entry>
-    <entry lang="en" key="LINUX_MOUNT_AT_DIR">Mount at directory:</entry>
-    <entry lang="en" key="LINUX_SELECT">Se&amp;lect...</entry>
-    <entry lang="en" key="LINUX_DISMOUNT_ALL_WHEN">Dismount All Volumes When</entry>
-    <entry lang="en" key="LINUX_ENTERING_POWERSAVING">System is entering power saving mode</entry>
-    <entry lang="en" key="LINUX_LOGIN_ACTION">Actions to Perform when User Logs On</entry>
-    <entry lang="en" key="LINUX_CLOSE_EXPL_ON_DISMOUNT">Close all Explorer windows of volume being dismounted</entry>
-    <entry lang="en" key="LINUX_HOTKEYS">Hotkeys</entry>
-    <entry lang="en" key="LINUX_SYSTEM_HOTKEYS">System-Wide Hotkeys</entry>
-    <entry lang="en" key="LINUX_SOUND_NOTIFICATION">Play system notification sound after mount/dismount</entry>
-    <entry lang="en" key="LINUX_CONFIRM_AFTER_DISMOUNT">Display confirmation message box after dismount</entry>
-    <entry lang="en" key="LINUX_VC_QUITS">VeraCrypt quits</entry>
-    <entry lang="en" key="LINUX_OPEN_FINDER">Open Finder window for successfully mounted volume</entry>
-    <entry lang="en" key="LINUX_DISABLE_KERNEL_ONLY_SETTING">Please note that this setting takes effect only if use of the kernel cryptographic services is disabled.</entry>
-    <entry lang="en" key="LINUX_DISABLE_KERNEL_CRYPT_CONFIRM">Disabling the use of kernel cryptographic services can degrade performance.\n\nAre you sure?</entry>
-    <entry lang="en" key="LINUX_KERNEL_CRYPT_OPTION_CHANGE_MOUNTED_HINT">Please note that disabling this option may have no effect on volumes mounted using kernel cryptographic services.</entry>
-    <entry lang="en" key="LINUX_REMOUNT_BECAUSEOF_SETTING">Please note that any currently mounted volumes need to be remounted before they can use this setting.</entry>
-    <entry lang="en" key="LINUX_UNKNOWN_EXC_OCCURRED">Unknown exception occurred.</entry>
-    <entry lang="en" key="LINUX_FIRST_AID">"Disk Utility will be launched after you press 'OK'.\n\nPlease select your volume in the Disk Utility window and press 'Verify Disk' or 'Repair Disk' button on the 'First Aid' page.</entry>
-    <entry lang="en" key="LINUX_MOUNT_ALL_DEV">Mount All Devices</entry>
-    <entry lang="en" key="LINUX_ERROR_LOADING_CONFIG">Error while loading configuration files located in </entry>
-    <entry lang="en" key="LINUX_SELECT_FREE_SLOT">Please select a free drive slot from the list.</entry>
-    <entry lang="en" key="LINUX_MESSAGE_ON_MOUNT_AGAIN">\n\nDo you want to show this message next time you mount such a volume?</entry>
+    <entry lang="ar" key="LINUX_ADMIN_PW_QUERY">أدخل كلمة مرور المستخدم أو كلمة مرور المسؤول:</entry>
+    <entry lang="ar" key="LINUX_ADMIN_PW_QUERY_TITLE">مطلوبة امتيازات المسؤول</entry>
+    <entry lang="ar" key="LINUX_VC_RUNNING_ALREADY">VeraCrypt يعمل بالفعل.</entry>
+    <entry lang="ar" key="LINUX_SYSTEM_ENC_PW_LENGTH_NOTE">كلمة مرور تشفير النظام أطول من {0} حرف.</entry>
+    <entry lang="ar" key="LINUX_MOUNT_SYSTEM_ENC_PREBOOT">تركيب القسم &amp;باستخدام تشفير النظام (المصادقة قبل الإقلاع)</entry>
+    <entry lang="ar" key="LINUX_DO_NOT_MOUNT">لا &amp;تقُم بالتركيب</entry>
+    <entry lang="ar" key="LINUX_MOUNT_AT_DIR">تركيب في الدليل:</entry>
+    <entry lang="ar" key="LINUX_SELECT">اخ&amp;تر...</entry>
+    <entry lang="ar" key="LINUX_UNMOUNT_ALL_WHEN">إلغاء تركيب جميع الأحجام عند</entry>
+    <entry lang="ar" key="LINUX_ENTERING_POWERSAVING">دخول النظام إلى وضع توفير الطاقة</entry>
+    <entry lang="ar" key="LINUX_LOGIN_ACTION">الإجراءات التي سيتم تنفيذها عند تسجيل دخول المستخدم</entry>
+    <entry lang="ar" key="LINUX_CLOSE_EXPL_ON_UNMOUNT">إغلاق جميع نوافذ المستكشف للحجم الجاري إلغاء تركيبه</entry>
+    <entry lang="ar" key="LINUX_HOTKEYS">مفاتيح الاختصار</entry>
+    <entry lang="ar" key="LINUX_SYSTEM_HOTKEYS">مفاتيح الاختصار على مستوى النظام</entry>
+    <entry lang="ar" key="LINUX_SOUND_NOTIFICATION">تشغيل صوت الإشعار بالنظام بعد التركيب/إلغاء التركيب</entry>
+    <entry lang="ar" key="LINUX_CONFIRM_AFTER_UNMOUNT">عرض رسالة تأكيد بعد إلغاء التركيب</entry>
+    <entry lang="ar" key="LINUX_VC_QUITS">VeraCrypt يخرج</entry>
+    <entry lang="ar" key="LINUX_OPEN_FINDER">فتح نافذة الباحث للحجم المثبت بنجاح</entry>
+    <entry lang="ar" key="LINUX_DISABLE_KERNEL_ONLY_SETTING">يرجى ملاحظة أن هذا الإعداد يكون مفعلاً فقط إذا تم تعطيل استخدام خدمات التشفير في النواة.</entry>
+    <entry lang="ar" key="LINUX_DISABLE_KERNEL_CRYPT_CONFIRM">يمكن أن يؤدي تعطيل استخدام خدمات التشفير في النواة إلى تقليل الأداء.\n\nهل أنت متأكد؟</entry>
+    <entry lang="ar" key="LINUX_KERNEL_CRYPT_OPTION_CHANGE_MOUNTED_HINT">يرجى ملاحظة أن تعطيل هذا الخيار قد لا يكون له تأثير على الأحجام المثبتة باستخدام خدمات التشفير في النواة.</entry>
+    <entry lang="ar" key="LINUX_REMOUNT_BECAUSEOF_SETTING">يرجى ملاحظة أن أي أحجام مثبتة حاليًا تحتاج إلى إعادة تثبيتها قبل أن تتمكن من استخدام هذا الإعداد.</entry>
+    <entry lang="ar" key="LINUX_UNKNOWN_EXC_OCCURRED">حدث استثناء غير معروف.</entry>
+    <entry lang="ar" key="LINUX_FIRST_AID">"سيتم تشغيل “أداة القرص” بعد الضغط على "موافق".\n\nيرجى تحديد حجمك في نافذة أداة الأقراص والضغط على "التحقق من القرص" أو زر "إصلاح القرص" على صفحة "الإسعافات الأولية".</entry>
+    <entry lang="ar" key="LINUX_MOUNT_ALL_DEV">تركيب جميع الأجهزة</entry>
+    <entry lang="ar" key="LINUX_ERROR_LOADING_CONFIG">خطأ أثناء تحميل ملفات التكوين الموجودة في </entry>
+    <entry lang="ar" key="LINUX_SELECT_FREE_SLOT">يرجى اختيار فتحة محرك مجانية من القائمة.</entry>
+    <entry lang="ar" key="LINUX_MESSAGE_ON_MOUNT_AGAIN">\n\nهل ترغب في عرض هذه الرسالة في المرة القادمة التي تقوم فيها بتركيب مثل هذا الحجم؟</entry>
     <entry lang="ar" key="LINUX_WARNING">تحذير</entry>
     <entry lang="ar" key="LINUX_ERROR">خطأ</entry>
-    <entry lang="en" key="LINUX_ONLY_TEXTMODE">This feature is currently supported only in text mode.</entry>
-    <entry lang="en" key="LINUX_FREE_SPACE_ON_DRIVE">Free space on drive {0}: is {1}.</entry>
-    <entry lang="en" key="LINUX_DYNAMIC_NOTICE">Please note that if your operating system does not allocate files from the beginning of the free space, the maximum possible hidden volume size may be much smaller than the size of the free space on the outer volume. This is not a bug in VeraCrypt but a limitation of the operating system.</entry>
-    <entry lang="en" key="LINUX_MAX_HIDDEN_SIZE">Maximum possible hidden volume size for this volume is {0}.</entry>
+    <entry lang="ar" key="LINUX_ONLY_TEXTMODE">هذه الميزة مدعومة حاليًا في وضع النص فقط.</entry>
+    <entry lang="ar" key="LINUX_FREE_SPACE_ON_DRIVE">المساحة الحرة على محرك {0}: هي {1}.</entry>
+    <entry lang="ar" key="LINUX_DYNAMIC_NOTICE">يرجى ملاحظة أنه إذا كان نظام التشغيل الخاص بك لا يخصص الملفات من بداية المساحة الحرة، فقد يكون الحد الأقصى الممكن لحجم الحجم المخفي أصغر بكثير من حجم المساحة الحرة على الحجم الخارجي. هذه ليست خللاً في VeraCrypt لكنها قيد من نظام التشغيل.</entry>
+    <entry lang="ar" key="LINUX_MAX_HIDDEN_SIZE">الحد الأقصى الممكن لحجم الحجم المخفي لهذا الحجم هو {0}.</entry>
     <entry lang="ar" key="LINUX_OPEN_OUTER_VOL">‮أوصل مجلدا خارجيا</entry>
-    <entry lang="en" key="LINUX_OUTER_VOL_IS_MOUNTED">Outer volume has been successfully created and mounted as '{0}'. To this volume you should now copy some sensitive-looking files that you actually do NOT want to hide. The files will be there for anyone forcing you to disclose your password. You will reveal only the password for this outer volume, not for the hidden one. The files that you really care about will be stored in the hidden volume, which will be created later on. When you finish copying, click Next. Do not dismount the volume.\n\nNote: After you click Next, the outer volume will be analyzed to determine the size of uninterrupted area of free space whose end is aligned with the end of the volume. This area will accommodate the hidden volume, so it will limit its maximum possible size. The procedure ensures no data on the outer volume are overwritten by the hidden volume.</entry>
-    <entry lang="en" key="LINUX_ERROR_TRY_ENCRYPT_SYSTEM_DRIVE">Error: You are trying to encrypt a system drive.\n\nVeraCrypt can encrypt a system drive only under Windows.</entry>
-    <entry lang="en" key="LINUX_ERROR_TRY_ENCRYPT_SYSTEM_PARTITION">Error: You are trying to encrypt a system partition.\n\nVeraCrypt can encrypt system partitions only under Windows.</entry>
-    <entry lang="en" key="LINUX_WARNING_FORMAT_DESTROY_FS">WARNING: Formatting of the device will destroy all data on filesystem '{0}'.\n\nDo you want to continue?</entry>
-    <entry lang="en" key="LINUX_MOUNTET_HINT">The filesystem of the selected device is currently mounted. Please dismount '{0}' before proceeding.</entry>
-    <entry lang="en" key="LINUX_HIDDEN_PASS_NO_DIFF">The Hidden volume can't have the same password, PIM and keyfiles as the Outer volume</entry>
-    <entry lang="en" key="LINUX_NOT_FAT_HINT">Please note that the volume will not be formatted with a FAT filesystem and, therefore, you may be required to install additional filesystem drivers on platforms other than {0}, which will enable you to mount the volume.</entry>
-    <entry lang="en" key="LINUX_ERROR_SIZE_HIDDEN_VOL">Error: The hidden volume to be created is larger than {0} TB ({1} GB).\n\nPossible solutions:\n- Create a container/partition smaller than {0} TB.\n</entry>
-    <entry lang="en" key="LINUX_MAX_SIZE_HINT">- Use a drive with 4096-byte sectors to be able to create partition/device-hosted hidden volumes up to 16 TB in size</entry>
-    <entry lang="en" key="LINUX_DOT_LF">.\n</entry>
-    <entry lang="en" key="LINUX_NOT_SUPPORTED"> (not supported by components available on this platform).\n</entry>
-    <entry lang="en" key="LINUX_KERNEL_OLD">Your system uses an old version of the Linux kernel.\n\nDue to a bug in the Linux kernel, your system may stop responding when writing data to a VeraCrypt volume. This problem can be solved by upgrading the kernel to version 2.6.24 or later.</entry>
-    <entry lang="en" key="LINUX_VOL_DISMOUNTED">Volume {0} has been dismounted.</entry>
-    <entry lang="en" key="LINUX_VOL_MOUNTED">Volume {0} has been mounted.</entry>
-    <entry lang="en" key="LINUX_OOM">Out of memory.</entry>
-    <entry lang="en" key="LINUX_CANT_GET_ADMIN_PRIV">Failed to obtain administrator privileges</entry>
-    <entry lang="en" key="LINUX_COMMAND_GET_ERROR">Command {0} returned error {1}.</entry>
-    <entry lang="en" key="LINUX_CMD_HELP">VeraCrypt Command Line Help</entry>
-    <entry lang="en" key="LINUX_HIDDEN_FILES_PRESENT_IN_KEYFILE_PATH">\n\nWarning: Hidden files are present in a keyfile path. If you need to use them as keyfiles, remove the leading dot from their filenames. Hidden files are visible only if enabled in system options.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_DEVICESECTORSIZEMISMATCH">Storage device and VC volume sector size mismatch</entry>
-    <entry lang="en" key="LINUX_EX2MSG_ENCRYPTEDSYSTEMREQUIRED">This operation must be performed only when the system hosted on the volume is running.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_INSUFFICIENTDATA">Not enough data available.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_KERNELCRYPTOSERVICETESTFAILED">Kernel cryptographic service test failed. The cryptographic service of your kernel most likely does not support volumes larger than 2 TB.\n\nPossible solutions:\n- Upgrade the Linux kernel to version 2.6.33 or later.\n- Disable use of the kernel cryptographic services (Settings > Preferences > System Integration) or use 'nokernelcrypto' mount option on the command line.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_LOOPDEVICESETUPFAILED">Failed to set up a loop device.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_MISSINGARGUMENT">A required argument is missing.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_MISSINGVOLUMEDATA">Volume data missing.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_MOUNTPOINTREQUIRED">Mount point required.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_MOUNTPOINTUNAVAILABLE">Mount point is already in use.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PASSWORDEMPTY">No password or keyfile specified.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PASSWORDORKEYBOARDLAYOUTINCORRECT">\n\nNote that pre-boot authentication passwords need to be typed in the pre-boot environment where non-US keyboard layouts are not available. Therefore, pre-boot authentication passwords must always be typed using the standard US keyboard layout (otherwise, the password will be typed incorrectly in most cases). However, note that you do NOT need a real US keyboard; you just need to change the keyboard layout in your operating system.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PASSWORDORMOUNTOPTIONSINCORRECT">\n\nNote: If you are attempting to mount a partition located on an encrypted system drive without pre-boot authentication or to mount the encrypted system partition of an operating system that is not running, you can do so by selecting 'Options >' > 'Mount partition using system encryption'.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PASSWORDTOOLONG">Password is longer than {0} characters.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PARTITIONDEVICEREQUIRED">Partition device required.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PROTECTIONPASSWORDINCORRECT">Incorrect password to the protected hidden volume or the hidden volume does not exist.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_PROTECTIONPASSWORDKEYFILESINCORRECT">Incorrect keyfile(s) and/or password to the protected hidden volume or the hidden volume does not exist.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_STRINGCONVERSIONFAILED">Invalid characters encountered.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_STRINGFORMATTEREXCEPTION">Error while parsing formatted string.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_TEMPORARYDIRECTORYFAILURE">Failed to create a file or directory in a temporary directory.\n\nPlease make sure that the temporary directory exists, its security permissions allow you to access it, and there is sufficient disk space.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZEHIDDENVOLUMEPROTECTION">Error: The drive uses a sector size other than 512 bytes.\n\nDue to limitations of components available on your platform, outer volumes hosted on the drive cannot be mounted using hidden volume protection.\n\nPossible solutions:\n- Use a drive with 512-byte sectors.\n- Create a file-hosted volume (container) on the drive.\n- Backup the contents of the hidden volume and then update the outer volume.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZENOKERNELCRYPTO">Error: The drive uses a sector size other than 512 bytes.\n\nDue to limitations of components available on your platform, partition/device-hosted volumes on the drive can only be mounted using kernel cryptographic services.\n\nPossible solutions:\n- Enable use of the kernel cryptographic services (Preferences > System Integration).\n- Use a drive with 512-byte sectors.\n- Create a file-hosted volume (container) on the drive.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZE">Error: The drive uses a sector size other than 512 bytes.\n\nDue to limitations of components available on your platform, partition/device-hosted volumes cannot be created/used on the drive.\n\nPossible solutions:\n- Create a file-hosted volume (container) on the drive.\n- Use a drive with 512-byte sectors.\n- Use VeraCrypt on another platform.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_VOLUMEHOSTINUSE">The host file/device is already in use.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_VOLUMESLOTUNAVAILABLE">Volume slot unavailable.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_HIGHERFUSEVERSIONREQUIRED">VeraCrypt requires OSXFUSE 2.5 or above.</entry>
-    <entry lang="en" key="EXCEPTION_OCCURRED">Exception occurred</entry>
+    <entry lang="ar" key="LINUX_OUTER_VOL_IS_MOUNTED">تم إنشاء الحجم الخارجي بنجاح وتم تركيبه كـ '{0}'. يجب الآن نسخ بعض الملفات التي تبدو حساسة إلى هذا الحجم والتي لا تريد إخفاءها فعليًا. ستكون هذه الملفات متاحة لأي شخص يجبرك على الإفصاح عن كلمة المرور الخاصة بك. ستقوم بالكشف فقط عن كلمة مرور هذا الحجم الخارجي، وليس الحجم المخفي. سيتم تخزين الملفات التي تهتم بها في الحجم المخفي، الذي سيتم إنشاؤه لاحقًا. عند الانتهاء من النسخ، انقر فوق التالي. لا تقم بإلغاء تركيب الحجم.\n\nملاحظة: بعد النقر على التالي، سيتم تحليل الحجم الخارجي لتحديد حجم المساحة الحرة المستمرة التي ينتهي نهايتها مع نهاية الحجم. هذه المساحة ستستوعب الحجم المخفي، لذلك ستحدد حجمه الأقصى الممكن. يضمن الإجراء عدم استبدال أي بيانات على الحجم الخارجي بالحجم المخفي.</entry>
+    <entry lang="ar" key="LINUX_ERROR_TRY_ENCRYPT_SYSTEM_DRIVE">خطأ: تحاول تشفير محرك نظام.\n\nيمكن لـ VeraCrypt تشفير محرك نظام فقط تحت نظام Windows.</entry>
+    <entry lang="ar" key="LINUX_ERROR_TRY_ENCRYPT_SYSTEM_PARTITION">خطأ: تحاول تشفير قسم نظام.\n\nيمكن لـ VeraCrypt تشفير أقسام النظام فقط تحت نظام Windows.</entry>
+    <entry lang="ar" key="LINUX_WARNING_FORMAT_DESTROY_FS">تحذير: تنسيق الجهاز سيدمر جميع البيانات على نظام الملفات '{0}'.\n\nهل تريد المتابعة؟</entry>
+    <entry lang="ar" key="LINUX_MOUNTET_HINT">نظام الملفات للجهاز المحدد مثبت حاليًا. يرجى إلغاء تركيب '{0}' قبل المتابعة.</entry>
+    <entry lang="ar" key="LINUX_HIDDEN_PASS_NO_DIFF">لا يمكن أن يكون للحجم المخفي نفس كلمة المرور و PIM وملفات المفاتيح للحجم الخارجي</entry>
+    <entry lang="ar" key="LINUX_NOT_FAT_HINT">يرجى ملاحظة أن الحجم لن يتم تنسيقه بنظام ملفات FAT، ولهذا السبب، قد تحتاج إلى تثبيت برامج تشغيل لنظام الملفات على منصات غير {0}، والتي ستمكنك من تركيب الحجم.</entry>
+    <entry lang="ar" key="LINUX_KERNEL_OLD">نظامك يستخدم إصدارًا قديمًا من نواة لينكس.\n\nنظرًا لخلل في نواة لينكس، قد يتوقف نظامك عن الاستجابة عند كتابة البيانات إلى حجم VeraCrypt. يمكن حل هذه المشكلة بترقية النواة إلى الإصدار 2.6.24 أو أحدث.</entry>
+    <entry lang="ar" key="LINUX_VOL_UNMOUNTED">تم إلغاء تركيب الحجم {0}.</entry>
+    <entry lang="ar" key="LINUX_VOL_MOUNTED">تم تركيب الحجم {0}.</entry>
+    <entry lang="ar" key="LINUX_OOM">نفدت الذاكرة.</entry>
+    <entry lang="ar" key="LINUX_CANT_GET_ADMIN_PRIV">فشل في الحصول على امتيازات المسؤول</entry>
+    <entry lang="ar" key="LINUX_COMMAND_GET_ERROR">أمر {0} أعاد الخطأ {1}.</entry>
+    <entry lang="ar" key="LINUX_CMD_HELP">مساعدة سطر الأوامر في VeraCrypt</entry>
+    <entry lang="ar" key="LINUX_HIDDEN_FILES_PRESENT_IN_KEYFILE_PATH">\n\nتحذير: توجد ملفات مخفية في مسار ملف المفاتيح. إذا كنت بحاجة لاستخدامها كملفات مفاتيح، أزل النقطة المبدئية من أسماء الملفات. الملفات المخفية مرئية فقط إذا تم تمكينها في خيارات النظام.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_DEVICESECTORSIZEMISMATCH">عدم تطابق حجم القطاع بين جهاز التخزين وحجم VeraCrypt</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_ENCRYPTEDSYSTEMREQUIRED">يجب تنفيذ هذه العملية فقط عندما يكون النظام المستضاف على الحجم قيد التشغيل.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_INSUFFICIENTDATA">لا توجد بيانات كافية متاحة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_KERNELCRYPTOSERVICETESTFAILED">فشل اختبار خدمة التشفير في النواة. على الأرجح أن خدمة التشفير في النواة لديك لا تدعم الأحجام الأكبر من 2 تيرابايت.\n\nالحلول الممكنة:\n- ترقية نواة لينكس إلى الإصدار 2.6.33 أو أحدث.\n- تعطيل استخدام خدمات التشفير في النواة (إعدادات &gt; تفضيلات &gt; تكامل النظام) أو استخدام خيار التركيب 'nokernelcrypto' في سطر الأوامر.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_LOOPDEVICESETUPFAILED">فشل في إعداد جهاز الحلقة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_MISSINGARGUMENT">يوجد حجة مطلوبة مفقودة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_MISSINGVOLUMEDATA">بيانات الحجم مفقودة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_MOUNTPOINTREQUIRED">نقطة التركيب مطلوبة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_MOUNTPOINTUNAVAILABLE">نقطة التركيب مشغولة بالفعل.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PASSWORDEMPTY">لم يتم تحديد كلمة مرور أو ملف مفتاح.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PASSWORDORKEYBOARDLAYOUTINCORRECT">\n\nيرجى ملاحظة أن كلمات مرور المصادقة قبل التمهيد تحتاج إلى كتابتها في بيئة ما قبل التمهيد حيث لا تتوفر تخطيطات لوحة المفاتيح غير الأمريكية. لذلك، يجب دائمًا كتابة كلمات مرور المصادقة قبل التمهيد باستخدام تخطيط لوحة المفاتيح الأمريكية القياسية (وإلا، سيتم كتابة كلمة المرور بشكل غير صحيح في معظم الحالات). ومع ذلك، لاحظ أنك لست بحاجة إلى لوحة مفاتيح أمريكية فعلية؛ تحتاج فقط إلى تغيير تخطيط لوحة المفاتيح في نظام التشغيل الخاص بك.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PASSWORDORMOUNTOPTIONSINCORRECT">\n\nملاحظة: إذا كنت تحاول تركيب قسم موجود على محرك نظام مشفر دون مصادقة ما قبل التمهيد أو تركيب القسم المشفر لنظام تشغيل غير قيد التشغيل، يمكنك القيام بذلك عن طريق تحديد 'خيارات &gt;' &gt; 'تركيب القسم باستخدام تشفير النظام'.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PASSWORDTOOLONG">كلمة المرور أطول من {0} حرف.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PARTITIONDEVICEREQUIRED">جهاز القسم مطلوب.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PROTECTIONPASSWORDINCORRECT">كلمة مرور غير صحيحة للحجم المخفي المحمي أو أن الحجم المخفي غير موجود.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_PROTECTIONPASSWORDKEYFILESINCORRECT">ملف (ملفات) مفتاح غير صحيح و / أو كلمة مرور للحجم المخفي المحمي أو أن الحجم المخفي غير موجود.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_STRINGCONVERSIONFAILED">تم اكتشاف أحرف غير صالحة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_STRINGFORMATTEREXCEPTION">خطأ أثناء تحليل السلسلة المنسقة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_TEMPORARYDIRECTORYFAILURE">فشل في إنشاء ملف أو دليل في دليل مؤقت.\n\nيرجى التأكد من أن الدليل المؤقت موجود، وتصاريح الأمان الخاصة به تسمح لك بالوصول إليه، وهناك مساحة كافية على القرص.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZEHIDDENVOLUMEPROTECTION">خطأ: يستخدم المحرك حجم قطاع غير 512 بايت.\n\nبسبب قيود المكونات المتاحة على نظامك، لا يمكن تركيب الأحجام الخارجية المستضافة على المحرك باستخدام حماية الحجم المخفي.\n\nالحلول الممكنة:\n- استخدام محرك بأحجام قطاع 512 بايت.\n- إنشاء حجم مستضاف على الملفات (حاوية) على المحرك.\n- نسخ محتويات الحجم المخفي ثم تحديث الحجم الخارجي.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZENOKERNELCRYPTO">خطأ: يستخدم المحرك حجم قطاع غير 512 بايت.\n\nبسبب قيود المكونات المتاحة على نظامك، يمكن تركيب الأحجام المستضافة على القسم / الجهاز فقط باستخدام خدمات التشفير في النواة.\n\nالحلول الممكنة:\n- تمكين استخدام خدمات التشفير في النواة (التفضيلات &gt; تكامل النظام).\n- استخدام محرك بأحجام قطاع 512 بايت.\n- إنشاء حجم مستضاف على الملفات (حاوية) على المحرك.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_UNSUPPORTEDSECTORSIZE">خطأ: يستخدم المحرك حجم قطاع غير 512 بايت.\n\nبسبب قيود المكونات المتاحة على نظامك، لا يمكن إنشاء / استخدام الأحجام المستضافة على القسم / الجهاز على المحرك.\n\nالحلول الممكنة:\n- إنشاء حجم مستضاف على الملفات (حاوية) على المحرك.\n- استخدام محرك بأحجام قطاع 512 بايت.\n- استخدام VeraCrypt على نظام آخر.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_VOLUMEHOSTINUSE">ملف / جهاز المضيف قيد الاستخدام بالفعل.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_VOLUMESLOTUNAVAILABLE">فتحة الحجم غير متاحة.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_HIGHERFUSEVERSIONREQUIRED">يتطلب VeraCrypt إصدار macFUSE 2.5 أو أحدث.</entry>
+    <entry lang="ar" key="EXCEPTION_OCCURRED">حدث استثناء</entry>
     <entry lang="ar" key="ENTER_PASSWORD">إدخال كلمة السر</entry>
     <entry lang="ar" key="ENTER_TC_VOL_PASSWORD">‮أدخل كلمة سر مجلد ڤيراكربت</entry>
-    <entry lang="en" key="MOUNT">Mount</entry>
-    <entry lang="en" key="MOUNT_POINT">Mount Directory</entry>
-    <entry lang="en" key="NO_VOLUMES_MOUNTED">No volumes mounted.</entry>
-    <entry lang="en" key="OPEN_NEW_VOLUME">Specify a New VeraCrypt Volume</entry>
-    <entry lang="en" key="PARAMETER_INCORRECT">Parameter incorrect</entry>
-    <entry lang="en" key="SELECT_KEYFILES">Select Keyfiles</entry>
-    <entry lang="en" key="START_TC">Start VeraCrypt</entry>
-    <entry lang="en" key="VOLUME_ALREADY_MOUNTED">The volume {0} is already mounted.</entry>
-    <entry lang="en" key="UNKNOWN_OPTION">Unknown option</entry>
+    <entry lang="ar" key="MOUNT">تركيب</entry>
+    <entry lang="ar" key="MOUNT_POINT">دليل التركيب</entry>
+    <entry lang="ar" key="NO_VOLUMES_MOUNTED">لم يتم تركيب أي أحجام.</entry>
+    <entry lang="ar" key="OPEN_NEW_VOLUME">حدد حجم VeraCrypt جديد</entry>
+    <entry lang="ar" key="PARAMETER_INCORRECT">معلمة غير صحيحة</entry>
+    <entry lang="ar" key="SELECT_KEYFILES">اختر ملفات المفتاح</entry>
+    <entry lang="ar" key="START_TC">ابدأ VeraCrypt</entry>
+    <entry lang="ar" key="VOLUME_ALREADY_MOUNTED">الحجم {0} مثبت بالفعل.</entry>
+    <entry lang="ar" key="UNKNOWN_OPTION">خيار غير معروف</entry>
     <entry lang="ar" key="VOLUME_LOCATION">‮موضع المُجلَّد</entry>
-    <entry lang="en" key="VOLUME_HOST_IN_USE">WARNING: The host file/device {0} is already in use!\n\nIgnoring this can cause undesired results including system instability. All applications that might be using the host file/device should be closed before mounting the volume.\n\nContinue mounting?</entry>
-    <entry lang="en" key="CANT_INSTALL_WITH_EXE_OVER_MSI">VeraCrypt was previously installed using an MSI package and so it can't be updated using the standard installer.\n\nPlease use the MSI package to update your VeraCrypt installation.</entry>
-    <entry lang="en" key="IDC_USE_ALL_FREE_SPACE">Use all available free space</entry>
-    <entry lang="en" key="SYS_ENCRYPTION_UPGRADE_UNSUPPORTED_ALGORITHM">VeraCrypt cannot be upgraded because the system partition/drive was encrypted using an algorithm that is not supported anymore.\nPlease decrypt your system before upgrading VeraCrypt and then encrypt it again.</entry>
-    <entry lang="en" key="LINUX_EX2MSG_TERMINALNOTFOUND">Supported terminal application could not be found, you need either xterm, konsole or gnome-terminal (with dbus-x11).</entry>
-    <entry lang="en" key="IDM_MOUNT_NO_CACHE">Mount Without Cache</entry>
-    <entry lang="en" key="EXPANDER_INFO">:: VeraCrypt Expander ::\n\nExpand a VeraCrypt volume on the fly without reformatting\n\n\nAll kind of volumes (container files, disks and partitions) formatted with NTFS are supported. The only condition is that there must be enough free space on the host drive or host device of the VeraCrypt volume.\n\nDo not use this software to expand an outer volume containing a hidden volume, because this destroys the hidden volume!\n</entry>
-    <entry lang="en" key="IDC_STEPSEXPAND">1. Select the VeraCrypt volume to be expanded\n2. Click the 'Mount' button</entry>
-    <entry lang="en" key="IDT_VOL_NAME">Volume: </entry>
-    <entry lang="en" key="IDT_FILE_SYS">File system: </entry>
-    <entry lang="en" key="IDT_CURRENT_SIZE">Current size: </entry>
-    <entry lang="en" key="IDT_NEW_SIZE">New size: </entry>
-    <entry lang="en" key="IDT_NEW_SIZE_BOX_TITLE">Enter new volume size</entry>
-    <entry lang="en" key="IDC_INIT_NEWSPACE">Fill new space with random data</entry>
-    <entry lang="en" key="IDC_QUICKEXPAND">Quick Expand</entry>
-    <entry lang="en" key="IDT_INIT_SPACE">Fill new space: </entry>
-    <entry lang="en" key="EXPANDER_FREE_SPACE">%s free space available on host drive</entry>
-    <entry lang="en" key="EXPANDER_HELP_DEVICE">This is a device-based VeraCrypt volume.\n\nThe new volume size will be choosen automatically as the size of the host device.</entry>
-    <entry lang="en" key="EXPANDER_HELP_FILE">Please specify the new size of the VeraCrypt volume (must be at least %I64u KB larger than the current size).</entry>
-    <entry lang="en" key="QUICK_EXPAND_WARNING">WARNING: You should use Quick Expand only in the following cases:\n\n1) The device where the file container is located contains no sensitive data and you do not need plausible deniability.\n2) The device where the file container is located has already been securely and fully encrypted.\n\nAre you sure you want to use Quick Expand?</entry>
-    <entry lang="en" key="EXPANDER_STATUS_TEXT">IMPORTANT: Move your mouse as randomly as possible within this window. The longer you move it, the better. This significantly increases the cryptographic strength of the encryption keys. Then click 'Continue' to expand the volume.</entry>
-    <entry lang="en" key="EXPANDER_STATUS_TEXT_LEGACY">Click 'Continue' to expand the volume.</entry>
-    <entry lang="en" key="EXPANDER_FINISH_ERROR">Error: volume expansion failed.</entry>
-    <entry lang="en" key="EXPANDER_FINISH_ABORT">Error: operation aborted by user.</entry>
-    <entry lang="en" key="EXPANDER_FINISH_OK">Finished. Volume successfully expanded.</entry>
-    <entry lang="en" key="EXPANDER_CANCEL_WARNING">Warning: Volume expansion is in progress!\n\nStopping now may result in a damaged volume.\n\nDo you really want to cancel?</entry>
-    <entry lang="en" key="EXPANDER_STARTING_STATUS">Starting volume expansion ...\n</entry>
-    <entry lang="en" key="EXPANDER_HIDDEN_VOLUME_ERROR">An outer volume containing a hidden volume can't be expanded, because this destroys the hidden volume.\n</entry>
-    <entry lang="en" key="EXPANDER_SYSTEM_VOLUME_ERROR">A VeraCrypt system volume can't be expanded.</entry>
-    <entry lang="en" key="EXPANDER_NO_FREE_SPACE">Not enough free space to expand the volume</entry>
-    <entry lang="en" key="EXPANDER_WARNING_FILE_CONTAINER_JUNK">Warning: The container file is larger than the VeraCrypt volume area. The data after the VeraCrypt volume area will be overwritten.\n\nDo you want to continue?</entry>
-    <entry lang="en" key="EXPANDER_WARNING_FAT">Warning: The VeraCrypt volume contains a FAT file system!\n\nOnly the VeraCrypt volume itself will be expanded, but not the file system.\n\nDo you want to continue?</entry>
-    <entry lang="en" key="EXPANDER_WARNING_EXFAT">Warning: The VeraCrypt volume contains an exFAT file system!\n\nOnly the VeraCrypt volume itself will be expanded, but not the file system.\n\nDo you want to continue?</entry>
-    <entry lang="en" key="EXPANDER_WARNING_UNKNOWN_FS">Warning: The VeraCrypt volume contains an unknown or no file system!\n\nOnly the VeraCrypt volume itself will be expanded, the file system remains unchanged.\n\nDo you want to continue?</entry>
-    <entry lang="en" key="EXPANDER_ERROR_VOLUME_SIZE_TOO_SMALL">New volume size too small, must be at least %I64u kB larger than the current size.</entry>
-    <entry lang="en" key="EXPANDER_ERROR_VOLUME_SIZE_TOO_LARGE">New volume size too large, not enough space on host drive.</entry>
-    <entry lang="en" key="EXPANDER_ERROR_MAX_FILE_SIZE_EXCEEDED">Maximum file size of %I64u MB on host drive exceeded.</entry>
-    <entry lang="en" key="EXPANDER_ERROR_QUICKEXPAND_PRIVILEGES">Error: Failed to get necessary privileges to enable Quick Expand!\nPlease uncheck Quick Expand option and try again.</entry>
-    <entry lang="en" key="EXPANDER_ERROR_MAX_VC_VOLUME_SIZE_EXCEEDED">Maximum VeraCrypt volume size of %I64u TB exceeded!\n</entry>
-    <entry lang="en" key="FULL_FORMAT">Full Format</entry>
-    <entry lang="en" key="FAST_CREATE">Fast Create</entry>
-    <entry lang="en" key="WARN_FAST_CREATE">WARNING: You should use Fast Create only in the following cases:\n\n1) The device contains no sensitive data and you do not need plausible deniability.\n2) The device has already been securely and fully encrypted.\n\nAre you sure you want to use Fast Create?</entry>
-    <entry lang="en" key="IDC_ENABLE_EMV_SUPPORT">Enable EMV Support</entry>
-    <entry lang="en" key="COMMAND_APDU_INVALID">The APDU command sent to the card is not valid.</entry>
-    <entry lang="en" key="EXTENDED_APDU_UNSUPPORTED">Extended APDU commands cannot be used with the current token.</entry>
-    <entry lang="en" key="SCARD_MODULE_INIT_FAILED">Error when loading the WinSCard / PCSC library.</entry>
-    <entry lang="en" key="EMV_UNKNOWN_CARD_TYPE">The card in the reader is not a supported EMV card.</entry>
-    <entry lang="en" key="EMV_SELECT_AID_FAILED">The AID of the card in the reader could not be selected.</entry>
-    <entry lang="en" key="EMV_ICC_CERT_NOTFOUND">ICC Public Key Certificate was not found in the card.</entry>
-    <entry lang="en" key="EMV_ISSUER_CERT_NOTFOUND">Issuer Public Key Certificate was not found in the card.</entry>
-    <entry lang="en" key="EMV_CPLC_NOTFOUND">CLPC was not found in the EMV card.</entry>
-    <entry lang="en" key="EMV_PAN_NOTFOUND">No Primary Account Number (PAN) found in the EMV card.</entry>
-    <entry lang="en" key="INVALID_EMV_PATH">EMV path is invalid.</entry>
-    <entry lang="en" key="EMV_KEYFILE_DATA_NOTFOUND">Unable to build a keyfile from the EMV card's data.\n\nOne of the following is missing:\n- ICC Public Key Certificate.\n- Issuer Public Key Certificate.\n- CPCL data.</entry>
-    <entry lang="en" key="SCARD_W_REMOVED_CARD">No card in the reader.\n\nPlease make sure the card is correctly slotted.</entry>
-    <entry lang="en" key="FORMAT_EXTERNAL_FAILED">Windows format.com command failed to format the volume as NTFS/exFAT/ReFS: Error 0x%.8X.\n\nFalling back to using Windows FormatEx API.</entry>
-    <entry lang="en" key="FORMATEX_API_FAILED">Windows FormatEx API failed to format the volume as NTFS/exFAT/ReFS.\n\nFailure status = %s.</entry>
-    <entry lang="en" key="EXPANDER_WRITING_RANDOM_DATA">Writing random data to new space ...\n</entry>
-    <entry lang="en" key="EXPANDER_WRITING_ENCRYPTED_BACKUP">Writing re-encrypted backup header ...\n</entry>
-    <entry lang="en" key="EXPANDER_WRITING_ENCRYPTED_PRIMARY">Writing re-encrypted primary header ...\n</entry>
-    <entry lang="en" key="EXPANDER_WIPING_OLD_HEADER">Wiping old backup header ...\n</entry>
-    <entry lang="en" key="EXPANDER_MOUNTING_VOLUME">Mounting volume ...\n</entry>
-    <entry lang="en" key="EXPANDER_UNMOUNTING_VOLUME">Unmounting volume ...\n</entry>
-    <entry lang="en" key="EXPANDER_EXTENDING_FILESYSTEM">Extending file system ...\n</entry>
-    <entry lang="en" key="PARTIAL_SYSENC_MOUNT_READONLY">Warning: The system partition you attempted to mount was not fully encrypted. As a safety measure to prevent potential corruption or unwanted modifications, volume '%s' was mounted as read-only.</entry>
-    <entry lang="en" key="IDC_LINK_KEYFILES_EXTENSIONS_WARNING">Important information on using third-party file extensions</entry>
-    <entry lang="en" key="IDC_DISABLE_MEMORY_PROTECTION">Disable memory protection for Accessibility tools compatibility</entry>
-    <entry lang="en" key="DISABLE_MEMORY_PROTECTION_WARNING">WARNING: Disabling memory protection significantly reduces security. Enable this option ONLY if you rely on Accessibility tools, like Screen Readers, to interact with VeraCrypt's UI.</entry>
+    <entry lang="ar" key="VOLUME_HOST_IN_USE">تحذير: ملف/جهاز المضيف {0} قيد الاستخدام بالفعل!\n\nتجاهل هذا قد يؤدي إلى نتائج غير مرغوب فيها بما في ذلك عدم الاستقرار في النظام. يجب إغلاق جميع التطبيقات التي قد تستخدم ملف/جهاز المضيف قبل تركيب الحجم.\n\nهل ترغب في متابعة التركيب؟</entry>
+    <entry lang="ar" key="CANT_INSTALL_WITH_EXE_OVER_MSI">تم تثبيت VeraCrypt سابقًا باستخدام حزمة MSI وبالتالي لا يمكن تحديثه باستخدام المثبت العادي.\n\nيرجى استخدام حزمة MSI لتحديث تثبيت VeraCrypt الخاص بك.</entry>
+    <entry lang="ar" key="IDC_USE_ALL_FREE_SPACE">استخدام كل المساحة الحرة المتاحة</entry>
+    <entry lang="ar" key="SYS_ENCRYPTION_UPGRADE_UNSUPPORTED_ALGORITHM">لا يمكن ترقية VeraCrypt لأن قسم/محرك النظام تم تشفيره باستخدام خوارزمية لم تعد مدعومة.\nيرجى فك تشفير نظامك قبل ترقية VeraCrypt ثم تشفيره مجدداً.</entry>
+    <entry lang="ar" key="LINUX_EX2MSG_TERMINALNOTFOUND">لم يتم العثور على تطبيق طرفية مدعوم، تحتاج إلى xterm أو konsole أو gnome-terminal (مع dbus-x11).</entry>
+    <entry lang="ar" key="IDM_MOUNT_NO_CACHE">تركيب بدون ذاكرة تخزين مؤقتة</entry>
+    <entry lang="ar" key="EXPANDER_INFO">:: موسع VeraCrypt ::\n\nتوسيع حجم VeraCrypt دون إعادة التهيئة\n\n\nكل أنواع الأحجام (ملفات الحاويات، الأقراص والأقسام) المؤلفة باستخدام NTFS مدعومة. الشرط الوحيد هو أن تكون هناك مساحة حرة كافية على محرك أو جهاز المضيف لحجم VeraCrypt.\n\nلا تستخدم هذا البرنامج لتوسيع حجم خارجي يحتوي على حجم مخفي لأن هذا يؤدي إلى تدمير الحجم المخفي!\n</entry>
+    <entry lang="ar" key="IDC_STEPSEXPAND">1. اختر حجم VeraCrypt المراد توسيعه\n2. انقر على زر 'تركيب'</entry>
+    <entry lang="ar" key="IDT_VOL_NAME">الحجم: </entry>
+    <entry lang="ar" key="IDT_FILE_SYS">نظام الملفات: </entry>
+    <entry lang="ar" key="IDT_CURRENT_SIZE">الحجم الحالي: </entry>
+    <entry lang="ar" key="IDT_NEW_SIZE">الحجم الجديد: </entry>
+    <entry lang="ar" key="IDT_NEW_SIZE_BOX_TITLE">أدخل حجم الحجم الجديد</entry>
+    <entry lang="ar" key="IDC_INIT_NEWSPACE">ملء المساحة الجديدة ببيانات عشوائية</entry>
+    <entry lang="ar" key="IDC_QUICKEXPAND">توسيع سريع</entry>
+    <entry lang="ar" key="IDT_INIT_SPACE">ملء المساحة الجديدة: </entry>
+    <entry lang="ar" key="EXPANDER_FREE_SPACE">%s مساحة حرة متاحة على محرك المضيف</entry>
+    <entry lang="ar" key="EXPANDER_HELP_DEVICE">هذا حجم VeraCrypt معتمد على جهاز.\n\nسيتم اختيار حجم الحجم الجديد تلقائيًا كحجم جهاز المضيف.</entry>
+    <entry lang="ar" key="EXPANDER_HELP_FILE">يرجى تحديد الحجم الجديد لحجم VeraCrypt (يجب أن يكون أكبر على الأقل %I64u كيلوبايت من الحجم الحالي).</entry>
+    <entry lang="ar" key="QUICK_EXPAND_WARNING">تحذير: يجب عليك استخدام التوسيع السريع فقط في الحالات التالية:\n\n1) الجهاز الذي يقع فيه ملف الحاوية لا يحتوي على بيانات حساسة ولا تحتاج إلى الإنكار المعقول.\n2) الجهاز الذي يقع فيه ملف الحاوية قد تم تشفيره بشكل آمن وكامل بالفعل.\n\nهل أنت متأكد أنك تريد استخدام التوسيع السريع؟</entry>
+    <entry lang="ar" key="EXPANDER_STATUS_TEXT">مهم: حرك الماوس عشوائيًا قدر الإمكان داخل هذه النافذة. كلما طالت مدة تحركها، كان الأمر أفضل. هذا يزيد بشكل كبير من قوة التشفير للمفاتيح. ثم انقر على 'متابعة' لتوسيع الحجم.</entry>
+    <entry lang="ar" key="EXPANDER_STATUS_TEXT_LEGACY">انقر على 'متابعة' لتوسيع الحجم.</entry>
+    <entry lang="ar" key="EXPANDER_FINISH_ERROR">خطأ: فشل توسيع الحجم.</entry>
+    <entry lang="ar" key="EXPANDER_FINISH_ABORT">خطأ: تم إلغاء العملية بواسطة المستخدم.</entry>
+    <entry lang="ar" key="EXPANDER_FINISH_OK">تم. تم توسيع الحجم بنجاح.</entry>
+    <entry lang="ar" key="EXPANDER_CANCEL_WARNING">تحذير: توسيع الحجم جاري!\n\nالتوقف الآن قد يؤدي إلى تلف الحجم.\n\nهل تريد بالتأكيد الإلغاء؟</entry>
+    <entry lang="ar" key="EXPANDER_STARTING_STATUS">بدء توسيع الحجم ...\n</entry>
+    <entry lang="ar" key="EXPANDER_HIDDEN_VOLUME_ERROR">لا يمكن توسيع حجم خارجي يحتوي على حجم مخفي، لأن هذا يدمر الحجم المخفي.\n</entry>
+    <entry lang="ar" key="EXPANDER_SYSTEM_VOLUME_ERROR">لا يمكن توسيع حجم نظام VeraCrypt.</entry>
+    <entry lang="ar" key="EXPANDER_NO_FREE_SPACE">لا توجد مساحة حرة كافية لتوسيع الحجم</entry>
+    <entry lang="ar" key="EXPANDER_WARNING_FILE_CONTAINER_JUNK">تحذير: ملف الحاوية أكبر من منطقة حجم VeraCrypt. سيتم استبدال البيانات بعد منطقة حجم VeraCrypt.\n\nهل ترغب في المتابعة؟</entry>
+    <entry lang="ar" key="EXPANDER_WARNING_FAT">تحذير: يحتوي حجم VeraCrypt على نظام ملفات FAT!\n\nسيتم توسيع حجم VeraCrypt فقط، ولكن ليس نظام الملفات.\n\nهل ترغب في المتابعة؟</entry>
+    <entry lang="ar" key="EXPANDER_WARNING_EXFAT">تحذير: يحتوي حجم VeraCrypt على نظام ملفات exFAT!\n\nسيتم توسيع حجم VeraCrypt فقط، ولكن ليس نظام الملفات.\n\nهل ترغب في المتابعة؟</entry>
+    <entry lang="ar" key="EXPANDER_WARNING_UNKNOWN_FS">تحذير: يحتوي حجم VeraCrypt على نظام ملفات غير معروف أو بدون نظام ملفات!\n\nسيتم توسيع حجم VeraCrypt فقط، ولكن نظام الملفات سيظل بدون تغيير.\n\nهل ترغب في المتابعة؟</entry>
+    <entry lang="ar" key="EXPANDER_ERROR_VOLUME_SIZE_TOO_SMALL">حجم الحجم الجديد صغير جدًا، يجب أن يكون على الأقل %I64u كيلوبايت أكبر من الحجم الحالي.</entry>
+    <entry lang="ar" key="EXPANDER_ERROR_VOLUME_SIZE_TOO_LARGE">حجم الحجم الجديد كبير جدًا، لا توجد مساحة كافية على محرك المضيف.</entry>
+    <entry lang="ar" key="EXPANDER_ERROR_MAX_FILE_SIZE_EXCEEDED">تم تجاوز الحد الأقصى لحجم الملف %I64u ميغابايت على محرك المضيف.</entry>
+    <entry lang="ar" key="EXPANDER_ERROR_QUICKEXPAND_PRIVILEGES">خطأ: فشل في الحصول على الامتيازات اللازمة لتمكين التوسيع السريع!\nيرجى إلغاء تحديد خيار التوسيع السريع والمحاولة مرة أخرى.</entry>
+    <entry lang="ar" key="EXPANDER_ERROR_MAX_VC_VOLUME_SIZE_EXCEEDED">تم تجاوز الحد الأقصى لحجم حجم VeraCrypt %I64u تيرابايت!\n</entry>
+    <entry lang="ar" key="FULL_FORMAT">تهيئة كاملة</entry>
+    <entry lang="ar" key="FAST_CREATE">إنشاء سريع</entry>
+    <entry lang="ar" key="WARN_FAST_CREATE">تحذير: يجب عليك استخدام الإنشاء السريع فقط في الحالات التالية:\n\n1) الجهاز لا يحتوي على بيانات حساسة ولا تحتاج إلى الإنكار المعقول.\n2) الجهاز قد تم تشفيره بشكل آمن وكامل بالفعل.\n\nهل أنت متأكد أنك تريد استخدام الإنشاء السريع؟</entry>
+    <entry lang="ar" key="IDC_ENABLE_EMV_SUPPORT">تمكين دعم EMV</entry>
+    <entry lang="ar" key="COMMAND_APDU_INVALID">أمر APDU المرسل إلى البطاقة غير صالح.</entry>
+    <entry lang="ar" key="EXTENDED_APDU_UNSUPPORTED">لا يمكن استخدام أوامر APDU الممتدة مع الرمز الحالي.</entry>
+    <entry lang="ar" key="SCARD_MODULE_INIT_FAILED">خطأ عند تحميل مكتبة WinSCard / PCSC.</entry>
+    <entry lang="ar" key="EMV_UNKNOWN_CARD_TYPE">البطاقة في القارئ ليست بطاقة EMV مدعومة.</entry>
+    <entry lang="ar" key="EMV_SELECT_AID_FAILED">تعذر تحديد AID للبطاقة في القارئ.</entry>
+    <entry lang="ar" key="EMV_ICC_CERT_NOTFOUND">لم يتم العثور على شهادة المفتاح العام ICC في البطاقة.</entry>
+    <entry lang="ar" key="EMV_ISSUER_CERT_NOTFOUND">لم يتم العثور على شهادة المفتاح العام للجهة المصدرة في البطاقة.</entry>
+    <entry lang="ar" key="EMV_CPLC_NOTFOUND">لم يتم العثور على CPLC في بطاقة EMV.</entry>
+    <entry lang="ar" key="EMV_PAN_NOTFOUND">لم يتم العثور على رقم الحساب الأساسي (PAN) في بطاقة EMV.</entry>
+    <entry lang="ar" key="INVALID_EMV_PATH">مسار EMV غير صالح.</entry>
+    <entry lang="ar" key="EMV_KEYFILE_DATA_NOTFOUND">تعذر إنشاء ملف مفتاح من بيانات بطاقة EMV.\n\nأحد الأشياء التالية مفقود:\n- شهادة المفتاح العام ICC.\n- شهادة المفتاح العام للجهة المصدرة.\n- بيانات CPLC.</entry>
+    <entry lang="ar" key="SCARD_W_REMOVED_CARD">لا توجد بطاقة في القارئ.\n\nيرجى التأكد من إدخال البطاقة بشكل صحيح.</entry>
+    <entry lang="ar" key="FORMAT_EXTERNAL_FAILED">فشل أمر تنسيق Windows format.com في تهيئة الحجم كـ NTFS/exFAT/ReFS: خطأ 0x%.8X.\n\nالرجوع إلى استخدام واجهة برمجة تطبيقات FormatEx الخاصة بـ Windows.</entry>
+    <entry lang="ar" key="FORMATEX_API_FAILED">فشلت واجهة برمجة تطبيقات FormatEx الخاصة بـ Windows في تهيئة الحجم كـ NTFS/exFAT/ReFS.\n\nحالة الفشل = %s.</entry>
+    <entry lang="ar" key="EXPANDER_WRITING_RANDOM_DATA">كتابة بيانات عشوائية إلى المساحة الجديدة ...\n</entry>
+    <entry lang="ar" key="EXPANDER_WRITING_ENCRYPTED_BACKUP">كتابة رأس النسخة الاحتياطية المشفرة ...\n</entry>
+    <entry lang="ar" key="EXPANDER_WRITING_ENCRYPTED_PRIMARY">كتابة الرأس الأساسي المشفر ...\n</entry>
+    <entry lang="ar" key="EXPANDER_WIPING_OLD_HEADER">مسح رأس النسخة الاحتياطية القديم ...\n</entry>
+    <entry lang="ar" key="EXPANDER_MOUNTING_VOLUME">تركيب الحجم ...\n</entry>
+    <entry lang="ar" key="EXPANDER_UNMOUNTING_VOLUME">إلغاء تركيب الحجم ...\n</entry>
+    <entry lang="ar" key="EXPANDER_EXTENDING_FILESYSTEM">تمديد نظام الملفات ...\n</entry>
+    <entry lang="ar" key="PARTIAL_SYSENC_MOUNT_READONLY">تحذير: قسم النظام الذي حاولت تركيبه لم يتم تشفيره بالكامل. كإجراء احترازي لمنع الفساد المحتمل أو التعديلات غير المرغوب فيها، تم تركيب الحجم '%s' كقراءة فقط.</entry>
+    <entry lang="ar" key="IDC_LINK_KEYFILES_EXTENSIONS_WARNING">معلومات هامة عن استخدام ملحقات الملفات الخارجية</entry>
+    <entry lang="ar" key="IDC_DISABLE_MEMORY_PROTECTION">تعطيل حماية الذاكرة لتوافق أدوات الوصول</entry>
+    <entry lang="ar" key="DISABLE_MEMORY_PROTECTION_WARNING">تحذير: تعطيل حماية الذاكرة يقلل بشكل كبير من الأمان. قم بتمكين هذا الخيار فقط إذا كنت تعتمد على أدوات الوصول، مثل قارئات الشاشة، للتفاعل مع واجهة مستخدم VeraCrypt.</entry>
     <entry lang="ar" key="LINUX_LANGUAGE">‮اللغة</entry>
-    <entry lang="en" key="LINUX_SELECT_SYS_DEFAULT_LANG">Select system's default language</entry>
-    <entry lang="en" key="LINUX_RESTART_FOR_LANGUAGE_CHANGE">For the language change to come into effect, VeraCrypt needs to be restarted.</entry>
+    <entry lang="ar" key="LINUX_SELECT_SYS_DEFAULT_LANG">اختر اللغة الافتراضية للنظام</entry>
+    <entry lang="ar" key="LINUX_RESTART_FOR_LANGUAGE_CHANGE">لتفعيل تغيير اللغة، يحتاج VeraCrypt إلى إعادة التشغيل.</entry>
+    <entry lang="ar" key="ERR_XTS_MASTERKEY_VULNERABLE">تحذير: مفتاح رئيسي للحجم عرضة لهجوم يهدد أمن البيانات.\n\nيرجى إنشاء حجم جديد ونقل البيانات إليه.</entry>
+    <entry lang="ar" key="ERR_SYSENC_XTS_MASTERKEY_VULNERABLE">تحذير: المفتاح الرئيسي للنظام المشفر عرضة لهجوم يهدد أمن البيانات.\nيرجى فك تشفير قسم/محرك النظام ثم إعادة تشفيره.</entry>
+    <entry lang="ar" key="ERR_XTS_MASTERKEY_VULNERABLE_SHORT">تحذير: مفتاح رئيسي للحجم يحتوي على ثغرة أمنية.</entry>
+    <entry lang="ar" key="MOUNTPOINT_BLOCKED">خطأ: نقطة تركيب الحجم محظورة لأنها تحل محل دليل نظام محمي.\n\nيرجى اختيار نقطة تركيب مختلفة.</entry>
+    <entry lang="ar" key="MOUNTPOINT_NOTALLOWED">خطأ: نقطة تركيب الحجم غير مسموح بها لأنها تحل محل دليل مدرج ضمن متغير البيئة PATH.\n\nيرجى اختيار نقطة تركيب مختلفة.</entry>
+    <entry lang="ar" key="INSECURE_MODE">[وضع غير آمن]</entry>
+    <entry lang="ar" key="IDC_DISABLE_SCREEN_PROTECTION">تعطيل الحماية من لقطات الشاشة وتسجيل الشاشة</entry>
+    <entry lang="ar" key="DISABLE_SCREEN_PROTECTION_WARNING">تحذير: تعطيل حماية الشاشة يقلل بشكل كبير من مستوى الأمان. فعّل هذا الخيار فقط إذا كانت لديك حاجة محددة لالتقاط واجهة VeraCrypt. قد يؤدي ذلك إلى تعريض البيانات الحساسة لأدوات التقاط الشاشة وميزات تسجيل الشاشة مثل Windows 11 Recall.</entry>
+    <entry lang="ar" key="MEMORY_COST">كلفة الذاكرة</entry>
+    <entry lang="ar" key="IDT_KDF_ALGO">‮خوارزمية KDF</entry>
+    <entry lang="ar" key="IDD_PREFERENCES_TAB_GENERAL">‮عام</entry>
+    <entry lang="ar" key="IDD_PREFERENCES_TAB_ACTIONS">‮الإجراءات</entry>
+    <entry lang="ar" key="IDD_PREFERENCES_TAB_PASSWORD">‮كلمة السّر</entry>
+    <entry lang="ar" key="IDC_SECURE_DESKTOP_ENABLE_IME">‮تمكين محرر أسلوب الإدخال (IME) في سطح المكتب الآمن</entry>
+    <entry lang="ar" key="ENABLE_IME_IN_SECURE_DESKTOP_WARNING">‮تحذير: قم بتمكين هذا الخيار فقط إذا واجهت مشكلات عند تحديد ملفات المفاتيح/أمارات الأمان ضمن سطح المكتب الآمن.</entry>
+    <entry lang="ar" key="ERR_KEY_DERIVATION_FAILED">‮فشل اشتقاق المفتاح. قد يكون السبب في ذلك هو عدم كفاية الذاكرة أو عملية متقطعة.</entry>
+    <entry lang="ar" key="EFI_MS_BOOT_LOADER_RESTORE_FAILED">‮تم فك تعمية قسم/سواقة النظام بالفعل، ولكن لم تتم استعادة مسار محمل إقلاع Microsoft EFI إلى Windows Boot Manager. تحتاج ملفات إقلاع EFI فقط إلى الإصلاح. استخدم خيار إصلاح قرص إنقاذ ڤيراكربت، أو شغّل وسائط استرداد Windows ونفّذ 'bcdboot W:\\Windows /s S: /f UEFI' بعد استبدال W: بحرف سواقة مجلد Windows وS: بحرف سواقة قسم نظام EFI. المسار:</entry>
+    <entry lang="ar" key="EFI_FALLBACK_BOOT_LOADER_STILL_VERACRYPT">‮تم فك تعمية قسم/سواقة النظام بالفعل، لكن مسار محمل الإقلاع الاحتياطي EFI لا يزال يحتوي على محمل إقلاع ڤيراكربت. تحتاج ملفات إقلاع EFI فقط إلى الإصلاح. استخدم خيار إصلاح قرص إنقاذ ڤيراكربت، أو شغّل وسائط استرداد Windows ونفّذ 'bcdboot W:\\Windows /s S: /f UEFI' بعد استبدال W: بحرف سواقة مجلد Windows وS: بحرف سواقة قسم نظام EFI. المسار:</entry>
+    <entry lang="ar" key="IDM_REPAIR_EFI_BOOT_LOADER">‮إصلاح محمل الإقلاع EFI...</entry>
+    <entry lang="ar" key="CONFIRM_REPAIR_EFI_BOOT_LOADER">‮سيستعيد ڤيراكربت مسارات محمل إقلاع Windows EFI ويزيل إدخالات وملفات إقلاع ڤيراكربت EFI.\n\nاستخدم هذا فقط بعد فك تعمية قسم/سواقة النظام بالكامل، وعندما يستطيع Windows الإقلاع دون تعمية النظام.\n\nهل تريد الاستمرار؟</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_FILE_READ_FAILED">‮تعذرت قراءة ملف محمل الإقلاع EFI بالكامل:</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_FILE_TOO_LARGE">‮ملف محمل الإقلاع EFI كبير بشكل غير متوقع ولم يتم فحصه:</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_NVRAM_CLEANUP_FAILED">‮تم بالفعل فك تعمية قسم/سواقة النظام واستعيدت ملفات محمل الإقلاع EFI، ولكن لم يتمكن ڤيراكربت من إزالة واحد أو أكثر من إدخالات إقلاع ڤيراكربت في البرنامج الثابت. تُركت ملفات ڤيراكربت EFI في مكانها بحيث يظل أي إدخال متبقٍ في البرنامج الثابت يشير إلى محمل موجود. أعد المحاولة كمدير أو أزل إدخال إقلاع ڤيراكربت من إعدادات البرنامج الثابت بعد التأكد من أن Windows Boot Manager يبدأ بصورة طبيعية.</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_REPAIR_BLOCKED">‮لا يمكن إصلاح محمل الإقلاع EFI عندما تكون تعمية النظام أو فك تعميته نشطة أو غير مكتملة. أكمل أو استأنف عملية تعمية/فك تعمية النظام المعلقة قبل إعادة المحاولة.</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_REPAIR_NOT_APPLICABLE">‮يتوفر إجراء الإصلاح هذا فقط على الأنظمة التي يتم تشغيلها في الوضع UEFI من قسم النظام GPT.</entry>
+    <entry lang="ar" key="EFI_BOOT_LOADER_REPAIR_SUCCESS">‮تم إصلاح محمل الإقلاع EFI بنجاح.</entry>
+    <entry lang="ar" key="PIM_ARGON2_HELP">‮يتحكم PIM (مضاعف الدورات الشخصي) في تكاليف الذاكرة والوقت المستخدمة لاشتقاق مفتاح الترويسة Argon2id كما يلي:\n      الذاكرة = min(64 MiB + ((PIM - 1) x 32 MiB), 1024 MiB)\n      التكرارات = 3 + ((PIM - 1) / 3) إذا كان PIM 31 أو أقل، ثم 13 + (PIM - 31)\n\nعند تركه فارغًا أو تعيينه على 0، سيستخدم ڤيراكربت القيمة الافتراضية Argon2 PIM (12)، والتي تستخدم 416 MiB من الذاكرة و6 تكرارات.\n\nعندما تكون كلمة السر أقل من 20 حرفًا، لا يمكن أن يكون Argon2 PIM أقل من 12 للحفاظ على الحد الأدنى من مستوى الأمان.\nعندما تكون كلمة السر مكونة من 20 حرفًا أو أكثر، يمكن ضبط Argon2 PIM على أي قيمة.\n\nيزيد Argon2 PIM الأكبر من 12 من استخدام الذاكرة حتى 1024 MiB ثم يزيد من التكرارات. سيؤدي ذلك إلى وصل أبطأ. سيؤدي Argon2 PIM الصغير (أقل من 12) إلى الوصل بشكل أسرع، لكنه قد يقلل الأمان إذا لم تكن كلمة السر قوية بما يكفي.</entry>
+    <entry lang="ar" key="PIM_ARGON2_LARGE_WARNING">‮لقد اخترت قيمة Argon2 PIM أكبر من القيمة الافتراضية في ڤيراكربت.\nيرجى ملاحظة أن هذا قد يتطلب المزيد من الذاكرة ويؤدي إلى بطء عملية الوصل.</entry>
+    <entry lang="ar" key="PIM_ARGON2_SMALL_WARNING">‮لقد اخترت قيمة Argon2 PIM أصغر من القيمة الافتراضية في ڤيراكربت. يرجى ملاحظة أنه إذا لم تكن كلمة السر قوية بما يكفي، فقد يؤدي ذلك إلى ضعف الأمان.\n\nهل تؤكد أنك تستخدم كلمة سر قوية؟</entry>
+    <entry lang="ar" key="PIM_ARGON2_REQUIRE_LONG_PASSWORD">‮يجب أن تحتوي كلمة السر على 20 حرفًا أو أكثر حتى تتمكن من استخدام Argon2 PIM المحدد.\nلا يمكن استخدام كلمات السر الأقصر إلا إذا كان Argon2 PIM يساوي 12 أو أكبر.</entry>
+    <entry lang="ar" key="LINUX_PREF_MOUNT_NTFS_WITH_KERNEL_DRIVER">‮أوصل مجلدات NTFS باستخدام مشغّل لينكس في النواة</entry>
+    <entry lang="ar" key="LINUX_PREF_MOUNT_NTFS_WITH_KERNEL_DRIVER_HELP">‮لينكس فقط. عند تفعيل هذا الخيار، وعندما لا يكون نوع نظام الملفات محددًا صراحة، يفحص ڤيراكربت النبيطة الافتراضية المظهّرة باستخدام blkid -p ويصل أنظمة ملفات NTFS المكتشفة باستخدام مشغّل NTFS متاح في النواة، متجاوزًا مساعدات الوصل مثل ntfs-3g. يستخدم ڤيراكربت ntfs عندما يتأكد أنه مشغّل حديث للقراءة/الكتابة أو أنه متوقع في Linux 7.1 أو أحدث، وإلا يستخدم ntfs3. إذا فشل تحسس NTFS، يستخدم ڤيراكربت اختيار نظام الملفات التلقائي المعتاد. إذا لم يتوفر مشغّل NTFS مدعوم في النواة أو لم يمكن تحميله، يفشل الوصل. يمكن لهذا الخيار الاختياري أن يتجنب حالات التعليق أو السبات الناجمة عن تجمد أنظمة ملفات FUSE في مساحة المستخدم.</entry>
+    <entry lang="ar" key="LINUX_KERNEL_NTFS_DRIVER_UNAVAILABLE">‮لا يتوفر مشغّل NTFS مدعوم في النواة أو قابل للتحميل. لاستخدام خلفية NTFS المبدئية في النظام، عطّل تفضيل مشغّل NTFS في النواة أو لا تطلب NTFS في النواة صراحةً.</entry>
+    <entry lang="ar" key="LINUX_EMERGENCY_UNMOUNT_WARNING">‮فشل فصل المجلد {0} بالطريقة المعتادة. قد يحدث هذا عندما تظل التطبيقات محتفظة بملفات أو أدلة مفتوحة في المجلد، أو عندما تُفصل النبيطة المضيفة ويصبح الوصل قديما.\n\nإذا كانت النبيطة لا تزال متصلة فاختر لا، وأغلق التطبيقات التي تستخدم المجلد، ثم حاول فصله مجددا.\n\nإذا كانت النبيطة قد فُصلت أو كان الوصل قديما، فيمكن لڤيراكربت أن يحاول تنظيفا طارئا بفصل نظام الملفات فصلا مؤجلا وإزالة كائنات نواة ڤيراكربت أو جدولة إزالتها. قد تكون عمليات الكتابة المعلقة قد فشلت، وقد تضيع بيانات، وقد يبقى التنظيف معلقا حتى تغلق التطبيقات الملفات المفتوحة. افحص نظام الملفات باستخدام fsck أو أداة الإصلاح المناسبة قبل استخدامه مجددا.\n\nأأتابع؟</entry>
+    <entry lang="ar" key="LINUX_EMERGENCY_UNMOUNTED">‮بدأ التنظيف الطارئ للمجلد {0}. إذا كان المجلد قد فُصل، أو كان الوصل قديما، أو كانت هناك عمليات كتابة معلقة، فافحص نظام الملفات باستخدام fsck أو أداة الإصلاح المناسبة قبل استخدامه مجددا.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_WRITING_DATA">‮إنشاء بيانات المجلد. انتظر من فضلك.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_WRITING_BACKUP_HEADER">‮الانتهاء من إنشاء المجلد: كتابة الترويسة الاحتياطية.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_FLUSHING_DATA">‮الانتهاء من إنشاء المجلد: تفريغ البيانات إلى القرص. قد يستغرق ذلك عدة دقائق للمجلدات الكبيرة أو وسائط التخزين البطيئة/USB.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_FINISHED">‮الانتهاء من إنشاء المجلد.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_ABORTED">‮تم إحباط إنشاء المجلد.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_ERROR">‮فشل إنشاء المجلد.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_PREPARING_TEMP_VOLUME">‮الانتهاء من إنشاء المجلد: تركيب المجلد المؤقت.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_PREPARING_TEMP_DEVICE">‮الانتهاء من إنشاء المجلد: إعداد الجهاز المؤقت.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_CREATING_FILESYSTEM">‮الانتهاء من إنشاء المجلد: إنشاء نظام الملفات باستخدام {0}.</entry>
+    <entry lang="ar" key="FORMAT_STAGE_DISMOUNTING_TEMP_VOLUME">‮الانتهاء من إنشاء المجلد: فصل المجلد المؤقت.</entry>
+    <entry lang="ar" key="MACOSX_APFS_SYNTHESIZED_DEVICE">‮الجهاز المحدد '{0}' هو حاوية أو مجلد APFS مركب ولا يمكن استخدامه كمضيف مجلد ڤيراكربت خام.\n\nحدد قسم مخزن APFS الفعلي {1} بدلاً من ذلك.</entry>
+    <entry lang="ar" key="MACOSX_DEVICE_SYSTEM_PARTITION">‮الجهاز المحدد '{0}' هو قسم دعم/نظام macOS ولا يمكن استخدامه كمضيف مجلد ڤيراكربت.</entry>
+    <entry lang="ar" key="MACOSX_APFS_SYSTEM_STORE">‮يحتوي مخزن APFS الفعلي المحدد '{0}' على مجلد نظام macOS الموصول حاليًا ولا يمكن استخدامه كمضيف مجلد ڤيراكربت.</entry>
+    <entry lang="ar" key="MACOSX_DEVICE_NOT_WRITABLE">‮يُبلغ macOS عن الجهاز المحدد '{0}' كجهاز للقراءة فقط. حدد قسمًا أو قرصًا فعليًا قابلاً للكتابة.</entry>
+    <entry lang="ar" key="MACOSX_APFS_EROFS_HINT">‮أبلغ macOS عن الجهاز المحدد باعتباره للقراءة فقط. إذا كان هذا قرص APFS، فتأكد من تحديد قسم مخزن APFS الفعلي، وليس مجلد APFS مركبًا. استخدم Disk Utility أو "diskutil list" لتحديد القسم الفعلي، ثم أعد المحاولة.</entry>
+    <entry lang="ar" key="FAVORITE_PIM_OR_KDF_CHANGED">‮تم تسجيل هذا المجلد باعتباره من مفضلات النظام وتم تغيير إعدادات PIM و/أو KDF الخاصة به.\nهل تريد أن يحدّث ڤيراكربت إعدادات مفضلات النظام تلقائيًا (تتطلب صلاحيات المدير)؟\n\nيرجى ملاحظة أنه إذا كانت إجابتك لا، فسيتعين عليك تحديث مفضلات النظام يدويًا.</entry>
+    <entry lang="ar" key="PIM_RESET_ON_KDF_CHANGE_CONFIRM">‮يستخدم KDF المحدد معلمات PIM مختلفة، لذلك لن يعيد ڤيراكربت استخدام PIM المخصص الحالي. ستستخدم ترويسة المجلد الجديدة PIM الافتراضي لـ KDF المحدد ما لم تحدد "استخدام PIM" في قسم "جديد" وتدخل قيمة مخصصة.\n\nهل تريد الاستمرار؟</entry>
+    <entry lang="ar" key="SYSENC_EFI_UNSUPPORTED_SECUREBOOT_CA">‮الإقلاع الآمن Secure Boot مفعّل، لكن قاعدة بيانات Secure Boot في البرنامج الثابت لا تثق بأي مجموعة Microsoft UEFI CA يدعمها محمل الإقلاع EFI الخاص بـ ڤيراكربت. فعّل إما Microsoft Corporation UEFI CA 2011، أو كليهما Microsoft UEFI CA 2023 و Microsoft Option ROM UEFI CA 2023، ثم شغّل خيار الإصلاح/إعادة التنصيب في ڤيراكربت. بدلاً من ذلك، عطّل Secure Boot.</entry>
+    <entry lang="ar" key="MACOSX_CHECK_FILESYS">‮ستفتح نافذة الطرفية بعد الضغط على 'موافق' وستتحقق من نظام الملفات على مجلد ڤيراكربت المحدد باستخدام 'diskutil'. ستُعرض النتيجة في تلك النافذة.\n\nإذا تعذر بدء التحقق، فسيتم تشغيل أداة القرص بدلاً من ذلك.</entry>
+    <entry lang="ar" key="MACOSX_REPAIR_FILESYS">‮ستفتح نافذة الطرفية بعد الضغط على 'موافق' وستحاول إصلاح نظام الملفات على مجلد ڤيراكربت المحدد باستخدام 'diskutil'. ستُعرض النتيجة في تلك النافذة.\n\nإذا تعذر بدء الإصلاح، فسيتم تشغيل أداة القرص بدلاً من ذلك.</entry>
+    <entry lang="en" key="SYSENC_EFI_LOADER_NOT_TRUSTED_BY_SECUREBOOT">Warning: VeraCrypt could not validate the installed EFI bootloader files against one complete embedded resource set and confirm that all known required signing CAs are present in db and not listed by dbx. Firmware may reject VeraCrypt when Secure Boot is enabled.\n\nBefore booting with Secure Boot enabled, restore the required Microsoft certificates and current dbx as needed, then run VeraCrypt Repair/Reinstall. Do not remove Microsoft Corporation UEFI CA 2011 until db contains both Microsoft UEFI CA 2023 and Microsoft Option ROM UEFI CA 2023 and the actual installed files match VeraCrypt's 2023 set. This check cannot model every image-hash or security-version revocation. Make sure you have an up-to-date VeraCrypt Rescue Disk.</entry>
+    <entry lang="en" key="SYSENC_EFI_WINDOWS_LOADER_NOT_TRUSTED_BY_SECUREBOOT">Warning: VeraCrypt could not validate the embedded signature and known-CA compatibility of the Windows Boot Manager it chainloads (bootmgfw_ms.vc). The file may be missing, unreadable, not a Windows Boot Manager, have an unrecognized embedded signer, or use a known signing CA that is absent from db or listed by dbx. The handoff to Windows may fail when Secure Boot is enabled.\n\nComplete or repair the Windows Secure Boot certificate and boot-manager update, keep the VeraCrypt System Favorites service enabled, and run VeraCrypt Repair/Reinstall. Repair also checks Windows' serviced EFI_EX/EFI copies for a compatible current Boot Manager. If Windows cannot start, temporarily disable Secure Boot to recover. Make sure you have an up-to-date VeraCrypt Rescue Disk.</entry>
+    <entry lang="en" key="SYSENC_EFI_WINDOWS_LOADER_PCA2011_MIGRATION_NEEDED">Warning: The embedded signature of the Windows Boot Manager used by VeraCrypt (bootmgfw_ms.vc) is still issued by Microsoft Windows Production PCA 2011, although firmware db already contains Windows UEFI CA 2023. Its known CA is currently allowed, but it will no longer start after the PCA 2011 certificate is added to dbx.\n\nDo not apply the PCA 2011 revocation (AvailableUpdates bit 0x80, including combined value 0x280) yet. First complete the Windows 2023 boot-manager update while the VeraCrypt System Favorites service is enabled, then run VeraCrypt Repair/Reinstall so VeraCrypt can import a compatible serviced EFI_EX/EFI copy. Verify the embedded issuer of bootmgfw_ms.vc is Windows UEFI CA 2023 and make sure you have an up-to-date VeraCrypt Rescue Disk.</entry>
   </localization>
   <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:element name="VeraCrypt">

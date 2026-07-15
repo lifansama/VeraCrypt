@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -48,6 +48,11 @@ namespace VeraCrypt
 	MainFrame::MainFrame (wxWindow* parent) : MainFrameBase (parent),
 #ifdef HAVE_INDICATORS
 		indicator (NULL),
+		indicator_item_showhide (NULL),
+		indicator_item_mountfavorites (NULL),
+		indicator_item_dismountall (NULL),
+		indicator_item_prefs (NULL),
+		indicator_item_exit (NULL),
 #endif
 		ListItemRightClickEventPending (false),
 		SelectedItemIndex (-1),
@@ -84,6 +89,7 @@ namespace VeraCrypt
 		InitTaskBarIcon();
 		InitEvents();
 		InitMessageFilter();
+		InitWindowPrivacy();
 
 		if (!GetPreferences().SecurityTokenModule.IsEmpty() && !SecurityToken::IsInitialized())
 		{
@@ -222,7 +228,7 @@ namespace VeraCrypt
 					L"cmd.exe", args.c_str(), nullptr, SW_SHOW);
 #else
 #	ifdef TC_MACOSX
-				Gui->ShowInfo (LangString["LINUX_FIRST_AID"]);
+				Gui->ShowInfo (LangString[repair ? "MACOSX_REPAIR_FILESYS" : "MACOSX_CHECK_FILESYS"]);
 #	endif
 				Core->CheckFilesystem (selectedVolume, repair);
 				UpdateVolumeList();
@@ -470,6 +476,16 @@ namespace VeraCrypt
 #endif
 	}
 
+
+	void MainFrame::InitWindowPrivacy ()
+	{
+		bool enableContentProtection = !CmdLine->ArgAllowScreencapture;
+#ifdef TC_MACOSX
+		enableContentProtection = enableContentProtection && !GetPreferences().DisableScreenProtection;
+#endif
+		Gui->SetContentProtection (enableContentProtection);
+	}
+
 	void MainFrame::InitPreferences ()
 	{
 		try
@@ -518,7 +534,7 @@ namespace VeraCrypt
 
 				popup->AppendSeparator();
 				Gui->AppendToMenu (*popup, LangString["IDM_MOUNT_FAVORITE_VOLUMES"], this, wxCommandEventHandler (TaskBarIcon::OnMountAllFavoritesMenuItemSelected))->Enable (!Busy);
-				Gui->AppendToMenu (*popup, LangString["HK_DISMOUNT_ALL"], this, wxCommandEventHandler (TaskBarIcon::OnDismountAllMenuItemSelected))->Enable (!Busy);
+				Gui->AppendToMenu (*popup, LangString["HK_UNMOUNT_ALL"], this, wxCommandEventHandler (TaskBarIcon::OnDismountAllMenuItemSelected))->Enable (!Busy);
 
 				// Favorite volumes
 				if (Gui->GetPreferences().BackgroundTaskMenuMountItemsEnabled && !Frame->FavoriteVolumesMenuMap.empty())
@@ -558,7 +574,7 @@ namespace VeraCrypt
 						DismountMap.clear();
 						foreach (shared_ptr <VolumeInfo> volume, mountedVolumes)
 						{
-							wxString label = LangString["DISMOUNT"] + L" ";
+							wxString label = LangString["UNMOUNT"] + L" ";
 
 							if (!volume->MountPoint.IsEmpty())
 								label += wstring (volume->MountPoint) + L" (" + wstring (volume->Path) + L")";
@@ -644,7 +660,7 @@ namespace VeraCrypt
 			MountOptions mountOptions (GetPreferences().DefaultMountOptions);
 			if (CmdLine->ArgHash)
 			{
-				mountOptions.Kdf = Pkcs5Kdf::GetAlgorithm (*CmdLine->ArgHash);
+				mountOptions.Kdf = CmdLine->ArgHash;
 			}
 			if (CmdLine->ArgPim > 0)
 			{
@@ -669,7 +685,7 @@ namespace VeraCrypt
 			MountOptions mountOptions (GetPreferences().DefaultMountOptions);
 			if (CmdLine->ArgHash)
 			{
-				mountOptions.Kdf = Pkcs5Kdf::GetAlgorithm (*CmdLine->ArgHash);
+				mountOptions.Kdf = CmdLine->ArgHash;
 			}
 			if (CmdLine->ArgPim > 0)
 			{
@@ -700,7 +716,7 @@ namespace VeraCrypt
 		mountOptions.Path = GetSelectedVolumePath();
 		if (CmdLine->ArgHash)
 		{
-			mountOptions.Kdf = Pkcs5Kdf::GetAlgorithm (*CmdLine->ArgHash);
+			mountOptions.Kdf = CmdLine->ArgHash;
 		}
 		if (CmdLine->ArgPim > 0)
 		{
@@ -955,7 +971,7 @@ namespace VeraCrypt
 			MountOptions mountOptions (GetPreferences().DefaultMountOptions);
 			if (CmdLine->ArgHash)
 			{
-				mountOptions.Kdf = Pkcs5Kdf::GetAlgorithm (*CmdLine->ArgHash);
+				mountOptions.Kdf = CmdLine->ArgHash;
 			}
 			if (CmdLine->ArgPim > 0)
 			{
@@ -1001,7 +1017,7 @@ namespace VeraCrypt
 				if (newMountedCount < mountedCount)
 				{
 					if (newMountedCount == 0 && GetPreferences().DisplayMessageAfterHotkeyDismount)
-						Gui->ShowInfo ("MOUNTED_VOLUMES_DISMOUNTED");
+						Gui->ShowInfo ("MOUNTED_VOLUMES_UNMOUNTED");
 					else if (GetPreferences().BeepAfterHotkeyMountDismount)
 						MessageBeep((UINT) -1);
 				}
@@ -1017,7 +1033,7 @@ namespace VeraCrypt
 				Gui->DismountAllVolumes (true, true);
 
 				if (mounted && GetPreferences().DisplayMessageAfterHotkeyDismount)
-					Gui->ShowInfo ("VOLUMES_DISMOUNTED_CACHE_WIPED");
+					Gui->ShowInfo ("VOLUMES_UNMOUNTED_CACHE_WIPED");
 				else if (mounted && GetPreferences().BeepAfterHotkeyMountDismount)
 					MessageBeep((UINT) -1);
 
@@ -1142,7 +1158,7 @@ namespace VeraCrypt
 		wxMenu popup;
 		if (IsMountedSlotSelected())
 		{
-			Gui->AppendToMenu (popup, LangString["DISMOUNT"], this, wxCommandEventHandler (MainFrame::OnDismountVolumeMenuItemSelected));
+			Gui->AppendToMenu (popup, LangString["UNMOUNT"], this, wxCommandEventHandler (MainFrame::OnDismountVolumeMenuItemSelected));
 			Gui->AppendToMenu (popup, LangString["OPEN"], this, wxCommandEventHandler (MainFrame::OnOpenVolumeMenuItemSelected));
 			Gui->AppendToMenu (popup, LangString["LINUX_DESELECT"], this, wxCommandEventHandler (MainFrame::OnClearSlotSelectionMenuItemSelected));
 
@@ -1284,6 +1300,7 @@ namespace VeraCrypt
 		if (Gui->IsInBackgroundMode() && !prefs.BackgroundTaskEnabled)
 			Close (true);
 
+		InitWindowPrivacy();
 		SavePreferences();
 	}
 
@@ -1438,7 +1455,7 @@ namespace VeraCrypt
 			try
 			{
 				uint8 buf[128];
-				if (read (ShowRequestFifo, buf, sizeof (buf)) > 0 && Gui->IsInBackgroundMode())
+				if (read (ShowRequestFifo, buf, sizeof (buf)) > 0)
 					Gui->SetBackgroundMode (false);
 			}
 			catch (...)
@@ -1610,23 +1627,23 @@ namespace VeraCrypt
 
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_separator_menu_item_new());
 
-				indicator_item_mountfavorites = gtk_menu_item_new_with_label (LangString["IDM_MOUNT_FAVORITE_VOLUMES"]);
+				indicator_item_mountfavorites = gtk_menu_item_new_with_label (LangString["IDM_MOUNT_FAVORITE_VOLUMES"].mb_str());
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), indicator_item_mountfavorites);
 				g_signal_connect (indicator_item_mountfavorites, "activate", G_CALLBACK (IndicatorOnMountAllFavoritesMenuItemSelected), this);
 
-				indicator_item_dismountall = gtk_menu_item_new_with_label (LangString["HK_DISMOUNT_ALL"]);
+				indicator_item_dismountall = gtk_menu_item_new_with_label (LangString["HK_UNMOUNT_ALL"].mb_str());
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), indicator_item_dismountall);
 				g_signal_connect (indicator_item_dismountall, "activate", G_CALLBACK (IndicatorOnDismountAllMenuItemSelected), this);
 
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_separator_menu_item_new());
 
-				indicator_item_prefs = gtk_menu_item_new_with_label (LangString["IDM_PREFERENCES"]);
+				indicator_item_prefs = gtk_menu_item_new_with_label (LangString["IDM_PREFERENCES"].mb_str());
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), indicator_item_prefs);
 				g_signal_connect (indicator_item_prefs, "activate", G_CALLBACK (IndicatorOnPreferencesMenuItemSelected), this);
 
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_separator_menu_item_new());
 
-				indicator_item_exit = gtk_menu_item_new_with_label (LangString["EXIT"]);
+				indicator_item_exit = gtk_menu_item_new_with_label (LangString["EXIT"].mb_str());
 				gtk_menu_shell_append (GTK_MENU_SHELL (menu), indicator_item_exit);
 				g_signal_connect (indicator_item_exit, "activate", G_CALLBACK (IndicatorOnExitMenuItemSelected), this);
 
@@ -1680,7 +1697,6 @@ namespace VeraCrypt
 		}
 
 		VolumeInfoList protectionTriggeredVolumes;
-		SlotListCtrl->SetColumnWidth(0, wxLIST_AUTOSIZE);
 
 		// Update list
 		long prevItemIndex = -1;
@@ -1766,8 +1782,10 @@ namespace VeraCrypt
 			}
 		}
 
-		if (listChanged)
+		if (listChanged) {
+			SlotListCtrl->SetColumnWidth(0, wxLIST_AUTOSIZE);
 			OnListChanged();
+		}
 
 		foreach (shared_ptr <VolumeInfo> volume, protectionTriggeredVolumes)
 			OnHiddenVolumeProtectionTriggered (volume);

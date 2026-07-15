@@ -6,7 +6,7 @@
  Encryption for the Masses 2.02a, which is Copyright (c) 1998-2000 Paul Le Roux
  and which is governed by the 'License Agreement for Encryption for the Masses'
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages. */
@@ -136,13 +136,32 @@ BOOL CheckPasswordCharEncoding (HWND hPassword, Password *ptrPw)
 
 BOOL CheckPasswordLength (HWND hwndDlg, unsigned __int32 passwordLength, int pim, BOOL bForBoot, int bootPRF, BOOL bSkipPasswordWarning, BOOL bSkipPimWarning)
 {
-	BOOL bootPimCondition = (bForBoot && (bootPRF != SHA512 && bootPRF != WHIRLPOOL))? TRUE : FALSE;
-	BOOL bCustomPimSmall = ((pim != 0) && (pim < (bootPimCondition? 98 : 485)))? TRUE : FALSE;
+	BOOL bootPimCondition = FALSE;
+	BOOL argon2PimCondition = FALSE;
+	int defaultPim;
+	BOOL bCustomPimSmall;
+	const char *pimRequireLongPasswordMessage = "PIM_REQUIRE_LONG_PASSWORD";
+	const char *pimLargeWarningMessage = "PIM_LARGE_WARNING";
+	const char *pimSmallWarningMessage = "PIM_SMALL_WARNING";
+#ifndef VC_DCS_DISABLE_ARGON2
+	argon2PimCondition = (bootPRF == ARGON2)? TRUE : FALSE;
+#endif
+	bootPimCondition = (!argon2PimCondition && bForBoot && (bootPRF != SHA512 && bootPRF != WHIRLPOOL))? TRUE : FALSE;
+	defaultPim = bootPimCondition? 98 : argon2PimCondition? 12 : 485;
+	bCustomPimSmall = ((pim != 0) && (pim < defaultPim))? TRUE : FALSE;
+	if (bootPimCondition)
+		pimRequireLongPasswordMessage = "BOOT_PIM_REQUIRE_LONG_PASSWORD";
+	else if (argon2PimCondition)
+	{
+		pimRequireLongPasswordMessage = "PIM_ARGON2_REQUIRE_LONG_PASSWORD";
+		pimLargeWarningMessage = "PIM_ARGON2_LARGE_WARNING";
+		pimSmallWarningMessage = "PIM_ARGON2_SMALL_WARNING";
+	}
 	if (passwordLength < PASSWORD_LEN_WARNING)
 	{
 		if (bCustomPimSmall)
 		{
-			Error (bootPimCondition? "BOOT_PIM_REQUIRE_LONG_PASSWORD": "PIM_REQUIRE_LONG_PASSWORD", hwndDlg);
+			Error (pimRequireLongPasswordMessage, hwndDlg);
 			return FALSE;
 		}
 
@@ -154,15 +173,15 @@ BOOL CheckPasswordLength (HWND hwndDlg, unsigned __int32 passwordLength, int pim
 #ifndef _DEBUG
 	else if (bCustomPimSmall)
 	{
-		if (!bSkipPimWarning && AskWarnNoYes ("PIM_SMALL_WARNING", hwndDlg) != IDYES)
+		if (!bSkipPimWarning && AskWarnNoYes (pimSmallWarningMessage, hwndDlg) != IDYES)
 			return FALSE;
 	}
 #endif
 
-	if ((pim != 0) && (pim > (bootPimCondition? 98 : 485)))
+	if ((pim != 0) && (pim > defaultPim))
 	{
 		// warn that mount/boot will take more time
-		Warning ("PIM_LARGE_WARNING", hwndDlg);
+		Warning (pimLargeWarningMessage, hwndDlg);
 
 	}
 	return TRUE;
@@ -173,7 +192,7 @@ int ChangePwd (const wchar_t *lpszVolume, Password *oldPassword, int old_pkcs5, 
 	int nDosLinkCreated = 1, nStatus = ERR_OS_ERROR;
 	wchar_t szDiskFile[TC_MAX_PATH], szCFDevice[TC_MAX_PATH];
 	wchar_t szDosDevice[TC_MAX_PATH];
-	char buffer[TC_VOLUME_HEADER_EFFECTIVE_SIZE];
+	unsigned char buffer[TC_VOLUME_HEADER_EFFECTIVE_SIZE];
 	PCRYPTO_INFO cryptoInfo = NULL, ci = NULL;
 	void *dev = INVALID_HANDLE_VALUE;
 	DWORD dwError;
@@ -371,6 +390,10 @@ int ChangePwd (const wchar_t *lpszVolume, Password *oldPassword, int old_pkcs5, 
 		if (nStatus == ERR_CIPHER_INIT_WEAK_KEY)
 			nStatus = 0;	// We can ignore this error here
 
+		// if the XTS master key is vulnerable, return error and do not allow the user to change the password since the master key will not be changed
+		if ((nStatus == 0) && cryptoInfo->bVulnerableMasterKey)
+			nStatus = ERR_XTS_MASTERKEY_VULNERABLE;
+
 		if (nStatus == ERR_PASSWORD_WRONG)
 		{
 			continue;		// Try next volume type
@@ -396,9 +419,15 @@ int ChangePwd (const wchar_t *lpszVolume, Password *oldPassword, int old_pkcs5, 
 		goto error;
 	}
 
-	// Change the PKCS-5 PRF if requested by user
+	// Change the KDF if requested by user
 	if (pkcs5 != 0)
 		cryptoInfo->pkcs5 = pkcs5;
+
+	if (pkcs5 == 0 && old_pkcs5 == 0 && !CheckPasswordLength (hwndDlg, newPassword->Length, pim, FALSE, cryptoInfo->pkcs5, TRUE, FALSE))
+	{
+		nStatus = ERR_USER_ABORT;
+		goto error;
+	}
 
 	RandSetHashFunction (cryptoInfo->pkcs5);
 
@@ -563,4 +592,3 @@ error:
 
 	return nStatus;
 }
-

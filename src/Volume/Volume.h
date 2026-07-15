@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -114,6 +114,7 @@ namespace VeraCrypt
 		void ReEncryptHeader (bool backupHeader, const ConstBufferPtr &newSalt, const ConstBufferPtr &newHeaderKey, shared_ptr <Pkcs5Kdf> newPkcs5Kdf);
 		void WriteSectors (const ConstBufferPtr &buffer, uint64 byteOffset);
 		bool IsEncryptionNotCompleted () const { return EncryptionNotCompleted; }
+		bool IsMasterKeyVulnerable() const { return Header && Header->IsMasterKeyVulnerable(); }
 
 	protected:
 		void CheckProtectedRange (uint64 writeHostOffset, uint64 writeLength);

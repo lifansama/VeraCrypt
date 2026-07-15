@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -27,11 +27,78 @@
 
 namespace VeraCrypt
 {
-	string Process::Execute (const string &processName, const list <string> &arguments, int timeOut, ProcessExecFunctor *execFunctor, const Buffer *inputData)
+
+	bool Process::IsExecutable(const std::string& path) {
+		struct stat sb;
+		if (stat(path.c_str(), &sb) == 0) {
+			return S_ISREG(sb.st_mode) && (sb.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH));
+		}
+		return false;
+	}
+
+	// Find executable in system paths
+	std::string Process::FindSystemBinary(const char* name, std::string& errorMsg) {
+		if (!name) {
+			errno = EINVAL; // Invalid argument
+			errorMsg = "Invalid input: name or paths is NULL";
+			return "";
+		}
+
+		// Default system directories to search for executables.
+		// On macOS, system locations are searched before /usr/local/bin so that
+		// a user-writable /usr/local/bin (the default on Homebrew installs)
+		// cannot shadow system tools. This matters because this resolver is
+		// also used for privileged binaries such as sudo during elevation
+		// (see CoreService.cpp); a planted /usr/local/bin/sudo would otherwise
+		// receive the admin password.
+#ifdef TC_MACOSX
+		const char* defaultDirs[] = {"/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin"};
+#elif TC_FREEBSD
+		const char* defaultDirs[] = {"/sbin", "/bin", "/usr/sbin", "/usr/bin", "/usr/local/sbin", "/usr/local/bin"};
+#elif TC_OPENBSD
+		const char* defaultDirs[] = {"/sbin", "/bin", "/usr/sbin", "/usr/bin", "/usr/X11R6/bin", "/usr/local/sbin", "/usr/local/bin"};
+#else
+		const char* defaultDirs[] = {"/usr/local/sbin", "/usr/local/bin", "/usr/sbin", "/usr/bin", "/sbin", "/bin"};
+#endif
+		const size_t defaultDirCount = sizeof(defaultDirs) / sizeof(defaultDirs[0]);
+
+		std::string currentPath(name);
+
+		// If path doesn't start with '/', prepend default directories
+		if (currentPath[0] != '/') {
+			for (size_t i = 0; i < defaultDirCount; ++i) {
+				std::string combinedPath = std::string(defaultDirs[i]) + "/" + currentPath;
+				if (IsExecutable(combinedPath)) {
+					return combinedPath;
+				}
+			}
+		} else if (IsExecutable(currentPath)) {
+			return currentPath;
+		}
+
+		// Prepare error message
+		errno = ENOENT; // No such file or directory
+		errorMsg = std::string(name) + " not found in system directories";
+		return "";
+	}
+
+	string Process::Execute (const string &processNameArg, const list <string> &arguments, int timeOut, ProcessExecFunctor *execFunctor, const Buffer *inputData)
 	{
 		char *args[32];
 		if (array_capacity (args) <= (arguments.size() + 1))
 			throw ParameterTooLarge (SRC_POS);
+
+		// if execFunctor is null and processName is not absolute path, find it in system paths
+		string processName;
+		if (!execFunctor && (processNameArg[0] != '/'))
+		{
+			std::string errorMsg;
+			processName = FindSystemBinary(processNameArg.c_str(), errorMsg);
+			if (processName.empty())
+				throw SystemException(SRC_POS, errorMsg);
+		}
+		else
+			processName = processNameArg;
 
 #if 0
 		stringstream dbg;
@@ -202,4 +269,43 @@ namespace VeraCrypt
 
 		return strOutput;
 	}
+
+#if defined(TC_LINUX)
+	bool Process::IsRunningUnderAppImage (const string &executablePath)
+	{
+		if (executablePath.empty())
+			return false;
+
+		// AppImage detection logic:
+		// Check that APPIMAGE and APPDIR environment variables are set
+		// Check that the executable path starts with APPDIR
+		// Check that APPDIR itself starts with the expected AppImage mount prefix
+		const char* appImageEnv = getenv("APPIMAGE");
+		const char* appDirEnv = getenv("APPDIR");
+
+		if (appImageEnv && appDirEnv)
+		{
+			string appDirString = appDirEnv;
+			const std::string appImageMountPrefix = "/tmp/.mount_";
+			const std::string appImageMountSuffixPattern = "veracr"; // Lowercase for case-insensitive comparison
+
+			if (!appDirString.empty() &&
+				executablePath.rfind(appDirString, 0) == 0 &&
+				appDirString.rfind(appImageMountPrefix, 0) == 0)
+			{
+				// Ensure appDirString has enough room for appImageMountPrefix and appImageMountSuffixPattern
+				if (appDirString.length() > appImageMountPrefix.length() + appImageMountSuffixPattern.length())
+				{
+					std::string actualSuffixPart = appDirString.substr(appImageMountPrefix.length(), appImageMountSuffixPattern.length());
+					if (StringConverter::ToLower(actualSuffixPart) == appImageMountSuffixPattern)
+					{
+						// All conditions met, this is the AppImage scenario.
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+#endif
 }

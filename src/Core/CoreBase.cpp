@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -20,8 +20,9 @@ namespace VeraCrypt
 {
 	CoreBase::CoreBase ()
 		: DeviceChangeInProgress (false)
-#if defined(TC_LINUX ) || defined (TC_FREEBSD)
 		, UseDummySudoPassword (false)
+#if defined(TC_UNIX)
+		,AllowInsecureMount (false)
 #endif
 	{
 	}
@@ -50,7 +51,7 @@ namespace VeraCrypt
 		RandomNumberGenerator::SetHash (newPkcs5Kdf->GetHash());
 
 		SecureBuffer newSalt (openVolume->GetSaltSize());
-		SecureBuffer newHeaderKey (VolumeHeader::GetLargestSerializedKeySize());
+		SecureBuffer newHeaderKey (VolumeHeader::GetHeaderKeyDerivationSize (newPkcs5Kdf));
 
 		shared_ptr <VolumePassword> password (Keyfile::ApplyListToPassword (newKeyfiles, newPassword, emvSupportEnabled));
 
@@ -64,7 +65,9 @@ namespace VeraCrypt
 				else
 					RandomNumberGenerator::GetDataFast (newSalt);
 
-				newPkcs5Kdf->DeriveKey (newHeaderKey, *password, newPim, newSalt);
+				int derivationResult = newPkcs5Kdf->DeriveKey (newHeaderKey, *password, newPim, newSalt);
+				if (derivationResult != 0)
+					throw ExternalException (SRC_POS, newPkcs5Kdf->GetDerivationFailureMessage (derivationResult));
 
 				openVolume->ReEncryptHeader (backupHeader, newSalt, newHeaderKey, newPkcs5Kdf);
 				openVolume->GetFile()->Flush();
@@ -77,10 +80,11 @@ namespace VeraCrypt
 		}
 	}
 
-	void CoreBase::ChangePassword (shared_ptr <VolumePath> volumePath, bool preserveTimestamps, shared_ptr <VolumePassword> password, int pim, shared_ptr <Pkcs5Kdf> kdf, shared_ptr <KeyfileList> keyfiles, shared_ptr <VolumePassword> newPassword, int newPim, shared_ptr <KeyfileList> newKeyfiles, bool emvSupportEnabled, shared_ptr <Pkcs5Kdf> newPkcs5Kdf, int wipeCount) const
+	shared_ptr <Volume> CoreBase::ChangePassword (shared_ptr <VolumePath> volumePath, bool preserveTimestamps, shared_ptr <VolumePassword> password, int pim, shared_ptr <Pkcs5Kdf> kdf, shared_ptr <KeyfileList> keyfiles, shared_ptr <VolumePassword> newPassword, int newPim, shared_ptr <KeyfileList> newKeyfiles, bool emvSupportEnabled, shared_ptr <Pkcs5Kdf> newPkcs5Kdf, int wipeCount) const
 	{
 		shared_ptr <Volume> volume = OpenVolume (volumePath, preserveTimestamps, password, pim, kdf, keyfiles, emvSupportEnabled);
 		ChangePassword (volume, newPassword, newPim, newKeyfiles, emvSupportEnabled, newPkcs5Kdf, wipeCount);
+		return volume;
 	}
 
 	void CoreBase::CoalesceSlotNumberAndMountPoint (MountOptions &options) const
@@ -280,12 +284,14 @@ namespace VeraCrypt
 		RandomNumberGenerator::SetHash (pkcs5Kdf->GetHash());
 
 		SecureBuffer newSalt (header->GetSaltSize());
-		SecureBuffer newHeaderKey (VolumeHeader::GetLargestSerializedKeySize());
+		SecureBuffer newHeaderKey (VolumeHeader::GetHeaderKeyDerivationSize (pkcs5Kdf));
 
 		shared_ptr <VolumePassword> passwordKey (Keyfile::ApplyListToPassword (keyfiles, password, emvSupportEnabled));
 
 		RandomNumberGenerator::GetData (newSalt);
-		pkcs5Kdf->DeriveKey (newHeaderKey, *passwordKey, pim, newSalt);
+		int derivationResult = pkcs5Kdf->DeriveKey (newHeaderKey, *passwordKey, pim, newSalt);
+		if (derivationResult != 0)
+			throw ExternalException (SRC_POS, pkcs5Kdf->GetDerivationFailureMessage (derivationResult));
 
 		header->EncryptNew (newHeaderBuffer, newSalt, newHeaderKey, pkcs5Kdf);
 	}

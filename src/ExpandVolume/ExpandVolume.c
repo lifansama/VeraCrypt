@@ -9,7 +9,7 @@
  or Copyright (c) 2012-2013 Josef Schneider <josef@netpage.dk>
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages. */
@@ -520,11 +520,9 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 	BOOL backupHeader;
 	uint8 *wipeBuffer = NULL;
 	uint32 workChunkSize = TC_VOLUME_HEADER_GROUP_SIZE;
-#ifdef _WIN64
 	CRYPTO_INFO tmpCI;
 	PCRYPTO_INFO cryptoInfoBackup = NULL;
 	BOOL bIsRamEncryptionEnabled = IsRamEncryptionEnabled();
-#endif
 
 	if (pVolumePassword->Length == 0) return -1;
 
@@ -691,18 +689,22 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 	if (nStatus == ERR_CIPHER_INIT_WEAK_KEY)
 		nStatus = 0;	// We can ignore this error here
 
+	// if the volume master key is vulnerable, print a warning to inform the user
+	if ((nStatus == 0) && cryptoInfo->bVulnerableMasterKey)
+	{
+		DebugAddProgressDlgStatus(hwndDlg, GetString ("ERR_XTS_MASTERKEY_VULNERABLE_SHORT"));
+	}
+
 	if (nStatus != 0)
 	{
 		cryptoInfo = NULL;
 		goto error;
 	}
 
-#ifdef _WIN64
 	if (bIsRamEncryptionEnabled)
 	{
 		VcProtectKeys (cryptoInfo, VcGetEncryptionID (cryptoInfo));
 	}
-#endif
 
 	if (cryptoInfo->HeaderFlags & TC_HEADER_FLAG_ENCRYPTED_SYSTEM)
 	{
@@ -869,7 +871,6 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 		else
 			DebugAddProgressDlgStatus(hwndDlg, GetString("EXPANDER_WRITING_ENCRYPTED_PRIMARY"));
 
-#ifdef _WIN64
 		if (bIsRamEncryptionEnabled)
 		{
 			VirtualLock (&tmpCI, sizeof (CRYPTO_INFO));
@@ -878,7 +879,6 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 			cryptoInfoBackup = cryptoInfo;
 			cryptoInfo = &tmpCI;
 		}
-#endif
 
 		// Prepare new volume header
 		nStatus = CreateVolumeHeaderInMemory (hwndDlg, FALSE,
@@ -899,14 +899,12 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 			cryptoInfo->SectorSize,
 			FALSE ); // use slow poll
 
-#ifdef _WIN64
 		if (bIsRamEncryptionEnabled)
 		{
 			cryptoInfo = cryptoInfoBackup;
 			burn (&tmpCI, sizeof (CRYPTO_INFO));
 			VirtualUnlock (&tmpCI, sizeof (CRYPTO_INFO));
 		}
-#endif
 
 		if (ci != NULL)
 			crypto_close (ci);
@@ -939,7 +937,6 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 			PCRYPTO_INFO dummyInfo = NULL;
 			LARGE_INTEGER hiddenOffset;
 
-#ifdef _WIN64
 			if (bIsRamEncryptionEnabled)
 			{
 				VirtualLock (&tmpCI, sizeof (CRYPTO_INFO));
@@ -948,17 +945,14 @@ static int ExpandVolume (HWND hwndDlg, wchar_t *lpszVolume, Password *pVolumePas
 				cryptoInfoBackup = cryptoInfo;
 				cryptoInfo = &tmpCI;
 			}
-#endif
 
 			nStatus = WriteRandomDataToReservedHeaderAreas (hwndDlg, dev, cryptoInfo, newDataAreaSize, !backupHeader, backupHeader);
-#ifdef _WIN64
 			if (bIsRamEncryptionEnabled)
 			{
 				cryptoInfo = cryptoInfoBackup;
 				burn (&tmpCI, sizeof (CRYPTO_INFO));
 				VirtualUnlock (&tmpCI, sizeof (CRYPTO_INFO));
 			}
-#endif
 			if (nStatus != ERR_SUCCESS)
 				goto error;
 
@@ -1136,6 +1130,7 @@ void __cdecl volTransformThreadFunction (void *pExpandDlgParam)
 	int nStatus;
 	EXPAND_VOL_THREAD_PARAMS *pParam=(EXPAND_VOL_THREAD_PARAMS *)pExpandDlgParam;
 	HWND hwndDlg = (HWND) pParam->hwndDlg;
+	AttachProtectionToCurrentThread(NULL);
 
 	nStatus = ExpandVolume (hwndDlg, (wchar_t*)pParam->szVolumeName, pParam->pVolumePassword,
 		pParam->VolumePkcs5, pParam->VolumePim, pParam->newSize, pParam->bInitFreeSpace, pParam->bQuickExpand );
@@ -1146,6 +1141,8 @@ void __cdecl volTransformThreadFunction (void *pExpandDlgParam)
 	bVolTransformThreadCancel = FALSE;
 
 	PostMessage (hwndDlg, TC_APPMSG_VOL_TRANSFORM_THREAD_ENDED, 0, nStatus);
+
+	DetachProtectionFromCurrentThread();
 
 	_endthread ();
 }

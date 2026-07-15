@@ -4,7 +4,7 @@
  by the TrueCrypt License 3.0.
 
  Modifications and additions to the original source code (contained in this file)
- and all other portions of this file are Copyright (c) 2013-2017 IDRIX
+ and all other portions of this file are Copyright (c) 2013-2026 AM Crypto
  and are governed by the Apache License 2.0 the full text of which is
  contained in the file License.txt included in VeraCrypt binary and source
  code distribution packages.
@@ -28,6 +28,9 @@
 #include "Application.h"
 #include "GraphicUserInterface.h"
 #include "FatalErrorHandler.h"
+#ifdef TC_MACOSX
+#include "MacOSXSecureTextFieldHotkeys.h"
+#endif
 #include "Forms/DeviceSelectionDialog.h"
 #include "Forms/KeyfileGeneratorDialog.h"
 #include "Forms/MainFrame.h"
@@ -37,7 +40,79 @@
 
 namespace VeraCrypt
 {
-	class AdminPasswordRequestHandler : public GetStringFunctor
+#ifdef TC_LINUX
+	namespace
+	{
+		bool TryCreatePrivateDirectory (const wxString &dir)
+		{
+			if (dir.empty())
+				return false;
+
+			if (!wxDirExists (dir) && !wxFileName::Mkdir (dir, wxS_IRUSR | wxS_IWUSR | wxS_IXUSR, wxPATH_MKDIR_FULL))
+				return false;
+
+			chmod (string (dir.fn_str()).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+			return access (string (dir.fn_str()).c_str(), W_OK | X_OK) == 0;
+		}
+
+		wxString GetSingleInstanceCheckerLockDirectory ()
+		{
+			const wxString appDirName = Application::GetName();
+			const wxChar pathSeparator = wxFileName::GetPathSeparator();
+
+			const wxChar *xdgRuntimeDir = wxGetenv (wxT("XDG_RUNTIME_DIR"));
+			if (!wxIsEmpty (xdgRuntimeDir))
+			{
+				wxFileName runtimeDir (xdgRuntimeDir, wxEmptyString);
+				if (runtimeDir.IsAbsolute() && wxDirExists (runtimeDir.GetPath()))
+				{
+					wxString lockDir = runtimeDir.GetPath();
+					if (!lockDir.empty() && lockDir.Last() != pathSeparator)
+						lockDir += pathSeparator;
+					lockDir += appDirName;
+
+					if (TryCreatePrivateDirectory (lockDir))
+						return lockDir;
+				}
+			}
+
+			wxString cacheDir;
+			const wxChar *xdgCacheHome = wxGetenv (wxT("XDG_CACHE_HOME"));
+			if (!wxIsEmpty (xdgCacheHome))
+			{
+				wxFileName xdgCacheDir (xdgCacheHome, wxEmptyString);
+				if (xdgCacheDir.IsAbsolute())
+					cacheDir = xdgCacheDir.GetPath();
+			}
+
+			if (cacheDir.empty())
+			{
+				wxFileName homeDir (wxFileName::GetHomeDir(), wxEmptyString);
+				if (homeDir.IsAbsolute())
+				{
+					cacheDir = homeDir.GetPath();
+					if (!cacheDir.empty() && cacheDir.Last() != pathSeparator)
+						cacheDir += pathSeparator;
+					cacheDir += wxT(".cache");
+				}
+			}
+
+			if (!cacheDir.empty())
+			{
+				if (cacheDir.Last() != pathSeparator)
+					cacheDir += pathSeparator;
+				cacheDir += appDirName;
+
+				if (TryCreatePrivateDirectory (cacheDir))
+					return cacheDir;
+			}
+
+			return wxGetHomeDir();
+		}
+	}
+#endif
+
+	class AdminPasswordGUIRequestHandler : public GetStringFunctor
 	{
 		public:
 		virtual void operator() (string &passwordStr)
@@ -63,11 +138,23 @@ namespace VeraCrypt
 			StringConverter::ToSingle (wPassword, passwordStr);
 		}
 	};
-
 #ifdef TC_MACOSX
 	int GraphicUserInterface::g_customIdCmdV = 0;
 	int GraphicUserInterface::g_customIdCmdA = 0;
 #endif
+
+	// Check if given language has a corresponding translated documentation
+	static BOOL HasTranslatedDocumentation(const char* language)
+	{
+		// hardcoded list of languages for which a translated documentation exists
+		const char* supportedLanguages[] = { "en", "ru", "zh-cn"};
+		for (size_t i = 0; i < sizeof(supportedLanguages) / sizeof(supportedLanguages[0]); i++)
+		{
+			if (strcmp(language, supportedLanguages[i]) == 0)
+				return TRUE;
+		}
+		return FALSE;
+	}
 
 	GraphicUserInterface::GraphicUserInterface () :
 		ActiveFrame (nullptr),
@@ -85,12 +172,19 @@ namespace VeraCrypt
 #ifdef TC_MACOSX
 		g_customIdCmdV = wxNewId();
 		g_customIdCmdA = wxNewId();
+		InstallMacOSXSecureTextFieldHotkeys();
 		wxApp::s_macHelpMenuTitleName = LangString["MENU_HELP"];
+#endif
+#if wxCHECK_VERSION(3, 1, 6)
+		wxSizerFlags::DisableConsistencyChecks();
 #endif
 	}
 
 	GraphicUserInterface::~GraphicUserInterface ()
 	{
+#ifdef TC_MACOSX
+		UninstallMacOSXSecureTextFieldHotkeys();
+#endif
 		try
 		{
 			if (RandomNumberGenerator::IsRunning())
@@ -158,7 +252,7 @@ namespace VeraCrypt
 #ifdef TC_WINDOWS
 		if (Core->IsVolumeMounted (*volumePath))
 		{
-			ShowInfo ("DISMOUNT_FIRST");
+			ShowInfo ("UNMOUNT_FIRST");
 			return;
 		}
 #endif
@@ -192,6 +286,7 @@ namespace VeraCrypt
 		hiddenVolumeMountOptions.Path = volumePath;
 
 		VolumeType::Enum volumeType = VolumeType::Normal;
+		bool masterKeyVulnerable = false;
 
 		// Open both types of volumes
 		while (true)
@@ -272,6 +367,13 @@ namespace VeraCrypt
 					else
 						ShowWarning ("HEADER_DAMAGED_AUTO_USED_HEADER_BAK");
 				}
+			}
+
+			// check if volume master key is vulnerable
+			if (volume->IsMasterKeyVulnerable())
+			{
+				masterKeyVulnerable = true;
+				ShowWarning ("ERR_XTS_MASTERKEY_VULNERABLE");
 			}
 
 			if (volumeType == VolumeType::Hidden)
@@ -367,6 +469,10 @@ namespace VeraCrypt
 		}
 
 		ShowWarning ("VOL_HEADER_BACKED_UP");
+
+		// display again warning that master key is vulnerable
+		if (masterKeyVulnerable)
+			ShowWarning ("ERR_XTS_MASTERKEY_VULNERABLE");
 	}
 
 	void GraphicUserInterface::BeginInteractiveBusyState (wxWindow *window)
@@ -479,7 +585,7 @@ namespace VeraCrypt
 
 	shared_ptr <GetStringFunctor> GraphicUserInterface::GetAdminPasswordRequestHandler ()
 	{
-		return shared_ptr <GetStringFunctor> (new AdminPasswordRequestHandler);
+		return shared_ptr <GetStringFunctor> (new AdminPasswordGUIRequestHandler);
 	}
 
 	int GraphicUserInterface::GetCharHeight (wxWindow *window) const
@@ -714,8 +820,9 @@ namespace VeraCrypt
 	bool GraphicUserInterface::HandlePasswordEntryCustomEvent (wxEvent& event)
 	{
 		bool bHandled = false;
-		if (	(event.GetEventType() == wxEVT_MENU)
-			&&	((event.GetId() == g_customIdCmdV) || (event.GetId() == g_customIdCmdA)))
+		const bool isPasteShortcut = (event.GetId() == g_customIdCmdV) || (event.GetId() == wxID_PASTE);
+		const bool isSelectAllShortcut = (event.GetId() == g_customIdCmdA) || (event.GetId() == wxID_SELECTALL);
+		if ((event.GetEventType() == wxEVT_MENU) && (isPasteShortcut || isSelectAllShortcut))
 		{
 			wxWindow* focusedCtrl = wxWindow::FindFocus();
 			if (focusedCtrl 
@@ -723,9 +830,9 @@ namespace VeraCrypt
 				&& (focusedCtrl->GetWindowStyle() & wxTE_PASSWORD))
 			{
 				wxTextCtrl* passwordCtrl = (wxTextCtrl*) focusedCtrl;
-				if (event.GetId() == g_customIdCmdV)
+				if (isPasteShortcut)
 					passwordCtrl->Paste ();
-				else if (event.GetId() == g_customIdCmdA)
+				else if (isSelectAllShortcut)
 					passwordCtrl->SelectAll ();
 				bHandled = true;
 			}
@@ -797,7 +904,7 @@ namespace VeraCrypt
 		}
 	}
 
-	shared_ptr <VolumeInfo> GraphicUserInterface::MountVolume (MountOptions &options) const
+	shared_ptr <VolumeInfo> GraphicUserInterface::MountVolume (MountOptions &options, bool tryCachedPasswords) const
 	{
 		CheckRequirementsForMountingVolume();
 
@@ -815,9 +922,23 @@ namespace VeraCrypt
 			return volume;
 		}
 
+
+		// check if the volume path exists using stat function. Only ENOENT error is handled to exclude permission denied error
+		struct stat statBuf;
+		if (stat (string (*options.Path).c_str(), &statBuf) != 0)
+		{
+			if (errno == ENOENT)
+			{
+				SystemException ex (SRC_POS);
+				ShowError (ex);
+				return volume;
+			}
+		}
+
 		try
 		{
-			if ((!options.Password || options.Password->IsEmpty())
+			if (tryCachedPasswords
+				&& (!options.Password || options.Password->IsEmpty())
 				&& (!options.Keyfiles || options.Keyfiles->empty())
 				&& !Core->IsPasswordCacheEmpty())
 			{
@@ -962,7 +1083,12 @@ namespace VeraCrypt
 			wxLog::SetLogLevel (wxLOG_Error);
 
 			const wxString instanceCheckerName = wxString (L".") + Application::GetName() + L"-lock-" + wxGetUserId();
+#ifdef TC_LINUX
+			const wxString instanceCheckerLockDirectory = GetSingleInstanceCheckerLockDirectory();
+			SingleInstanceChecker.reset (new wxSingleInstanceChecker (instanceCheckerName, instanceCheckerLockDirectory));
+#else
 			SingleInstanceChecker.reset (new wxSingleInstanceChecker (instanceCheckerName));
+#endif
 
 			wxLog::SetLogLevel (logLevel);
 
@@ -997,7 +1123,6 @@ namespace VeraCrypt
 					if (write (showFifo, buf, 1) == 1)
 					{
 						close (showFifo);
-						Gui->ShowInfo (LangString["LINUX_VC_RUNNING_ALREADY"]);
 						Application::SetExitCode (0);
 						return false;
 					}
@@ -1014,16 +1139,28 @@ namespace VeraCrypt
 				// This is a false positive as VeraCrypt is not running (pipe not available)
 				// we continue running after cleaning the lock file
 				// and creating a new instance of the checker
+#ifdef TC_LINUX
+				wxString lockFileName = instanceCheckerLockDirectory;
+				if (!lockFileName.empty() && lockFileName.Last() != wxFileName::GetPathSeparator())
+				{
+					lockFileName += wxFileName::GetPathSeparator();
+				}
+#else
 				wxString lockFileName = wxGetHomeDir();
 				if ( lockFileName.Last() != wxT('/') )
 				{
 					lockFileName += wxT('/');
 				}
+#endif
 				lockFileName << instanceCheckerName;
 
 				if (wxRemoveFile (lockFileName))
 				{
+#ifdef TC_LINUX
+					SingleInstanceChecker.reset (new wxSingleInstanceChecker (instanceCheckerName, instanceCheckerLockDirectory));
+#else
 					SingleInstanceChecker.reset (new wxSingleInstanceChecker (instanceCheckerName));
+#endif
 				}
 #else
 
@@ -1058,7 +1195,12 @@ namespace VeraCrypt
 #endif
 
 			mMainFrame = new MainFrame (nullptr);
-
+#if defined(TC_UNIX)
+			if (CmdLine->ArgAllowInsecureMount)
+			{
+				mMainFrame->SetTitle (mMainFrame->GetTitle() + wxT(" ") + LangString["INSECURE_MODE"]);
+			}
+#endif
 			if (CmdLine->StartBackgroundTask)
 			{
 				UserPreferences prefs = GetPreferences ();
@@ -1127,7 +1269,7 @@ namespace VeraCrypt
 			OnAutoDismountAllEvent();
 
 			if (Core->GetMountedVolumes().size() < volumeCount)
-				ShowInfoTopMost (LangString["MOUNTED_VOLUMES_AUTO_DISMOUNTED"]);
+				ShowInfoTopMost (LangString["MOUNTED_VOLUMES_AUTO_UNMOUNTED"]);
 		}
 	}
 #endif
@@ -1191,7 +1333,7 @@ namespace VeraCrypt
 		}
 		else if (linkId == L"onlinehelp")
 		{
-			url = L"https://www.veracrypt.fr/en/Documentation.html";
+			url = L"https://veracrypt.jp/en/Documentation.html";
 			buildUrl = false;
 		}
 		else if (linkId == L"localizations")
@@ -1316,18 +1458,40 @@ namespace VeraCrypt
 #ifdef TC_RESOURCE_DIR
 			htmlPath = StringConverter::ToWide (string (TC_TO_STRING (TC_RESOURCE_DIR)) + "/doc/HTML/");
 #elif defined (TC_WINDOWS)
-			htmlPath += L"\\docs\\html\\en\\";
+			htmlPath += L"\\docs\\html\\";
 #elif defined (TC_MACOSX)
 			htmlPath += L"/../Resources/doc/HTML/";
 #elif defined (TC_UNIX)
 			htmlPath = L"/usr/share/doc/veracrypt/HTML/";
+#if defined(TC_LINUX)
+			// AppImage specific handling:
+			// if we are running from an AppImage, we need to use the path inside the AppImage
+			// instead of the path on the host system
+			std::string appPath= StringConverter::ToSingle (wstring(Application::GetExecutablePath()));
+			if (Process::IsRunningUnderAppImage(appPath))
+			{
+				const char* appDirEnv = getenv("APPDIR");
+				if (appDirEnv)
+				{
+					htmlPath = wxString::FromUTF8(appDirEnv);
+					htmlPath += L"/usr/share/doc/veracrypt/HTML/";
+				}
+			}
+#endif
 #else
 			localFile = false;
 #endif
+			string preferredLang = LangString.GetPreferredLang();
+			// Use preferred language only if it has translated documentation
+			if (!HasTranslatedDocumentation (preferredLang.c_str()))
+			{
+				preferredLang = "en";
+			}
+			wstring documentationLang = StringConverter::ToWide (preferredLang);
 			if (localFile)
 			{
 				/* check if local file exists */
-				wxFileName htmlFile = htmlPath + url;
+				wxFileName htmlFile = htmlPath + documentationLang + L"/" + url;
 				htmlFile.Normalize (
 					wxPATH_NORM_ENV_VARS |
 					wxPATH_NORM_DOTS     |
@@ -1337,11 +1501,32 @@ namespace VeraCrypt
 					wxPATH_NORM_TILDE
 				);
 				localFile = htmlFile.FileExists();
+				if (!localFile)
+				{
+					htmlFile = htmlPath + L"en/" + url;
+					htmlFile.Normalize (
+						wxPATH_NORM_ENV_VARS |
+						wxPATH_NORM_DOTS     |
+						wxPATH_NORM_CASE     |
+						wxPATH_NORM_LONG     |
+						wxPATH_NORM_SHORTCUT |
+						wxPATH_NORM_TILDE
+					);
+					localFile = htmlFile.FileExists();
+					if (localFile)
+					{
+						htmlPath += L"en/";
+					}
+				}
+				else
+				{
+					htmlPath += documentationLang + L"/";
+				}
 			}
 
 			if (!localFile)
 			{
-				htmlPath = L"https://www.veracrypt.fr/en/";
+				htmlPath = L"https://veracrypt.jp/" + documentationLang + L"/";
 			}
 			else
 			{
@@ -1389,7 +1574,7 @@ namespace VeraCrypt
 #ifdef TC_WINDOWS
 		if (Core->IsVolumeMounted (*volumePath))
 		{
-			ShowInfo ("DISMOUNT_FIRST");
+			ShowInfo ("UNMOUNT_FIRST");
 			return;
 		}
 #endif
@@ -1441,6 +1626,7 @@ namespace VeraCrypt
 		/* force the display of the random enriching interface */
 		RandomNumberGenerator::SetEnrichedByUserStatus (false);
 
+		bool masterKeyVulnerable = false;
 		if (restoreInternalBackup)
 		{
 			// Restore header from the internal backup
@@ -1492,6 +1678,8 @@ namespace VeraCrypt
 				ShowError ("VOLUME_HAS_NO_BACKUP_HEADER");
 				return;
 			}
+
+			masterKeyVulnerable = volume->IsMasterKeyVulnerable();
 
 			RandomNumberGenerator::Start();
 			UserEnrichRandomPool (nullptr);
@@ -1591,6 +1779,7 @@ namespace VeraCrypt
 
 						if (decryptRoutine.m_bResult)
 						{
+							masterKeyVulnerable = layout->GetHeader()->IsMasterKeyVulnerable();
 							decryptedLayout = layout;
 							break;
 						}
@@ -1646,6 +1835,12 @@ namespace VeraCrypt
 		}
 
 		ShowInfo ("VOL_HEADER_RESTORED");
+
+		// display warning if the volume master key is vulnerable
+		if (masterKeyVulnerable)
+		{
+			ShowWarning ("ERR_XTS_MASTERKEY_VULNERABLE");
+		}
 	}
 
 	DevicePath GraphicUserInterface::SelectDevice (wxWindow *parent) const
@@ -1774,7 +1969,9 @@ namespace VeraCrypt
 		BackgroundMode = state;
 
 #ifdef HAVE_INDICATORS
-		gtk_menu_item_set_label ((GtkMenuItem*) ((MainFrame*) mMainFrame)->indicator_item_showhide, LangString[Gui->IsInBackgroundMode() ? "SHOW_TC" : "HIDE_TC"].mb_str());
+		MainFrame *mainFrame = (MainFrame*) mMainFrame;
+		if (mainFrame->indicator_item_showhide)
+			gtk_menu_item_set_label ((GtkMenuItem*) mainFrame->indicator_item_showhide, LangString[Gui->IsInBackgroundMode() ? "SHOW_TC" : "HIDE_TC"].mb_str());
 #endif
 	}
 
@@ -1851,6 +2048,19 @@ namespace VeraCrypt
 			width += GetScrollbarWidth (listCtrl);
 #endif
 		listCtrl->SetMinSize (wxSize (width, listCtrl->GetMinSize().GetHeight()));
+	}
+
+
+	void GraphicUserInterface::SetContentProtection (bool enable) const
+	{
+#if defined(TC_WINDOWS) || defined(TC_MACOSX)
+		foreach (wxWindow *window, wxTopLevelWindows)
+		{
+			wxTopLevelWindow *topLevelWindow = dynamic_cast <wxTopLevelWindow *> (window);
+			if (topLevelWindow)
+				topLevelWindow->SetContentProtection (enable ? wxCONTENT_PROTECTION_ENABLED : wxCONTENT_PROTECTION_NONE);
+		}
+#endif
 	}
 
 	void GraphicUserInterface::ShowErrorTopMost (const wxString &message) const
@@ -1969,8 +2179,12 @@ namespace VeraCrypt
 			{
 				item.SetText (field);
 				listCtrl->SetItem (item);
-				if (item.GetColumn() == 3 || item.GetColumn() == 4)
+				if ((item.GetColumn() == 3 || item.GetColumn() == 4) && !item.GetText().IsEmpty())
 					listCtrl->SetColumnWidth(item.GetColumn(), wxLIST_AUTOSIZE);
+					// SlotListCtrl headers do not automatically move with column widths changing on macOS
+#ifdef TC_MACOSX
+					listCtrl->Update();
+#endif
 				changed = true;
 			}
 		}
